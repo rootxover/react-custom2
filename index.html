@@ -65,6 +65,60 @@
       --shadow-sm:   0 2px 8px rgba(0,0,0,.08);
       --shadow-md:   0 4px 20px rgba(0,0,0,.12);
     }
+    :root[data-theme="tactical"] {
+      --bg:          #1a0a0c;
+      --bg2:         #220e10;
+      --bg3:         #2a1214;
+      --surface:     #2e1416;
+      --surface2:    #381a1c;
+      --border:      #5a2228;
+      --border2:     #6e2a32;
+      --text:        #ffffff;
+      --text2:       #f0d0b0;
+      --text3:       #a06050;
+      --text4:       #703838;
+      --accent:      #D41C2C;
+      --accent2:     #FCCC44;
+      --danger:      #D41C2C;
+      --header-bg:   #160808;
+      --modal-bg:    #1e0c0e;
+      --modal-border:#5a2228;
+      --input-bg:    #140808;
+      --input-border:#4a1e22;
+      --scrollbar:   #5a2228;
+      --cell-bg:     #1e0e10;
+      --cell-border: #4a1e22;
+      --dim-opacity: 0.15;
+      --shadow-sm:   0 2px 8px rgba(212,28,44,.2);
+      --shadow-md:   0 4px 20px rgba(212,28,44,.25);
+    }
+    :root[data-theme="midnight"] {
+      --bg:          #0a1628;
+      --bg2:         #0e1e32;
+      --bg3:         #12263c;
+      --surface:     #162e48;
+      --surface2:    #1a3650;
+      --border:      #244a6a;
+      --border2:     #2e5a7a;
+      --text:        #e0f0ff;
+      --text2:       #90b8d8;
+      --text3:       #506878;
+      --text4:       #304858;
+      --accent:      #3b9eff;
+      --accent2:     #6bb8ff;
+      --danger:      #ff5070;
+      --header-bg:   #081220;
+      --modal-bg:    #0e1a2e;
+      --modal-border:#244a6a;
+      --input-bg:    #081424;
+      --input-border:#1e3a58;
+      --scrollbar:   #244a6a;
+      --cell-bg:     #0e1828;
+      --cell-border: #1e3a58;
+      --dim-opacity: 0.18;
+      --shadow-sm:   0 2px 8px rgba(0,0,0,.4);
+      --shadow-md:   0 4px 20px rgba(0,0,0,.5);
+    }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body, #root { height: 100%; }
@@ -885,7 +939,7 @@ function App({initialMatrix, initialName}) {
   const [panelOpen,     setPanelOpen]     = useState(true);
   const fileRef = useRef();
 
-  const dark = theme === "dark";
+  const dark = theme !== "light";
 
   // Apply theme to html element
   useEffect(()=>{ document.documentElement.setAttribute('data-theme', theme); }, [theme]);
@@ -993,18 +1047,45 @@ function App({initialMatrix, initialName}) {
   const linkedPhases     = matrix.tactics.filter(t=>t.url).length;
   const catCounts        = categories.slice(1).map(c=>({...c,count:matrix.tactics.reduce((s,t)=>s+t.techniques.filter(te=>te.category===c.id).length,0)})).filter(c=>c.count>0);
 
-  // ── Theme colors ──
-  const bg        = dark?"#0e0e18":"#f0f0f8";
-  const headerBg  = dark?"#111120":"#ffffff";
-  const barBg     = dark?"#0c0c1a":"#e8e8f4";
+  // ── Theme colors (read from CSS variables so all 4 themes work) ──
+  const getVar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const [themeColors, setThemeColors] = useState({});
+  useEffect(()=>{
+    // Small delay to let CSS apply
+    requestAnimationFrame(()=>{
+      setThemeColors({
+        bg:       getVar('--bg'),
+        headerBg: getVar('--header-bg'),
+        bg2:      getVar('--bg2'),
+        bg3:      getVar('--bg3'),
+        surface:  getVar('--surface'),
+        border:   getVar('--border'),
+        border2:  getVar('--border2'),
+        text:     getVar('--text'),
+        text2:    getVar('--text2'),
+        text3:    getVar('--text3'),
+        text4:    getVar('--text4'),
+        accent:   getVar('--accent'),
+        accent2:  getVar('--accent2'),
+        cellBg:   getVar('--cell-bg'),
+        cellBorder:getVar('--cell-border'),
+        inputBg:  getVar('--input-bg'),
+        inputBorder:getVar('--input-border'),
+        modalBg:  getVar('--modal-bg'),
+      });
+    });
+  }, [theme]);
+  const bg        = themeColors.bg       || (dark?"#0e0e18":"#f0f0f8");
+  const headerBg  = themeColors.headerBg || (dark?"#111120":"#ffffff");
+  const barBg     = themeColors.bg2      || (dark?"#0c0c1a":"#e8e8f4");
   const hintBg    = dark?"#0a0a12":"#f0f0fa";
-  const border    = dark?"#1e1e38":"#d8d8f0";
-  const border2   = dark?"#252545":"#c8c8e8";
-  const textMain  = dark?"#e8e8f0":"#1a1a2e";
-  const textSub   = dark?"#8888aa":"#6060a0";
-  const textDim   = dark?"#444460":"#b0b0cc";
-  const cellBg    = dark?"#161628":"#ffffff";
-  const cellBorderBase = dark?"#252545":"#d8d8f0";
+  const border    = themeColors.border   || (dark?"#1e1e38":"#d8d8f0");
+  const border2   = themeColors.border2  || (dark?"#252545":"#c8c8e8");
+  const textMain  = themeColors.text     || (dark?"#e8e8f0":"#1a1a2e");
+  const textSub   = themeColors.text3    || (dark?"#8888aa":"#6060a0");
+  const textDim   = themeColors.text4    || (dark?"#444460":"#b0b0cc");
+  const cellBg    = themeColors.cellBg   || (dark?"#161628":"#ffffff");
+  const cellBorderBase = themeColors.cellBorder || (dark?"#252545":"#d8d8f0");
 
   const S = getS(dark);
 
@@ -1050,11 +1131,19 @@ function App({initialMatrix, initialName}) {
 
         <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center"}}>
           {/* Theme toggle */}
-          <button className="theme-toggle" onClick={()=>setTheme(t=>t==="dark"?"light":"dark")}
-            title={`Switch to ${dark?"light":"dark"} mode`}
-            style={{background:dark?"#1a1a3a":"#ede9fe",border:`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:7,width:34,height:30,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer"}}>
-            {dark ? <SunIcon color="#f6ad55" size={15}/> : <MoonIcon color="#5b4fd4" size={15}/>}
-          </button>
+          {(()=>{
+            const themes = ["dark","light","tactical","midnight"];
+            const labels = {dark:"Dark",light:"Light",tactical:"Tactical",midnight:"Midnight"};
+            const nextTheme = themes[(themes.indexOf(theme)+1)%themes.length];
+            return (
+              <button className="theme-toggle" onClick={()=>setTheme(nextTheme)}
+                title={`Theme: ${labels[theme]} → ${labels[nextTheme]}`}
+                style={{background:dark?"#1a1a3a":"#ede9fe",border:`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:7,height:30,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",gap:5,padding:"0 10px"}}>
+                {dark ? <SunIcon color={theme==="tactical"?"#FCCC44":"#f6ad55"} size={15}/> : <MoonIcon color="#5b4fd4" size={15}/>}
+                <span style={{fontSize:10,color:dark?"#888":"#666",letterSpacing:.5}}>{labels[theme]}</span>
+              </button>
+            );
+          })()}
           {[
             {label:"+ Phase",        fn:()=>setShowAddTactic(true)},
             {label:"+ Action",       fn:()=>setShowAddAction(true)},
@@ -1204,12 +1293,6 @@ function App({initialMatrix, initialName}) {
                           <div style={{fontSize:12,fontWeight:500,color:inPb?textMain:(tech.category?cat.text:(hasLink?(dark?"#b0b0d8":"#4040a0"):(dark?"#9090b8":"#5050a0"))),lineHeight:1.35}}>
                             {tech.name}
                           </div>
-                          {/* Description */}
-                          {tech.description&&(
-                            <div style={{fontSize:10,fontStyle:"italic",color:dark?"#666688":"#9090b0",lineHeight:1.35,marginTop:3}}>
-                              {tech.description}
-                            </div>
-                          )}
                           {/* Category badge */}
                           {tech.category&&(
                             <div style={{display:"inline-flex",alignItems:"center",gap:4,marginTop:6,background:`${cat.color}20`,border:`1px solid ${cat.color}55`,borderRadius:10,padding:"2px 7px"}}>
