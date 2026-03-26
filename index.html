@@ -1095,9 +1095,30 @@ function ResponseGuideOverlay({dark, playbook, matrix, onClose}) {
 
 function GuideSection({sec, dark, pbColor}) {
   const [open, setOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
   const textSub  = dark?"#8888aa":"#6060a0";
   const textMain = dark?"#ccc":"#333";
   const borderC  = dark?"#252545":"#d8d8f0";
+
+  function handleCopy(e) {
+    e.stopPropagation();
+    if(!sec.body) return;
+    navigator.clipboard.writeText(sec.body).then(()=>{
+      setCopied(true);
+      setTimeout(()=>setCopied(false), 1800);
+    }).catch(()=>{
+      const ta = document.createElement('textarea');
+      ta.value = sec.body;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      setCopied(true);
+      setTimeout(()=>setCopied(false), 1800);
+    });
+  }
 
   return (
     <div style={{marginBottom:4}}>
@@ -1112,8 +1133,30 @@ function GuideSection({sec, dark, pbColor}) {
         <span className="sec-title" style={{fontSize:11,fontWeight:600,color:textSub,letterSpacing:.5,transition:"color .12s"}}>{sec.title || "Notes"}</span>
       </div>
       {open && (
-        <div className="fade-in" style={{fontSize:12,color:textMain,lineHeight:1.6,padding:"4px 0 6px 14px",whiteSpace:"pre-wrap"}}>
-          {sec.body || <span style={{opacity:.4,fontStyle:"italic"}}>empty</span>}
+        <div className="fade-in" style={{position:"relative",margin:"2px 0 6px 14px",borderRadius:5,border:`1px solid ${borderC}`,overflow:"hidden"}}>
+          {sec.body&&(
+            <button
+              onClick={handleCopy}
+              title={copied?"Copied!":"Copy to clipboard"}
+              style={{
+                position:"absolute",top:5,right:5,
+                background:copied?(dark?"#1a3a1a":"#e6f7e6"):(dark?"#1a1a3a":"#ede9fe"),
+                border:`1px solid ${copied?(dark?"#276749":"#86efac"):(dark?"#3a3a6a":"#c4b5fd")}`,
+                borderRadius:4,padding:"2px 6px",cursor:"pointer",
+                fontSize:9,fontFamily:"inherit",
+                color:copied?(dark?"#68d391":"#15803d"):(dark?"#a29bfe":"#5b4fd4"),
+                display:"flex",alignItems:"center",gap:3,
+                transition:"all .2s",zIndex:1,
+              }}>
+              {copied
+                ? <><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Copied</>
+                : <><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2 2v1"/></svg> Copy</>
+              }
+            </button>
+          )}
+          <div style={{padding:"6px 8px",paddingRight:sec.body?"52px":"8px",background:dark?"#0c0c1e88":"#f0f0f888",fontSize:12,color:textMain,lineHeight:1.6,whiteSpace:"pre-wrap",wordBreak:"break-word",minHeight:28}}>
+            {sec.body || <span style={{opacity:.4,fontStyle:"italic"}}>empty</span>}
+          </div>
         </div>
       )}
     </div>
