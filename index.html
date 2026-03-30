@@ -558,8 +558,8 @@ function AddPlaybookModal({dark, onClose, onAdd, usedColors}) {
   return (
     <div className="modal-overlay">
       <div style={S.mbox}>
-        <div style={S.ml}>New Playbook</div>
-        <div style={S.ml2}>PLAYBOOK NAME</div>
+        <div style={S.ml}>New Use Case</div>
+        <div style={S.ml2}>USE CASE NAME</div>
         <input value={name} onChange={e=>setName(e.target.value)} placeholder="e.g. Ransomware, Insider Threat…" autoFocus style={{...S.input,marginBottom:16}}/>
         <div style={S.ml2}>COLOUR</div>
         <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:20}}>
@@ -569,7 +569,7 @@ function AddPlaybookModal({dark, onClose, onAdd, usedColors}) {
         </div>
         <div style={{display:"flex",gap:10,justifyContent:"flex-end"}}>
           <button onClick={onClose} style={S.ghost}>Cancel</button>
-          <button onClick={()=>name.trim()&&onAdd(name.trim(),color)} style={S.primary}>Create Playbook</button>
+          <button onClick={()=>name.trim()&&onAdd(name.trim(),color)} style={S.primary}>Create Use Case</button>
         </div>
       </div>
     </div>
@@ -768,10 +768,10 @@ function PlaybookPanel({dark, playbooks, activePlaybookId, pbMode, onSelect, onS
       <div style={{padding:"12px 14px 10px",borderBottom:`1px solid ${panelBorder}`,background:headerBg,display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0}}>
         <div style={{display:"flex",alignItems:"center",gap:7}}>
           <BookIcon color="#7c6ff7" size={14}/>
-          <span style={{fontSize:12,color:"#7c6ff7",letterSpacing:1,fontWeight:600}}>PLAYBOOKS</span>
+          <span style={{fontSize:12,color:"#7c6ff7",letterSpacing:1,fontWeight:600}}>USE CASES</span>
         </div>
         <div style={{display:"flex",gap:5}}>
-          <button onClick={onAdd} title="New playbook" style={{background:dark?"#1a1a3a":"#ede9fe",border:`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:5,width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer"}}>
+          <button onClick={onAdd} title="New use case" style={{background:dark?"#1a1a3a":"#ede9fe",border:`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:5,width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer"}}>
             <PlusIcon color="#7c6ff7" size={10}/>
           </button>
           <button onClick={onCollapse} title="Collapse panel"
@@ -787,7 +787,7 @@ function PlaybookPanel({dark, playbooks, activePlaybookId, pbMode, onSelect, onS
       <div style={{flex:1,overflowY:"auto",padding:"10px 10px 16px"}}>
         {playbooks.length===0 && (
           <div style={{textAlign:"center",color:textSub,fontSize:11,padding:"24px 12px",lineHeight:1.7}}>
-            No playbooks yet.<br/>Click + to create one.
+            No use cases yet.<br/>Click + to create one.
           </div>
         )}
 
@@ -920,7 +920,7 @@ function PlaybookPanel({dark, playbooks, activePlaybookId, pbMode, onSelect, onS
             onMouseEnter={e=>{e.target.style.borderColor="#e94560";e.target.style.color="#e94560";}}
             onMouseLeave={e=>{e.target.style.borderColor=dark?"#2e2e5e":"#d0d0e8";e.target.style.color=dark?"#666":"#aaa";}}
             style={{width:"100%",background:"transparent",border:`1px solid ${dark?"#2e2e5e":"#d0d0e8"}`,borderRadius:6,color:dark?"#666":"#aaa",padding:"6px",cursor:"pointer",fontSize:11,fontFamily:"inherit",transition:"all .15s"}}>
-            ✕ Deselect playbook
+            ✕ Deselect use case
           </button>
         </div>
       )}
@@ -1007,7 +1007,7 @@ function ResponseGuideOverlay({dark, playbook, matrix, onClose}) {
           {/* Phase sections */}
           {phases.length===0 && (
             <div style={{textAlign:"center",padding:"60px 20px",color:textDim,fontSize:13}}>
-              No actions assigned to this playbook yet.<br/>
+              No actions assigned to this use case yet.<br/>
               <span style={{fontSize:11,opacity:.7}}>Use Edit mode on the main matrix to add actions, then return to this guide.</span>
             </div>
           )}
@@ -1400,7 +1400,7 @@ function App({initialMatrix, initialName}) {
             {label:"+ Phase",        fn:()=>setShowAddTactic(true)},
             {label:"+ Action",       fn:()=>setShowAddAction(true)},
             {label:"Clear All",      fn:clearAll},
-            {label:"Import HTML",    fn:()=>fileRef.current.click()},
+            {label:"Import JSON",    fn:()=>fileRef.current.click()},
             {label:"Export JSON ↓",  fn:exportSnapshot, hi:true},
           ].map(btn=>(
             <button key={btn.label} className="tool-btn" onClick={btn.fn} style={{
@@ -1631,12 +1631,12 @@ function App({initialMatrix, initialName}) {
             matrix={matrix}
           />
         ) : (
-          <div onClick={()=>setPanelOpen(true)} title="Open playbooks panel"
+          <div onClick={()=>setPanelOpen(true)} title="Open use cases panel"
             style={{width:32,flexShrink:0,background:dark?"#0e0e1e":"#f8f8ff",borderLeft:`1px solid ${dark?"#1e1e38":"#d8d8f0"}`,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",cursor:"pointer",gap:10,transition:"background .15s"}}
             onMouseEnter={e=>e.currentTarget.style.background=dark?"#141430":"#eeeefc"}
             onMouseLeave={e=>e.currentTarget.style.background=dark?"#0e0e1e":"#f8f8ff"}>
             <BookIcon color="#7c6ff7" size={14}/>
-            <span style={{fontSize:10,color:"#7c6ff7",letterSpacing:2,textTransform:"uppercase",writingMode:"vertical-rl",transform:"rotate(180deg)",opacity:.8,whiteSpace:"nowrap"}}>Playbooks</span>
+            <span style={{fontSize:10,color:"#7c6ff7",letterSpacing:2,textTransform:"uppercase",writingMode:"vertical-rl",transform:"rotate(180deg)",opacity:.8,whiteSpace:"nowrap"}}>Use Cases</span>
             {(matrix.playbooks||[]).length>0&&(
               <span style={{fontSize:9,color:"#a29bfe",background:dark?"#1a1a3a":"#ede9fe",border:`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:8,padding:"2px 5px",textAlign:"center"}}>
                 {(matrix.playbooks||[]).length}
