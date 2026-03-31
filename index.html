@@ -1262,6 +1262,7 @@ function App({initialMatrix, initialName}) {
   const [showAddPb,     setShowAddPb]     = useState(false);
   const [showManageCat, setShowManageCat] = useState(false);
   const [hoveredCell,   setHoveredCell]   = useState(null);
+  const [expandedCards, setExpandedCards] = useState({});
   const [hoveredTactic, setHoveredTactic] = useState(null);
   const [matrixName,    setMatrixName]    = useState(initialName||"Incident Response — PICERL");
   const [editingName,   setEditingName]   = useState(false);
@@ -1351,8 +1352,8 @@ function App({initialMatrix, initialName}) {
       if(pbMode==="view"&&activePb.techIds.includes(tech.id)&&tech.url) openLink(tech.url);
       return;
     }
-    if(tech.url) openLink(tech.url);
-    else setSelected({tacticId,techId:tech.id});
+    const key=tacticId+"-"+tech.id;
+    setExpandedCards(e=>({...e,[key]:!e[key]}));
   }
   function handleTacticClick(tactic) {
     if(activePb) return;
@@ -1585,6 +1586,9 @@ function App({initialMatrix, initialName}) {
                       const inPb      = activePb&&activePb.techIds.includes(tech.id);
                       const isDimmed  = activePb&&!inPb;
                       const memberPbs = (matrix.playbooks||[]).filter(p=>p.id!==activePlaybook&&p.techIds.includes(tech.id));
+                      const cardKey = `${tactic.id}-${tech.id}`;
+                      const isExpanded = expandedCards[cardKey];
+                      const hasContent = tech.description || (tech.sections?.length>0) || (tech.comment&&!tech.sections);
 
                       let cls="tech-cell";
                       if(isDimmed)                    cls+=" dimmed";
@@ -1607,7 +1611,7 @@ function App({initialMatrix, initialName}) {
                             background: catBg,
                             border: `1px solid ${catBorder}`,
                             borderRadius:8, padding:"9px 11px",
-                            cursor: pbMode==="edit"?"crosshair":(hasLink||inPb)?"pointer":"default",
+                            cursor: pbMode==="edit"?"crosshair":"pointer",
                             position:"relative",
                             boxShadow: inPb
                               ? `0 0 14px ${activePb.color}44`
@@ -1626,8 +1630,8 @@ function App({initialMatrix, initialName}) {
                             <span>{tech.id}</span>
                             <div style={{display:"flex",alignItems:"center",gap:3}}>
                               {memberPbs.map(p=><div key={p.id} style={{width:5,height:5,borderRadius:"50%",background:p.color}} title={p.name}/>)}
-                              {hasLink&&!activePb&&<LinkIcon color={tech.category?cat.text:(dark?"#5a5a90":"#b0b0d0")} size={9}/>}
-                              {inPb&&pbMode==="view"&&hasLink&&<LinkIcon color={activePb.color} size={9}/>}
+                              {hasLink&&!activePb&&<a href={tech.url} target="_blank" rel="noopener noreferrer" onClick={e=>e.stopPropagation()} style={{display:"flex",alignItems:"center"}} title={tech.url}><LinkIcon color={tech.category?cat.text:(dark?"#5a5a90":"#b0b0d0")} size={9}/></a>}
+                              {inPb&&pbMode==="view"&&hasLink&&<a href={tech.url} target="_blank" rel="noopener noreferrer" onClick={e=>e.stopPropagation()} style={{display:"flex",alignItems:"center"}} title={tech.url}><LinkIcon color={activePb.color} size={9}/></a>}
                             </div>
                           </div>
                           {/* Name */}
@@ -1641,12 +1645,20 @@ function App({initialMatrix, initialName}) {
                               <span style={{fontSize:9,color:cat.text,letterSpacing:.5}}>{cat.label}</span>
                             </div>
                           )}
-                          {/* Collapsible detail sections */}
-                          {!inPb&&!activePb&&(tech.sections?.length>0||(tech.comment&&!tech.sections))&&(
-                            <div style={{marginTop:6}} onClick={e=>e.stopPropagation()}>
-                              {(tech.sections?.length>0?tech.sections:[{id:"legacy",title:"Notes",body:tech.comment}]).map(sec=>(
+                          {/* Expandable sections — shown when card is clicked */}
+                          {isExpanded&&!inPb&&!activePb&&(
+                            <div className="fade-in" style={{marginTop:8,borderTop:`1px solid ${dark?"#252545":"#e0e0f0"}`,paddingTop:6}} onClick={e=>e.stopPropagation()}>
+                              {tech.description&&(
+                                <div style={{fontSize:10,fontStyle:"italic",color:dark?"#666688":"#9090b0",lineHeight:1.4,marginBottom:6}}>
+                                  {tech.description}
+                                </div>
+                              )}
+                              {(tech.sections?.length>0?tech.sections:(tech.comment?[{id:"legacy",title:"Notes",body:tech.comment}]:[])).map(sec=>(
                                 <SectionBlock key={sec.id} sec={sec} dark={dark}/>
                               ))}
+                              {!tech.description&&!(tech.sections?.length>0)&&!tech.comment&&(
+                                <div style={{fontSize:10,color:dark?"#444460":"#b0b0cc",fontStyle:"italic",opacity:.6}}>No details yet</div>
+                              )}
                             </div>
                           )}
                           {/* In-playbook checkmark */}
