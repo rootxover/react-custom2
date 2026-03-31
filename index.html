@@ -799,7 +799,7 @@ function PlaybookPanel({dark, playbooks, activePlaybookId, pbMode, onSelect, onS
           const isActive    = activePlaybookId===pb.id;
           const isEdit      = isActive&&pbMode==="edit";
           const isView      = isActive&&pbMode==="view";
-          const isCollapsed = !isActive&&collapsed[pb.id];
+          const isCollapsed = !isActive&&!collapsed[pb.id];
           const techCount   = pb.techIds.length;
           const ordered     = getOrderedTechs(pb);
           const steps       = getSteps(pb);
