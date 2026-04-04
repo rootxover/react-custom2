@@ -1283,7 +1283,7 @@ function App({initialMatrix, initialName}) {
   const [hoveredTactic, setHoveredTactic] = useState(null);
   const [matrixName,    setMatrixName]    = useState(initialName||"Incident Response — PICERL");
   const [editingName,   setEditingName]   = useState(false);
-  const [filterCat,     setFilterCat]     = useState("");
+  const [filterCat,     setFilterCat]     = useState(null);
   const [activePlaybook,setActivePlaybook]= useState(null);
   const [pbMode,        setPbMode]        = useState(null);
   const [panelOpen,     setPanelOpen]     = useState(true);
@@ -1359,7 +1359,7 @@ function App({initialMatrix, initialName}) {
       categories:(m.categories||DEFAULT_CATEGORIES).filter(c=>c.id!==catId),
       tactics:m.tactics.map(t=>({...t,techniques:t.techniques.map(te=>te.category===catId?{...te,category:""}:te)})),
     }));
-    if(filterCat===catId) setFilterCat("");
+    if(filterCat===catId) setFilterCat(null);
   }
 
   // ── Click routing ──
@@ -1523,12 +1523,20 @@ function App({initialMatrix, initialName}) {
       {/* ── CATEGORY FILTER BAR ── */}
       <div style={{background:barBg,borderBottom:`1px solid ${border}`,padding:"7px 22px",display:"flex",gap:5,flexWrap:"wrap",alignItems:"center",flexShrink:0}}>
         <span style={{fontSize:10,color:textDim,letterSpacing:2,marginRight:4}}>CATEGORY:</span>
+        <button onClick={()=>setFilterCat(null)}
+          disabled={filterCat===null}
+          title="Clear category filter"
+          onMouseEnter={e=>{if(filterCat!==null){e.currentTarget.style.background="#e94560";e.currentTarget.style.color="#fff";}}}
+          onMouseLeave={e=>{if(filterCat!==null){e.currentTarget.style.background="transparent";e.currentTarget.style.color="#e94560";}}}
+          style={{display:"flex",alignItems:"center",gap:4,background:"transparent",border:`1px solid #e94560`,borderRadius:20,padding:"3px 10px",cursor:filterCat===null?"default":"pointer",fontFamily:"inherit",color:"#e94560",fontSize:11,transition:"all .15s",opacity:filterCat===null?.35:1,marginRight:2}}>
+          ✕ Clear
+        </button>
         {categories.map(cat=>{
           const on = filterCat===cat.id;
           const isCustom = !DEFAULT_CATEGORIES.find(d=>d.id===cat.id);
           return (
-            <div key={cat.id} className="cat-pill-wrap" style={{display:"flex",alignItems:"center",position:"relative",opacity:filterCat&&!on?.4:1}}>
-              <button onClick={()=>setFilterCat(on?"":cat.id)}
+            <div key={cat.id} className="cat-pill-wrap" style={{display:"flex",alignItems:"center",position:"relative",opacity:filterCat!==null&&!on?.4:1}}>
+              <button onClick={()=>setFilterCat(on?null:cat.id)}
                 style={{display:"flex",alignItems:"center",gap:5,background:on?cat.bg:"transparent",border:`1px solid ${on?cat.color:dark?"#2a2a48":"#d0d0e8"}`,borderRadius:20,padding:isCustom?"3px 22px 3px 10px":"3px 10px",cursor:"pointer",fontFamily:"inherit",transition:"all .15s"}}>
                 <div style={{width:6,height:6,borderRadius:"50%",background:on?cat.text:dark?"#4a4a70":"#b0b0cc",flexShrink:0}}/>
                 <span style={{fontSize:11,color:on?cat.text:textSub}}>{cat.label}</span>
@@ -1577,7 +1585,7 @@ function App({initialMatrix, initialName}) {
                 const bi = catOrder.indexOf(b.category||"");
                 return (ai===-1?999:ai) - (bi===-1?999:bi);
               });
-              const techs  = sortByCat(filterCat ? tactic.techniques.filter(te=>te.category===filterCat) : tactic.techniques);
+              const techs  = sortByCat(filterCat!==null ? tactic.techniques.filter(te=>(te.category||"")===filterCat) : tactic.techniques);
 
               return (
                 <div key={tactic.id} className="tactic-wrap" style={{width:175,flexShrink:0}}>
@@ -1591,7 +1599,7 @@ function App({initialMatrix, initialName}) {
                     <div style={{fontSize:9,color:accent.text,opacity:.6,letterSpacing:3,marginBottom:4,textTransform:"uppercase"}}>Phase {idx+1}</div>
                     <div style={{fontSize:13,fontWeight:700,color:accent.text,fontFamily:"'Space Grotesk',sans-serif",lineHeight:1.25,paddingRight:18}}>{tactic.name}</div>
                     <div style={{fontSize:10,color:dark?"#44446088":"#88889088",marginTop:4,display:"flex",alignItems:"center",gap:5}}>
-                      <span>{filterCat?`${techs.length}/${tactic.techniques.length}`:tactic.techniques.length} actions</span>
+                      <span>{filterCat!==null?`${techs.length}/${tactic.techniques.length}`:tactic.techniques.length} actions</span>
                       {tactic.url&&<span style={{display:"flex",alignItems:"center",gap:3,color:accent.text,opacity:.6}}>· <LinkIcon color={accent.text} size={9}/></span>}
                     </div>
                     {hoveredTactic===tactic.id&&!tactic.url&&!activePb&&(
@@ -1705,7 +1713,7 @@ function App({initialMatrix, initialName}) {
                       );
                     })}
 
-                    {filterCat&&techs.length===0&&(
+                    {filterCat!==null&&techs.length===0&&(
                       <div style={{border:`1px dashed ${dark?"#1e1e38":"#d8d8f0"}`,borderRadius:8,padding:"16px 10px",textAlign:"center",color:textDim,fontSize:11}}>no match</div>
                     )}
 
