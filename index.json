@@ -2,8 +2,12 @@
   "name": "Incident Response — PICERL",
   "categories": "categories.json",
   "playbooks": [
-    "playbooks/phishing.json",
-    "playbooks/ddos.json"
+    "usecases/phishing.json",
+    "usecases/layer3-ddos.json",
+    "usecases/layer7-ddos.json",
+    "usecases/password-spray.json",
+    "usecases/malware.json",
+    "usecases/insider-threat.json"
   ],
   "phases": [
     "phases/01-preparation",
