@@ -8,7 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Space+Grotesk:wght@600;700&family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
     /* ── THEME TOKENS ── */
     :root[data-theme="dark"] {
@@ -120,6 +120,129 @@
       --shadow-md:   0 4px 20px rgba(0,0,0,.5);
     }
 
+    :root[data-theme="retro"] {
+      --bg:          #1a1a2e;
+      --bg2:         #16213e;
+      --bg3:         #0f3460;
+      --surface:     #1a1a40;
+      --surface2:    #222255;
+      --border:      #00ff41;
+      --border2:     #33ff66;
+      --text:        #00ff41;
+      --text2:       #33ff88;
+      --text3:       #00aa2a;
+      --text4:       #006618;
+      --accent:      #ff003c;
+      --accent2:     #ffcc00;
+      --danger:      #ff003c;
+      --header-bg:   #0a0a1e;
+      --modal-bg:    #0e0e28;
+      --modal-border:#00ff41;
+      --input-bg:    #0a0a20;
+      --input-border:#00ff41;
+      --scrollbar:   #00ff41;
+      --cell-bg:     #0e0e2a;
+      --cell-border: #00aa2a;
+      --dim-opacity: 0.12;
+      --shadow-sm:   0 2px 0 #00ff41, 0 -2px 0 #00ff41, 2px 0 0 #00ff41, -2px 0 0 #00ff41;
+      --shadow-md:   0 0 12px rgba(0,255,65,.3);
+    }
+
+    /* ── RETRO 8-BIT OVERRIDES ── */
+    :root[data-theme="retro"] body,
+    :root[data-theme="retro"] input,
+    :root[data-theme="retro"] textarea,
+    :root[data-theme="retro"] button,
+    :root[data-theme="retro"] select {
+      font-family: 'Press Start 2P', monospace !important;
+    }
+    :root[data-theme="retro"] * {
+      border-radius: 0 !important;
+      image-rendering: pixelated;
+    }
+    :root[data-theme="retro"] .tech-cell {
+      border: 2px solid #00aa2a !important;
+      box-shadow: 4px 4px 0 #000 !important;
+      transition: none !important;
+    }
+    :root[data-theme="retro"] .tech-cell:hover {
+      transform: none !important;
+      border-color: #00ff41 !important;
+      box-shadow: 4px 4px 0 #00ff41 !important;
+    }
+    :root[data-theme="retro"] .tech-cell.in-playbook {
+      outline: 3px solid var(--pb-color,#ffcc00) !important;
+      outline-offset: 0 !important;
+      box-shadow: 0 0 8px var(--pb-color,#ffcc00), 4px 4px 0 #000 !important;
+    }
+    :root[data-theme="retro"] .tactic-header {
+      border: 2px solid #00ff41 !important;
+      box-shadow: 4px 4px 0 #000 !important;
+      transition: none !important;
+    }
+    :root[data-theme="retro"] .tactic-header:hover {
+      filter: none !important;
+      border-color: #ffcc00 !important;
+    }
+    :root[data-theme="retro"] .tool-btn {
+      border: 2px solid #00ff41 !important;
+      box-shadow: 3px 3px 0 #000 !important;
+      transition: none !important;
+      text-transform: uppercase;
+    }
+    :root[data-theme="retro"] .tool-btn:hover {
+      background: #00ff41 !important;
+      color: #0a0a1e !important;
+      border-color: #00ff41 !important;
+    }
+    :root[data-theme="retro"] .tool-btn:active {
+      box-shadow: 1px 1px 0 #000 !important;
+      transform: translate(2px,2px);
+    }
+    :root[data-theme="retro"] .theme-toggle {
+      border: 2px solid #00ff41 !important;
+      box-shadow: 3px 3px 0 #000 !important;
+      transition: none !important;
+    }
+    :root[data-theme="retro"] .theme-toggle:hover {
+      transform: none !important;
+      background: #00ff41 !important;
+      color: #0a0a1e !important;
+    }
+    :root[data-theme="retro"] .pb-card {
+      border: 2px solid #00aa2a !important;
+      box-shadow: 4px 4px 0 #000 !important;
+      transition: none !important;
+    }
+    :root[data-theme="retro"] .pb-tech-row {
+      border: 1px solid #006618 !important;
+      transition: none !important;
+    }
+    :root[data-theme="retro"] .pb-tech-row:hover {
+      border-color: #00ff41 !important;
+      background: #1a1a40 !important;
+    }
+    :root[data-theme="retro"] .modal-overlay {
+      backdrop-filter: none !important;
+      background: rgba(0,0,0,.85) !important;
+    }
+    :root[data-theme="retro"] .mode-btn {
+      transition: none !important;
+    }
+    :root[data-theme="retro"] ::-webkit-scrollbar-thumb {
+      background: #00ff41 !important;
+      border-radius: 0 !important;
+    }
+    :root[data-theme="retro"] ::-webkit-scrollbar-track {
+      background: #0a0a1e !important;
+    }
+
+    @keyframes retro-blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    @keyframes retro-scanlines {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 4px; }
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body, #root { height: 100%; }
     body { background: var(--bg); font-family: 'DM Mono', monospace; color: var(--text); overflow: hidden; transition: background .25s, color .25s; }
@@ -219,6 +342,15 @@ const TACTIC_ACCENTS_LIGHT = {
   t5:{ from:"#e0f2fe", to:"#f0f9ff", border:"#7dd3fc", text:"#0369a1" },
   t6:{ from:"#ffe4e6", to:"#fff1f2", border:"#fda4af", text:"#be123c" },
 };
+const TACTIC_ACCENTS_RETRO = {
+  t1:{ from:"#0a1040", to:"#060828", border:"#00aaff", text:"#00ccff" },
+  t2:{ from:"#200840", to:"#140428", border:"#cc00ff", text:"#dd44ff" },
+  t3:{ from:"#2a1800", to:"#1a0e00", border:"#ff8800", text:"#ffaa00" },
+  t4:{ from:"#002a10", to:"#001a08", border:"#00ff41", text:"#33ff66" },
+  t5:{ from:"#002040", to:"#001428", border:"#0088ff", text:"#44aaff" },
+  t6:{ from:"#2a0010", to:"#1a0008", border:"#ff003c", text:"#ff3366" },
+};
+const DEF_ACCENT_RETRO = { from:"#0e0e30", to:"#08081a", border:"#00ff41", text:"#00ff41" };
 const DEF_ACCENT_DARK  = { from:"#1e1e4f", to:"#12122a", border:"#3e2e7e", text:"#c4b5fd" };
 const DEF_ACCENT_LIGHT = { from:"#ede9fe", to:"#f5f3ff", border:"#a78bfa", text:"#5b21b6" };
 
@@ -739,7 +871,7 @@ function ManageCategoriesModal({dark, categories, onClose, onAdd, onDelete}) {
 }
 
 // ── Playbook Panel ──
-function PlaybookPanel({dark, playbooks, activePlaybookId, pbMode, onSelect, onSetMode, onDeselect, onAdd, onDelete, onRename, onUpdateDesc, onReorder, onCollapse, onOpenGuide, matrix}) {
+function PlaybookPanel({dark, theme, playbooks, activePlaybookId, pbMode, onSelect, onSetMode, onDeselect, onAdd, onDelete, onRename, onUpdateDesc, onReorder, onCollapse, onOpenGuide, matrix}) {
   const [collapsed,  setCollapsed]  = useState({});
   const [collapsedPhases, setCollapsedPhases] = useState({});
   const [editingId,  setEditingId]  = useState(null);
@@ -749,12 +881,13 @@ function PlaybookPanel({dark, playbooks, activePlaybookId, pbMode, onSelect, onS
   const [dropPos,    setDropPos]    = useState(null);
   const dragPbRef = useRef(null);
 
-  const panelBg     = dark ? "#0e0e1e" : "#f8f8ff";
-  const panelBorder = dark ? "#1e1e38" : "#e0e0f0";
-  const headerBg    = dark ? "#111120" : "#ffffff";
-  const cardBg      = dark ? "#0e0e1e" : "#f8f8ff";
-  const textMain    = dark ? "#ccccee" : "#2a2a4a";
-  const textSub     = dark ? "#666688" : "#9090b0";
+  const isRetro     = theme==="retro";
+  const panelBg     = isRetro ? "#0a0a1e" : dark ? "#0e0e1e" : "#f8f8ff";
+  const panelBorder = isRetro ? "#00aa2a" : dark ? "#1e1e38" : "#e0e0f0";
+  const headerBg    = isRetro ? "#0a0a1e" : dark ? "#111120" : "#ffffff";
+  const cardBg      = isRetro ? "#0e0e2a" : dark ? "#0e0e1e" : "#f8f8ff";
+  const textMain    = isRetro ? "#00ff41" : dark ? "#ccccee" : "#2a2a4a";
+  const textSub     = isRetro ? "#00aa2a" : dark ? "#666688" : "#9090b0";
 
   function getOrderedTechs(pb) {
     const lookup = {};
@@ -799,12 +932,12 @@ function PlaybookPanel({dark, playbooks, activePlaybookId, pbMode, onSelect, onS
   function onDragEnd() { setDragId(null); setDragOverId(null); setDropPos(null); dragPbRef.current=null; }
 
   return (
-    <div style={{width:268,flexShrink:0,background:panelBg,borderLeft:`1px solid ${panelBorder}`,display:"flex",flexDirection:"column",height:"100%",overflow:"hidden"}}>
+    <div style={{width:268,flexShrink:0,background:panelBg,borderLeft:isRetro?`2px solid #00ff41`:`1px solid ${panelBorder}`,display:"flex",flexDirection:"column",height:"100%",overflow:"hidden"}}>
       {/* Header */}
       <div style={{padding:"12px 14px 10px",borderBottom:`1px solid ${panelBorder}`,background:headerBg,display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0}}>
         <div style={{display:"flex",alignItems:"center",gap:7}}>
-          <BookIcon color="#7c6ff7" size={14}/>
-          <span style={{fontSize:12,color:"#7c6ff7",letterSpacing:1,fontWeight:600}}>USE CASES</span>
+          <BookIcon color={isRetro?"#00ff41":"#7c6ff7"} size={14}/>
+          <span style={{fontSize:isRetro?7:12,color:isRetro?"#00ff41":"#7c6ff7",letterSpacing:1,fontWeight:600,textShadow:isRetro?"0 0 8px #00ff41":"none"}}>{isRetro?"★ ":""}USE CASES</span>
         </div>
         <div style={{display:"flex",gap:5}}>
           <button onClick={onAdd} title="New use case" style={{background:dark?"#1a1a3a":"#ede9fe",border:`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:5,width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer"}}>
@@ -1005,7 +1138,7 @@ function PlaybookPanel({dark, playbooks, activePlaybookId, pbMode, onSelect, onS
 }
 
 // ── Response Guide Overlay ──
-function ResponseGuideOverlay({dark, playbook, matrix, onClose}) {
+function ResponseGuideOverlay({dark, theme, playbook, matrix, onClose}) {
   const [expanded, setExpanded] = useState({});
   const toggle = id => setExpanded(e=>({...e,[id]:!e[id]}));
 
@@ -1026,8 +1159,18 @@ function ResponseGuideOverlay({dark, playbook, matrix, onClose}) {
 
   const totalActions = playbook.techIds.filter(id=>lookup[id]).length;
 
+  const isRetro  = theme==="retro";
+  const retroFont= "'Press Start 2P', monospace";
+
   // Phase badge colors
-  const phaseBadge = {
+  const phaseBadge = isRetro ? {
+    P:{ bg:"#001a40", text:"#00ccff" },
+    I:{ bg:"#200040", text:"#dd44ff" },
+    C:{ bg:"#2a1800", text:"#ffaa00" },
+    E:{ bg:"#2a0010", text:"#ff3366" },
+    R:{ bg:"#002a10", text:"#33ff66" },
+    L:{ bg:"#1a1a00", text:"#ffcc00" },
+  } : {
     P:{ bg:dark?"#1a365d":"#dbeafe", text:dark?"#63b3ed":"#1d4ed8" },
     I:{ bg:dark?"#2d1f5e":"#ede9fe", text:dark?"#b794f4":"#5b21b6" },
     C:{ bg:dark?"#4a2e08":"#ffedd5", text:dark?"#f6ad55":"#c2410c" },
@@ -1035,25 +1178,25 @@ function ResponseGuideOverlay({dark, playbook, matrix, onClose}) {
     R:{ bg:dark?"#143325":"#dcfce7", text:dark?"#68d391":"#15803d" },
     L:{ bg:dark?"#3b1a3b":"#fce7f3", text:dark?"#d6bcfa":"#a21caf" },
   };
-
-  const bgMain   = dark?"#0e0e18":"#f0f0f8";
-  const bgCard   = dark?"#161628":"#ffffff";
-  const borderC  = dark?"#2e2e50":"#d8d8f0";
-  const textMain = dark?"#e8e8f0":"#1a1a2e";
-  const textSub  = dark?"#8888aa":"#6060a0";
-  const textDim  = dark?"#555577":"#a0a0c0";
-  const surfaceBg= dark?"#1a1a2e":"#f5f5fc";
+  const bgMain   = isRetro?"#0a0a1e":dark?"#0e0e18":"#f0f0f8";
+  const bgCard   = isRetro?"#0e0e2a":dark?"#161628":"#ffffff";
+  const borderC  = isRetro?"#00ff41":dark?"#2e2e50":"#d8d8f0";
+  const textMain = isRetro?"#00ff41":dark?"#e8e8f0":"#1a1a2e";
+  const textSub  = isRetro?"#00aa2a":dark?"#8888aa":"#6060a0";
+  const textDim  = isRetro?"#006618":dark?"#555577":"#a0a0c0";
+  const surfaceBg= isRetro?"#0e0e28":dark?"#1a1a2e":"#f5f5fc";
 
   return (
-    <div style={{position:"fixed",inset:0,background:bgMain,zIndex:2000,display:"flex",flexDirection:"column",fontFamily:"'DM Mono',monospace",overflow:"hidden"}}>
+    <div style={{position:"fixed",inset:0,background:bgMain,zIndex:2000,display:"flex",flexDirection:"column",fontFamily:isRetro?retroFont:"'DM Mono',monospace",overflow:"hidden"}}>
+      {isRetro && <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:9999,background:"repeating-linear-gradient(0deg, rgba(0,255,65,0.03) 0px, rgba(0,255,65,0.03) 1px, transparent 1px, transparent 3px)",mixBlendMode:"overlay"}}/>}
       {/* Header bar */}
-      <div style={{padding:"16px 28px",borderBottom:`1px solid ${borderC}`,display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0,background:dark?"#111120":"#ffffff"}}>
+      <div style={{padding:isRetro?"12px 28px":"16px 28px",borderBottom:isRetro?`2px solid #00ff41`:`1px solid ${borderC}`,display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0,background:isRetro?"#0a0a1e":dark?"#111120":"#ffffff",boxShadow:isRetro?"0 4px 0 #000":"none"}}>
         <div style={{display:"flex",alignItems:"center",gap:12}}>
-          <div style={{width:10,height:10,borderRadius:"50%",background:playbook.color,boxShadow:`0 0 8px ${playbook.color}`}}/>
-          <span style={{fontSize:16,fontFamily:"'Space Grotesk',sans-serif",fontWeight:700,color:textMain}}>Response Guide</span>
-          <span style={{fontSize:12,color:textSub}}>—</span>
-          <span style={{fontSize:14,fontFamily:"'Space Grotesk',sans-serif",fontWeight:600,color:playbook.color}}>{playbook.name}</span>
-          <span style={{fontSize:11,color:textDim,background:dark?"#1e1e38":"#eeeefc",borderRadius:10,padding:"2px 10px"}}>{totalActions} actions across {phases.length} phases</span>
+          <div style={{width:10,height:10,borderRadius:isRetro?0:"50%",background:playbook.color,boxShadow:isRetro?"none":`0 0 8px ${playbook.color}`}}/>
+          <span style={{fontSize:isRetro?9:16,fontFamily:isRetro?retroFont:"'Space Grotesk',sans-serif",fontWeight:700,color:textMain,textShadow:isRetro?"0 0 8px #00ff41":"none"}}>{isRetro?"► ":""}Response Guide</span>
+          <span style={{fontSize:isRetro?8:12,color:textSub}}>—</span>
+          <span style={{fontSize:isRetro?8:14,fontFamily:isRetro?retroFont:"'Space Grotesk',sans-serif",fontWeight:600,color:playbook.color}}>{playbook.name}</span>
+          <span style={{fontSize:isRetro?6:11,color:textDim,background:isRetro?"#0e0e28":dark?"#1e1e38":"#eeeefc",border:isRetro?"1px solid #006618":"none",borderRadius:isRetro?0:10,padding:"2px 10px"}}>{totalActions} actions across {phases.length} phases</span>
         </div>
         <div style={{display:"flex",alignItems:"center",gap:8}}>
           {(() => {
@@ -1307,8 +1450,8 @@ function App({initialMatrix, initialName}) {
   const activePb     = (matrix.playbooks||[]).find(p=>p.id===activePlaybook)||null;
   const selectedTech = selected ? matrix.tactics.find(t=>t.id===selected.tacticId)?.techniques.find(te=>te.id===selected.techId) : null;
 
-  const TACTIC_ACCENTS = dark ? TACTIC_ACCENTS_DARK : TACTIC_ACCENTS_LIGHT;
-  const DEF_ACCENT     = dark ? DEF_ACCENT_DARK      : DEF_ACCENT_LIGHT;
+  const TACTIC_ACCENTS = theme==="retro" ? TACTIC_ACCENTS_RETRO : dark ? TACTIC_ACCENTS_DARK : TACTIC_ACCENTS_LIGHT;
+  const DEF_ACCENT     = theme==="retro" ? DEF_ACCENT_RETRO : dark ? DEF_ACCENT_DARK      : DEF_ACCENT_LIGHT;
 
   // ── Playbook fns ──
   function selectPlaybook(pbId) { setActivePlaybook(pbId); setPbMode("view"); setSelected(null); }
@@ -1434,10 +1577,12 @@ function App({initialMatrix, initialName}) {
       });
     });
   }, [theme]);
+  const isRetro = theme==="retro";
+  const retroFont = "'Press Start 2P', monospace";
   const bg        = themeColors.bg       || (dark?"#0e0e18":"#f0f0f8");
   const headerBg  = themeColors.headerBg || (dark?"#111120":"#ffffff");
   const barBg     = themeColors.bg2      || (dark?"#0c0c1a":"#e8e8f4");
-  const hintBg    = dark?"#0a0a12":"#f0f0fa";
+  const hintBg    = isRetro?"#0a0a1e":dark?"#0a0a12":"#f0f0fa";
   const border    = themeColors.border   || (dark?"#1e1e38":"#d8d8f0");
   const border2   = themeColors.border2  || (dark?"#252545":"#c8c8e8");
   const textMain  = themeColors.text     || (dark?"#e8e8f0":"#1a1a2e");
@@ -1449,21 +1594,22 @@ function App({initialMatrix, initialName}) {
   const S = getS(dark);
 
   return (
-    <div style={{height:"100vh",display:"flex",flexDirection:"column",background:bg,fontFamily:"'DM Mono',monospace",color:textMain}}>
+    <div style={{height:"100vh",display:"flex",flexDirection:"column",background:bg,fontFamily:isRetro?retroFont:"'DM Mono',monospace",color:textMain,position:"relative"}}>
+      {isRetro && <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:9999,background:"repeating-linear-gradient(0deg, rgba(0,255,65,0.03) 0px, rgba(0,255,65,0.03) 1px, transparent 1px, transparent 3px)",mixBlendMode:"overlay"}}/>}
 
       {/* ── HEADER ── */}
-      <header style={{background:headerBg,borderBottom:`1px solid ${border}`,padding:"13px 22px",display:"flex",alignItems:"center",gap:14,flexWrap:"wrap",flexShrink:0,boxShadow:dark?"none":"0 1px 8px rgba(0,0,0,.06)"}}>
+      <header style={{background:headerBg,borderBottom:isRetro?`2px solid #00ff41`:`1px solid ${border}`,padding:isRetro?"10px 22px":"13px 22px",display:"flex",alignItems:"center",gap:14,flexWrap:"wrap",flexShrink:0,boxShadow:isRetro?"0 4px 0 #000":dark?"none":"0 1px 8px rgba(0,0,0,.06)"}}>
         <div style={{flex:1,minWidth:220}}>
           {editingName ? (
             <input value={matrixName} onChange={e=>setMatrixName(e.target.value)} onBlur={()=>setEditingName(false)} onKeyDown={e=>e.key==="Enter"&&setEditingName(false)} autoFocus
               style={{fontSize:18,fontFamily:"'Space Grotesk',sans-serif",fontWeight:700,background:"transparent",border:"none",borderBottom:"2px solid #7c6ff7",color:textMain,outline:"none",padding:"2px 0",minWidth:280}}/>
           ) : (
             <h1 onClick={()=>setEditingName(true)} title="Click to rename"
-              style={{margin:0,fontSize:18,fontFamily:"'Space Grotesk',sans-serif",fontWeight:700,color:textMain,cursor:"text",letterSpacing:.3}}>
-              {matrixName}
+              style={{margin:0,fontSize:isRetro?12:18,fontFamily:isRetro?retroFont:"'Space Grotesk',sans-serif",fontWeight:700,color:isRetro?"#00ff41":textMain,cursor:"text",letterSpacing:isRetro?1:.3,textShadow:isRetro?"0 0 10px #00ff41":"none"}}>
+              {isRetro?"► ":""}{matrixName}{isRetro?" ◄":""}
             </h1>
           )}
-          <div style={{fontSize:11,color:textDim,marginTop:4,display:"flex",gap:10,flexWrap:"wrap",alignItems:"center"}}>
+          <div style={{fontSize:isRetro?7:11,color:textDim,marginTop:4,display:"flex",gap:10,flexWrap:"wrap",alignItems:"center"}}>
             <span>{categorizedTechs}/{totalTechs} categorized</span>
             <span style={{opacity:.4}}>·</span>
             <span>{matrix.tactics.length} phases</span>
@@ -1491,15 +1637,15 @@ function App({initialMatrix, initialName}) {
         <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center"}}>
           {/* Theme toggle */}
           {(()=>{
-            const themes = ["dark","light","tactical","midnight"];
-            const labels = {dark:"Dark",light:"Light",tactical:"Tactical",midnight:"Midnight"};
+            const themes = ["dark","light","tactical","midnight","retro"];
+            const labels = {dark:"Dark",light:"Light",tactical:"Tactical",midnight:"Midnight",retro:"8-Bit"};
             const nextTheme = themes[(themes.indexOf(theme)+1)%themes.length];
             return (
               <button className="theme-toggle" onClick={()=>setTheme(nextTheme)}
                 title={`Theme: ${labels[theme]} → ${labels[nextTheme]}`}
-                style={{background:dark?"#1a1a3a":"#ede9fe",border:`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:7,height:30,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",gap:5,padding:"0 10px"}}>
-                {dark ? <SunIcon color={theme==="tactical"?"#FCCC44":"#f6ad55"} size={15}/> : <MoonIcon color="#5b4fd4" size={15}/>}
-                <span style={{fontSize:10,color:dark?"#888":"#666",letterSpacing:.5}}>{labels[theme]}</span>
+                style={{background:theme==="retro"?"#0a0a1e":dark?"#1a1a3a":"#ede9fe",border:theme==="retro"?"2px solid #00ff41":`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:7,height:30,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",gap:5,padding:"0 10px"}}>
+                {theme==="retro" ? <span style={{fontSize:10,lineHeight:1}}>&#x1F47E;</span> : dark ? <SunIcon color={theme==="tactical"?"#FCCC44":"#f6ad55"} size={15}/> : <MoonIcon color="#5b4fd4" size={15}/>}
+                <span style={{fontSize:theme==="retro"?7:10,color:theme==="retro"?"#00ff41":dark?"#888":"#666",letterSpacing:theme==="retro"?1:.5}}>{labels[theme]}</span>
               </button>
             );
           })()}
@@ -1511,18 +1657,18 @@ function App({initialMatrix, initialName}) {
             {label:"Export JSON ↓",  fn:exportSnapshot, hi:true},
           ].map(btn=>(
             <button key={btn.label} className="tool-btn" onClick={btn.fn} style={{
-              background:btn.hi?(dark?"#1a1040":"#ede9fe"):(dark?"#0e0e20":"#f5f5fc"),
-              color:btn.hi?(dark?"#a29bfe":"#5b4fd4"):(dark?"#888":"#6060a0"),
-              border:`1px solid ${btn.hi?(dark?"#6c5ce7":"#a78bfa"):(dark?"#252545":"#d0d0e8")}`,
-              borderRadius:6,padding:"6px 12px",cursor:"pointer",fontSize:11,letterSpacing:.5,fontFamily:"inherit",
+              background:isRetro?"#0a0a1e":btn.hi?(dark?"#1a1040":"#ede9fe"):(dark?"#0e0e20":"#f5f5fc"),
+              color:isRetro?(btn.hi?"#ffcc00":"#00ff41"):btn.hi?(dark?"#a29bfe":"#5b4fd4"):(dark?"#888":"#6060a0"),
+              border:isRetro?`2px solid ${btn.hi?"#ffcc00":"#00ff41"}`:`1px solid ${btn.hi?(dark?"#6c5ce7":"#a78bfa"):(dark?"#252545":"#d0d0e8")}`,
+              borderRadius:6,padding:isRetro?"5px 10px":"6px 12px",cursor:"pointer",fontSize:isRetro?7:11,letterSpacing:isRetro?0:.5,fontFamily:"inherit",
             }}>{btn.label}</button>
           ))}
         </div>
       </header>
 
       {/* ── CATEGORY FILTER BAR ── */}
-      <div style={{background:barBg,borderBottom:`1px solid ${border}`,padding:"7px 22px",display:"flex",gap:5,flexWrap:"wrap",alignItems:"center",flexShrink:0}}>
-        <span style={{fontSize:10,color:textDim,letterSpacing:2,marginRight:4}}>CATEGORY:</span>
+      <div style={{background:barBg,borderBottom:isRetro?`2px solid #00aa2a`:`1px solid ${border}`,padding:"7px 22px",display:"flex",gap:5,flexWrap:"wrap",alignItems:"center",flexShrink:0}}>
+        <span style={{fontSize:isRetro?7:10,color:isRetro?"#00ff41":textDim,letterSpacing:2,marginRight:4}}>CATEGORY:</span>
         <button onClick={()=>setFilterCat(null)}
           disabled={filterCat===null}
           title="Clear category filter"
@@ -1561,8 +1707,8 @@ function App({initialMatrix, initialName}) {
       </div>
 
       {/* ── HINT BAR ── */}
-      <div style={{background:hintBg,borderBottom:`1px solid ${border}`,padding:"5px 22px",display:"flex",gap:20,alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",flexShrink:0}}>
-        <span style={{fontSize:10,color:textDim,display:"flex",alignItems:"center",gap:5}}>
+      <div style={{background:isRetro?"#0a0a1e":hintBg,borderBottom:isRetro?`1px solid #006618`:`1px solid ${border}`,padding:"5px 22px",display:"flex",gap:20,alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",flexShrink:0}}>
+        <span style={{fontSize:isRetro?6:10,color:isRetro?"#00aa2a":textDim,display:"flex",alignItems:"center",gap:5}}>
           {activePb&&pbMode==="view"&&<><EyeIcon color={activePb.color+"aa"} size={9}/><span style={{color:activePb.color+"bb"}}>View — highlighted actions open their link on click</span></>}
           {activePb&&pbMode==="edit"&&<><div className="rec-dot" style={{width:5,height:5,borderRadius:"50%",background:activePb.color,flexShrink:0}}/><span style={{color:activePb.color+"bb"}}>Edit — click any action to add/remove from <strong style={{color:activePb.color}}>{activePb.name}</strong></span></>}
           {!activePb&&<><LinkIcon color={textDim} size={9}/> Phase/action with link → opens URL · No link → click to edit</>}
@@ -1595,10 +1741,10 @@ function App({initialMatrix, initialName}) {
                     onClick={()=>handleTacticClick(tactic)}
                     onMouseEnter={()=>setHoveredTactic(tactic.id)}
                     onMouseLeave={()=>setHoveredTactic(null)}
-                    style={{background:`linear-gradient(150deg,${accent.from},${accent.to})`,borderRadius:10,padding:"12px 14px",marginBottom:8,border:`1px solid ${tactic.url?accent.text+"66":accent.border}`,position:"relative",boxShadow:dark?(tactic.url?`0 4px 24px ${accent.text}22`:`0 4px 18px ${accent.border}22`):(tactic.url?`0 4px 16px ${accent.text}33`:`0 2px 8px ${accent.border}22`)}}>
-                    <div style={{fontSize:9,color:accent.text,opacity:.6,letterSpacing:3,marginBottom:4,textTransform:"uppercase"}}>Phase {idx+1}</div>
-                    <div style={{fontSize:13,fontWeight:700,color:accent.text,fontFamily:"'Space Grotesk',sans-serif",lineHeight:1.25,paddingRight:18}}>{tactic.name}</div>
-                    <div style={{fontSize:10,color:dark?"#44446088":"#88889088",marginTop:4,display:"flex",alignItems:"center",gap:5}}>
+                    style={{background:isRetro?accent.from:`linear-gradient(150deg,${accent.from},${accent.to})`,borderRadius:10,padding:"12px 14px",marginBottom:8,border:isRetro?`2px solid ${accent.border}`:`1px solid ${tactic.url?accent.text+"66":accent.border}`,position:"relative",boxShadow:isRetro?`4px 4px 0 #000`:dark?(tactic.url?`0 4px 24px ${accent.text}22`:`0 4px 18px ${accent.border}22`):(tactic.url?`0 4px 16px ${accent.text}33`:`0 2px 8px ${accent.border}22`)}}>
+                    <div style={{fontSize:isRetro?6:9,color:accent.text,opacity:.6,letterSpacing:isRetro?1:3,marginBottom:4,textTransform:"uppercase"}}>{isRetro?"★ ":""}Phase {idx+1}</div>
+                    <div style={{fontSize:isRetro?8:13,fontWeight:700,color:accent.text,fontFamily:isRetro?retroFont:"'Space Grotesk',sans-serif",lineHeight:isRetro?1.5:1.25,paddingRight:18,textShadow:isRetro?`0 0 6px ${accent.text}`:"none"}}>{tactic.name}</div>
+                    <div style={{fontSize:isRetro?6:10,color:dark?"#44446088":"#88889088",marginTop:4,display:"flex",alignItems:"center",gap:5}}>
                       <span>{filterCat!==null?`${techs.length}/${tactic.techniques.length}`:tactic.techniques.length} actions</span>
                       {tactic.url&&<span style={{display:"flex",alignItems:"center",gap:3,color:accent.text,opacity:.6}}>· <LinkIcon color={accent.text} size={9}/></span>}
                     </div>
@@ -1658,8 +1804,8 @@ function App({initialMatrix, initialName}) {
                           onMouseLeave={()=>setHoveredCell(null)}
                         >
                           {/* ID row */}
-                          <div style={{fontSize:9,color:dark?"#3a3a58":"#c0c0d8",marginBottom:3,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                            <span>{tech.id}</span>
+                          <div style={{fontSize:isRetro?6:9,color:isRetro?"#00aa2a":dark?"#3a3a58":"#c0c0d8",marginBottom:3,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                            <span>{isRetro?"▸ ":""}{tech.id}</span>
                             <div style={{display:"flex",alignItems:"center",gap:3}}>
                               {memberPbs.map(p=><div key={p.id} style={{width:5,height:5,borderRadius:"50%",background:p.color}} title={p.name}/>)}
                               {hasLink&&!activePb&&<a href={tech.url} target="_blank" rel="noopener noreferrer" onClick={e=>e.stopPropagation()} style={{display:"flex",alignItems:"center"}} title={tech.url}><LinkIcon color={tech.category?cat.text:(dark?"#5a5a90":"#b0b0d0")} size={9}/></a>}
@@ -1667,14 +1813,14 @@ function App({initialMatrix, initialName}) {
                             </div>
                           </div>
                           {/* Name */}
-                          <div style={{fontSize:12,fontWeight:500,color:inPb?textMain:(tech.category?cat.text:(hasLink?(dark?"#b0b0d8":"#4040a0"):(dark?"#9090b8":"#5050a0"))),lineHeight:1.35}}>
+                          <div style={{fontSize:isRetro?7:12,fontWeight:500,color:inPb?(isRetro?"#ffcc00":textMain):(tech.category?cat.text:(hasLink?(dark?"#b0b0d8":"#4040a0"):(dark?"#9090b8":"#5050a0"))),lineHeight:isRetro?1.6:1.35}}>
                             {tech.name}
                           </div>
                           {/* Category badge */}
                           {tech.category&&(
-                            <div style={{display:"inline-flex",alignItems:"center",gap:4,marginTop:6,background:`${cat.color}20`,border:`1px solid ${cat.color}55`,borderRadius:10,padding:"2px 7px"}}>
-                              <div style={{width:5,height:5,borderRadius:"50%",background:cat.text}}/>
-                              <span style={{fontSize:9,color:cat.text,letterSpacing:.5}}>{cat.label}</span>
+                            <div style={{display:"inline-flex",alignItems:"center",gap:4,marginTop:6,background:`${cat.color}20`,border:isRetro?`1px solid ${cat.color}`:`1px solid ${cat.color}55`,borderRadius:isRetro?0:10,padding:isRetro?"2px 5px":"2px 7px"}}>
+                              <div style={{width:isRetro?4:5,height:isRetro?4:5,borderRadius:isRetro?0:"50%",background:cat.text}}/>
+                              <span style={{fontSize:isRetro?6:9,color:cat.text,letterSpacing:.5}}>{cat.label}</span>
                             </div>
                           )}
                           {/* Expandable sections — shown when card is clicked */}
@@ -1749,6 +1895,7 @@ function App({initialMatrix, initialName}) {
         {panelOpen ? (
           <PlaybookPanel
             dark={dark}
+            theme={theme}
             playbooks={matrix.playbooks||[]}
             activePlaybookId={activePlaybook}
             pbMode={pbMode}
@@ -1766,11 +1913,11 @@ function App({initialMatrix, initialName}) {
           />
         ) : (
           <div onClick={()=>setPanelOpen(true)} title="Open use cases panel"
-            style={{width:32,flexShrink:0,background:dark?"#0e0e1e":"#f8f8ff",borderLeft:`1px solid ${dark?"#1e1e38":"#d8d8f0"}`,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",cursor:"pointer",gap:10,transition:"background .15s"}}
-            onMouseEnter={e=>e.currentTarget.style.background=dark?"#141430":"#eeeefc"}
-            onMouseLeave={e=>e.currentTarget.style.background=dark?"#0e0e1e":"#f8f8ff"}>
-            <BookIcon color="#7c6ff7" size={14}/>
-            <span style={{fontSize:10,color:"#7c6ff7",letterSpacing:2,textTransform:"uppercase",writingMode:"vertical-rl",transform:"rotate(180deg)",opacity:.8,whiteSpace:"nowrap"}}>Use Cases</span>
+            style={{width:32,flexShrink:0,background:isRetro?"#0a0a1e":dark?"#0e0e1e":"#f8f8ff",borderLeft:isRetro?`2px solid #00ff41`:`1px solid ${dark?"#1e1e38":"#d8d8f0"}`,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",cursor:"pointer",gap:10,transition:isRetro?"none":"background .15s"}}
+            onMouseEnter={e=>e.currentTarget.style.background=isRetro?"#0e0e28":dark?"#141430":"#eeeefc"}
+            onMouseLeave={e=>e.currentTarget.style.background=isRetro?"#0a0a1e":dark?"#0e0e1e":"#f8f8ff"}>
+            <BookIcon color={isRetro?"#00ff41":"#7c6ff7"} size={14}/>
+            <span style={{fontSize:isRetro?6:10,color:isRetro?"#00ff41":"#7c6ff7",letterSpacing:2,textTransform:"uppercase",writingMode:"vertical-rl",transform:"rotate(180deg)",opacity:.8,whiteSpace:"nowrap"}}>Use Cases</span>
             {(matrix.playbooks||[]).length>0&&(
               <span style={{fontSize:9,color:"#a29bfe",background:dark?"#1a1a3a":"#ede9fe",border:`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:8,padding:"2px 5px",textAlign:"center"}}>
                 {(matrix.playbooks||[]).length}
@@ -1787,7 +1934,7 @@ function App({initialMatrix, initialName}) {
       {/* Response Guide Overlay */}
       {showGuide&&(()=>{
         const guidePb=(matrix.playbooks||[]).find(p=>p.id===showGuide);
-        return guidePb ? <ResponseGuideOverlay dark={dark} playbook={guidePb} matrix={matrix} onClose={()=>setShowGuide(null)}/> : null;
+        return guidePb ? <ResponseGuideOverlay dark={dark} theme={theme} playbook={guidePb} matrix={matrix} onClose={()=>setShowGuide(null)}/> : null;
       })()}
 
       {selected&&selectedTech&&(
