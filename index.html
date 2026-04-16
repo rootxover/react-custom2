@@ -1429,7 +1429,8 @@ function fmtElapsed(fromMs, nowMs) {
 function fmtTs(ms) {
   if (!ms) return '—';
   const d = new Date(ms), p = n => String(n).padStart(2,'0');
-  return `${p(d.getDate())}/${p(d.getMonth()+1)} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
+  const tz = new Intl.DateTimeFormat('en', {timeZoneName:'short'}).formatToParts(d).find(pt=>pt.type==='timeZoneName')?.value || '';
+  return `${p(d.getDate())}/${p(d.getMonth()+1)} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())} ${tz}`;
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -1437,14 +1438,36 @@ function fmtTs(ms) {
 // ─────────────────────────────────────────────────────────────────
 function KanbanCard({ card, colStatus, colColor, colLabel, phaseColor, now, dark, isRetro, font,
                       getCat, textMain, textSub, textDim, border, border2, cardBg,
-                      onMove, onOwner, onNotes, onRemove }) {
-  const [ownerVal, setOwnerVal] = React.useState(card.owner || '');
-  const [notesVal, setNotesVal] = React.useState(card.notes || '');
-  React.useEffect(() => { setOwnerVal(card.owner || ''); }, [card.owner]);
-  React.useEffect(() => { setNotesVal(card.notes || ''); }, [card.notes]);
+                      onMove, onOwner, onNotes, onImages, onRemove }) {
+  const [ownerVal,  setOwnerVal]  = React.useState(card.owner  || '');
+  const [notesVal,  setNotesVal]  = React.useState(card.notes  || '');
+  const [imagesVal, setImagesVal] = React.useState(card.images || []);
+  React.useEffect(() => { setOwnerVal(card.owner   || ''); }, [card.owner]);
+  React.useEffect(() => { setNotesVal(card.notes   || ''); }, [card.notes]);
+  React.useEffect(() => { setImagesVal(card.images || []); }, [card.images]);
+
+  function handlePaste(e) {
+    const items = Array.from(e.clipboardData?.items || []);
+    const imageItem = items.find(item => item.type.startsWith('image/'));
+    if (!imageItem) return;
+    e.preventDefault();
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const next = [...imagesVal, ev.target.result];
+      setImagesVal(next);
+      onImages(card.id, next);
+    };
+    reader.readAsDataURL(imageItem.getAsFile());
+  }
+
+  function removeImage(idx) {
+    const next = imagesVal.filter((_,i) => i !== idx);
+    setImagesVal(next);
+    onImages(card.id, next);
+  }
 
   const cat       = getCat(card.category);
-  const stageTs   = colStatus==='todo' ? card.todoAt : colStatus==='inprogress' ? card.startedAt : card.completedAt;
+  const stageTs   = colStatus==='todo' ? card.todoAt : colStatus==='inprogress' ? card.startedAt : colStatus==='blocked' ? card.blockedAt : card.completedAt;
   const elapsed   = fmtElapsed(stageTs, now);
   const ph        = phaseColor;
 
@@ -1518,9 +1541,10 @@ function KanbanCard({ card, colStatus, colColor, colLabel, phaseColor, now, dark
         borderTop:`1px solid ${border2}`, paddingTop:4, marginTop:4,
         display:'flex', flexDirection:'column', gap:2,
       }}>
-        {stageTs     && <span>Entered:  {fmtTs(stageTs)}</span>}
+        {stageTs          && <span>Entered:  {fmtTs(stageTs)}</span>}
         {card.assignedAt  && <span>Assigned: {fmtTs(card.assignedAt)}</span>}
         {card.startedAt   && colStatus!=='todo' && <span>Started:  {fmtTs(card.startedAt)}</span>}
+        {card.blockedAt   && <span style={{color:isRetro?'#ff4444':dark?'#fc8181':'#c53030'}}>Blocked:  {fmtTs(card.blockedAt)}</span>}
         {card.completedAt && <span>Closed:   {fmtTs(card.completedAt)}</span>}
       </div>
 
@@ -1533,6 +1557,7 @@ function KanbanCard({ card, colStatus, colColor, colLabel, phaseColor, now, dark
           value={notesVal}
           onChange={e=>setNotesVal(e.target.value)}
           onBlur={()=>onNotes(card.id, notesVal)}
+          onPaste={handlePaste}
           placeholder="Add context, findings, observations…"
           rows={2}
           style={{
@@ -1545,10 +1570,46 @@ function KanbanCard({ card, colStatus, colColor, colLabel, phaseColor, now, dark
             padding:'5px 7px', outline:'none', resize:'vertical',
             lineHeight:1.5,
           }}/>
+        <div style={{fontSize:isRetro?5:8,color:textDim,marginTop:3,marginBottom:imagesVal.length?6:0}}>
+          Ctrl+V / ⌘V to paste a screenshot
+        </div>
+        {/* Screenshot thumbnails */}
+        {imagesVal.length>0&&(
+          <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
+            {imagesVal.map((src,idx)=>(
+              <div key={idx} style={{position:'relative',flexShrink:0}}>
+                <img src={src} alt={`screenshot ${idx+1}`}
+                  style={{
+                    width:80, height:60, objectFit:'cover',
+                    border:isRetro?'1px solid #00aa2a':`1px solid ${dark?'#2a2a48':'#d8d8f0'}`,
+                    borderRadius:isRetro?0:4, display:'block', cursor:'pointer',
+                  }}
+                  onClick={()=>window.open(src,'_blank')}
+                  title="Click to open full size"
+                />
+                <button
+                  onClick={()=>removeImage(idx)}
+                  title="Remove screenshot"
+                  style={{
+                    position:'absolute', top:-5, right:-5,
+                    width:16, height:16,
+                    background:isRetro?'#1a0404':dark?'#2a1010':'#fff',
+                    border:isRetro?'1px solid #ff4444':`1px solid ${dark?'#7a2020':'#fda4af'}`,
+                    borderRadius:'50%',
+                    color:isRetro?'#ff4444':dark?'#fc8181':'#c53030',
+                    cursor:'pointer', fontSize:10, lineHeight:1,
+                    display:'flex', alignItems:'center', justifyContent:'center',
+                    padding:0,
+                  }}>×</button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Move buttons */}
-      <div style={{display:'flex',gap:4,marginTop:8}}>
+      <div style={{display:'flex',gap:4,marginTop:8,flexWrap:'wrap'}}>
+        {/* ← Back */}
         {colStatus !== 'todo' && (
           <button onClick={()=>onMove(card.id, colStatus==='inprogress'?'todo':'inprogress')}
             style={{
@@ -1562,6 +1623,21 @@ function KanbanCard({ card, colStatus, colColor, colLabel, phaseColor, now, dark
             ← {colStatus==='inprogress'?'To Do':'In Progress'}
           </button>
         )}
+        {/* ⚠ Block — only available from In Progress */}
+        {colStatus === 'inprogress' && (
+          <button onClick={()=>onMove(card.id, 'blocked')}
+            style={{
+              flex:1, background:'transparent',
+              border:isRetro?'1px solid #ff4444':`1px solid ${dark?'#7a2020':'#fda4af'}`,
+              borderRadius:isRetro?0:4,
+              color:isRetro?'#ff4444':dark?'#fc8181':'#c53030',
+              padding:'3px 6px', cursor:'pointer', fontFamily:font,
+              fontSize:isRetro?5:9, fontWeight:600,
+            }}>
+            ⚠ Hold
+          </button>
+        )}
+        {/* Forward → */}
         {colStatus !== 'completed' && (
           <button onClick={()=>onMove(card.id, colStatus==='todo'?'inprogress':'completed')}
             style={{
@@ -1848,9 +1924,10 @@ function IncidentView({ matrix, theme, dark, onClose }) {
   };
 
   const COLS = [
-    { status:'todo',       label:'TO DO',       color:isRetro?'#00aaff':dark?'#63b3ed':'#2b6cb0', colBg:isRetro?'#07071a':dark?'#0d0d22':'#f5f5fc' },
-    { status:'inprogress', label:'IN PROGRESS',  color:isRetro?'#ffcc00':dark?'#f6ad55':'#c2410c', colBg:isRetro?'#120e00':dark?'#12100a':'#fffbf5' },
-    { status:'completed',  label:'COMPLETED',    color:isRetro?'#33ff66':dark?'#68d391':'#15803d', colBg:isRetro?'#061206':dark?'#0a140a':'#f0fdf4' },
+    { status:'todo',        label:'TO DO',         color:isRetro?'#00aaff':dark?'#63b3ed':'#2b6cb0', colBg:isRetro?'#07071a':dark?'#0d0d22':'#f5f5fc' },
+    { status:'inprogress',  label:'IN PROGRESS',   color:isRetro?'#ffcc00':dark?'#f6ad55':'#c2410c', colBg:isRetro?'#120e00':dark?'#12100a':'#fffbf5' },
+    { status:'blocked',     label:'BLOCKER / HOLD', color:isRetro?'#ff4444':dark?'#fc8181':'#c53030', colBg:isRetro?'#1a0404':dark?'#160808':'#fff5f5' },
+    { status:'completed',   label:'COMPLETED',     color:isRetro?'#33ff66':dark?'#68d391':'#15803d', colBg:isRetro?'#061206':dark?'#0a140a':'#f0fdf4' },
   ];
 
   // ── Incident management ──
@@ -1889,8 +1966,8 @@ function IncidentView({ matrix, theme, dark, onClose }) {
             id:uid(), techId:te.id, techName:te.name,
             tacticId:tactic.id, tacticName:tactic.name, tacticShortcode:tactic.shortcode,
             category:te.category||'', isAdHoc:false,
-            status:'todo', owner:'', notes:'',
-            todoAt:Date.now(), assignedAt:null, startedAt:null, completedAt:null,
+            status:'todo', owner:'', notes:'', images:[],
+            todoAt:Date.now(), assignedAt:null, startedAt:null, blockedAt:null, completedAt:null,
           });
         }
       });
@@ -1911,8 +1988,8 @@ function IncidentView({ matrix, theme, dark, onClose }) {
       id:uid(), techId:tech.id||null, techName:tech.name,
       tacticId:tactic.id, tacticName:tactic.name, tacticShortcode:tactic.shortcode,
       category:tech.category||'', isAdHoc,
-      status:'todo', owner:'', notes:'',
-      todoAt:Date.now(), assignedAt:null, startedAt:null, completedAt:null,
+      status:'todo', owner:'', notes:'', images:[],
+      todoAt:Date.now(), assignedAt:null, startedAt:null, blockedAt:null, completedAt:null,
     };
     updateInc(activeId, i=>({...i, cards:[...i.cards, card]}));
     setShowAdd(false);
@@ -1926,6 +2003,7 @@ function IncidentView({ matrix, theme, dark, onClose }) {
           ...c, status:newStatus,
           todoAt:      newStatus==='todo'       && !c.todoAt      ? t : c.todoAt,
           startedAt:   newStatus==='inprogress' && !c.startedAt   ? t : c.startedAt,
+          blockedAt:   newStatus==='blocked'                       ? t : c.blockedAt,
           completedAt: newStatus==='completed'                     ? t : c.completedAt,
         };
       }),
@@ -1945,6 +2023,11 @@ function IncidentView({ matrix, theme, dark, onClose }) {
   function setNotesFn(cardId, notes) {
     updateInc(activeId, i=>({
       ...i, cards:i.cards.map(c=>c.id===cardId ? {...c, notes} : c),
+    }));
+  }
+  function setImagesFn(cardId, images) {
+    updateInc(activeId, i=>({
+      ...i, cards:i.cards.map(c=>c.id===cardId ? {...c, images} : c),
     }));
   }
   function removeCard(cardId) {
@@ -1970,10 +2053,12 @@ function IncidentView({ matrix, theme, dark, onClose }) {
         owner: c.owner || 'Unassigned',
         status: c.status,
         notes: c.notes || '',
+        screenshots: (c.images||[]).length,
         timestamps: {
           addedToToDo:       c.todoAt      ? new Date(c.todoAt).toISOString()      : null,
           ownerAssigned:     c.assignedAt  ? new Date(c.assignedAt).toISOString()  : null,
           movedToInProgress: c.startedAt   ? new Date(c.startedAt).toISOString()   : null,
+          blocked:           c.blockedAt   ? new Date(c.blockedAt).toISOString()   : null,
           completed:         c.completedAt ? new Date(c.completedAt).toISOString() : null,
         },
       })),
@@ -2006,6 +2091,7 @@ function IncidentView({ matrix, theme, dark, onClose }) {
 
   const todoCards     = (activeInc?.cards||[]).filter(c=>c.status==='todo');
   const ipCards       = (activeInc?.cards||[]).filter(c=>c.status==='inprogress');
+  const blockedCards  = (activeInc?.cards||[]).filter(c=>c.status==='blocked');
   const doneCards     = (activeInc?.cards||[]).filter(c=>c.status==='completed');
 
   // ── Btn shared style ──
@@ -2062,9 +2148,10 @@ function IncidentView({ matrix, theme, dark, onClose }) {
         {activeInc&&(
           <div style={{display:'flex',gap:6}}>
             {[
-              {l:'TODO',    n:todoCards.length, c:isRetro?'#00aaff':dark?'#63b3ed':'#2b6cb0'},
-              {l:'IN PROG', n:ipCards.length,   c:isRetro?'#ffcc00':dark?'#f6ad55':'#c2410c'},
-              {l:'DONE',    n:doneCards.length,  c:isRetro?'#33ff66':dark?'#68d391':'#15803d'},
+              {l:'TODO',    n:todoCards.length,    c:isRetro?'#00aaff':dark?'#63b3ed':'#2b6cb0'},
+              {l:'IN PROG', n:ipCards.length,      c:isRetro?'#ffcc00':dark?'#f6ad55':'#c2410c'},
+              {l:'HOLD',    n:blockedCards.length,  c:isRetro?'#ff4444':dark?'#fc8181':'#c53030'},
+              {l:'DONE',    n:doneCards.length,    c:isRetro?'#33ff66':dark?'#68d391':'#15803d'},
             ].map(s=>(
               <span key={s.l} style={{
                 fontSize:isRetro?5:9, color:s.c, fontWeight:700,
@@ -2145,9 +2232,10 @@ function IncidentView({ matrix, theme, dark, onClose }) {
             <div style={{flex:1,overflowY:'auto',padding:'8px'}}>
               {incidents.map(inc=>{
                 const isAct = inc.id===activeId;
-                const todo  = inc.cards.filter(c=>c.status==='todo').length;
-                const ip    = inc.cards.filter(c=>c.status==='inprogress').length;
-                const done  = inc.cards.filter(c=>c.status==='completed').length;
+                const todo    = inc.cards.filter(c=>c.status==='todo').length;
+                const ip      = inc.cards.filter(c=>c.status==='inprogress').length;
+                const blocked = inc.cards.filter(c=>c.status==='blocked').length;
+                const done    = inc.cards.filter(c=>c.status==='completed').length;
                 return (
                   <div key={inc.id} onClick={()=>setActiveId(inc.id)} className="pb-card"
                     style={{
@@ -2196,7 +2284,7 @@ function IncidentView({ matrix, theme, dark, onClose }) {
 
                     {/* Progress stats */}
                     <div style={{display:'flex',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-                      {[{l:'TODO',n:todo,c:'#63b3ed'},{l:'PROG',n:ip,c:'#f6ad55'},{l:'DONE',n:done,c:'#68d391'}].map(s=>(
+                      {[{l:'TODO',n:todo,c:'#63b3ed'},{l:'PROG',n:ip,c:'#f6ad55'},{l:'HOLD',n:blocked,c:'#fc8181'},{l:'DONE',n:done,c:'#68d391'}].map(s=>(
                         <span key={s.l} style={{fontSize:isRetro?5:9,color:s.c}}>{s.l}:{s.n}</span>
                       ))}
                     </div>
@@ -2327,7 +2415,7 @@ function IncidentView({ matrix, theme, dark, onClose }) {
                             phaseColor={ph} now={now} dark={dark} isRetro={isRetro} font={font}
                             getCat={getCat} textMain={textMain} textSub={textSub} textDim={textDim}
                             border={border} border2={border2} cardBg={cardBg}
-                            onMove={moveCard} onOwner={setOwnerFn} onNotes={setNotesFn} onRemove={removeCard}
+                            onMove={moveCard} onOwner={setOwnerFn} onNotes={setNotesFn} onImages={setImagesFn} onRemove={removeCard}
                           />
                         ))}
                       </div>
