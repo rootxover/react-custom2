@@ -2200,6 +2200,72 @@ function IncidentView({ matrix, theme, dark, onClose, timerStart, onTimerStart, 
   }
 
   // ── Export ──
+  function exportTimeline() {
+    const inc = activeInc;
+    const p = n => String(n).padStart(2,'0');
+
+    function fmtUTC(ms) {
+      if (!ms) return '';
+      const d = new Date(ms);
+      return `${d.getUTCFullYear()}-${p(d.getUTCMonth()+1)}-${p(d.getUTCDate())} ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())} UTC`;
+    }
+
+    function fmtDuration(ms) {
+      if (!ms || ms < 0) return '';
+      const s = Math.floor(ms / 1000);
+      return `${p(Math.floor(s/3600))}:${p(Math.floor((s%3600)/60))}:${p(s%60)}`;
+    }
+
+    function lastActionMs(c) {
+      return Math.max(...[c.todoAt, c.assignedAt, c.startedAt, c.blockedAt, c.completedAt].filter(Boolean));
+    }
+
+    const completed = inc.cards.filter(c => c.status === 'completed')
+      .sort((a,b) => (a.completedAt||0) - (b.completedAt||0));
+    const rest = inc.cards.filter(c => c.status !== 'completed')
+      .sort((a,b) => lastActionMs(a) - lastActionMs(b));
+    const sorted = [...completed, ...rest];
+
+    const incidentDuration = timerStart
+      ? fmtDuration(Date.now() - timerStart)
+      : '';
+
+    const headers = ['Started Time (UTC)','Completed Time (UTC)','Duration (HH:MM:SS)','Last Action Time (UTC)','Status','Phase','Action','Owner','Notes','Screenshots'];
+
+    const escape = v => `"${String(v||'').replace(/"/g,'""')}"`;
+
+    const metaRows = [
+      ['Incident', escape(inc.name)],
+      ['Created', escape(fmtUTC(inc.createdAt))],
+      ['Total Incident Duration', escape(incidentDuration || 'Timer not used')],
+      ['Exported', escape(fmtUTC(Date.now()))],
+      [],
+      headers.map(escape),
+    ];
+
+    const dataRows = sorted.map(c => {
+      const duration = c.startedAt && c.completedAt ? fmtDuration(c.completedAt - c.startedAt) : '';
+      return [
+        escape(fmtUTC(c.startedAt)),
+        escape(fmtUTC(c.completedAt)),
+        escape(duration),
+        escape(fmtUTC(lastActionMs(c))),
+        escape(c.status === 'inprogress' ? 'In Progress' : c.status === 'todo' ? 'To Do' : c.status === 'blocked' ? 'Blocked' : 'Completed'),
+        escape(c.tacticShortcode || ''),
+        escape(c.techName || ''),
+        escape(c.owner || 'Unassigned'),
+        escape(c.notes || ''),
+        escape((c.images||[]).length),
+      ];
+    });
+
+    const csv = [...metaRows, ...dataRows].map(r => r.join(',')).join('\r\n');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+    a.download = `timeline-${inc.name.replace(/\s+/g,'-')}_${dateStamp()}.csv`;
+    a.click();
+  }
+
   function exportIncident() {
     const inc = activeInc;
     const pbName = inc.playbookId ? (matrix.playbooks||[]).find(p=>p.id===inc.playbookId)?.name : null;
@@ -2282,25 +2348,24 @@ function IncidentView({ matrix, theme, dark, onClose, timerStart, onTimerStart, 
       <div style={{
         background:headerBg, flexShrink:0,
         borderBottom:isRetro?'2px solid #c84b9e':`1px solid ${border}`,
-        padding:'10px 18px', display:'flex', alignItems:'center', gap:12, flexWrap:'wrap',
+        padding:'8px 18px', display:'flex', flexDirection:'column', gap:6,
         boxShadow:isRetro?'0 4px 0 #000':'none',
       }}>
-        <button onClick={onClose} style={btn(false)}>
-          ← {isRetro?'EXIT':'Back to Matrix'}
-        </button>
+        {/* Row 1: nav + incident name + action buttons */}
+        <div style={{display:'flex',alignItems:'center',gap:10}}>
+          <button onClick={onClose} style={btn(false)}>
+            ← {isRetro?'EXIT':'Back to Matrix'}
+          </button>
 
-        <div style={{display:'flex',alignItems:'center',gap:8,flex:1,minWidth:0}}>
           <span style={{
-            fontSize:15, fontWeight:700,
+            fontSize:13, fontWeight:700, flexShrink:0,
             fontFamily:isRetro?font:"'Space Grotesk',sans-serif",
             color:isRetro?'#f0eeea':textMain,
-            textShadow:isRetro?'0 0 10px rgba(200,75,158,.6)':'none', letterSpacing:0,
+            textShadow:isRetro?'0 0 10px rgba(200,75,158,.6)':'none',
           }}>INCIDENT VIEW</span>
 
-          <ClockBar timerStart={timerStart} onTimerStart={onTimerStart} onTimerStop={onTimerStop} compact={false} />
-
           {activeInc&&<>
-            <span style={{color:textDim,fontSize:12}}>—</span>
+            <span style={{color:textDim,fontSize:12,flexShrink:0}}>—</span>
             {editingIncId==='topbar' ? (
               <input
                 autoFocus
@@ -2315,85 +2380,86 @@ function IncidentView({ matrix, theme, dark, onClose, timerStart, onTimerStart, 
                   if(e.key==='Escape') setEditingIncId(null);
                 }}
                 style={{
-                  background:'transparent',
-                  border:'none',
+                  background:'transparent', border:'none',
                   borderBottom:`1px solid ${isRetro?'#e8520a':dark?'#a29bfe':'#5b4fd4'}`,
                   color:isRetro?'#e8520a':dark?'#a29bfe':'#5b4fd4',
                   fontFamily:font, fontSize:13, fontWeight:600,
-                  outline:'none', padding:'1px 2px', minWidth:160,
+                  outline:'none', padding:'1px 2px', minWidth:160, flex:1,
                 }}
               />
             ) : (
               <span
                 onClick={()=>{setEditingIncId('topbar');setEditIncName(activeInc.name);}}
                 title="Click to rename"
-                style={{fontSize:13,color:isRetro?'#e8520a':dark?'#a29bfe':'#5b4fd4',fontWeight:600,cursor:'text',borderBottom:'1px dashed transparent',transition:'border-color .15s'}}
+                style={{fontSize:13,color:isRetro?'#e8520a':dark?'#a29bfe':'#5b4fd4',fontWeight:600,cursor:'text',borderBottom:'1px dashed transparent',transition:'border-color .15s',flex:1,overflow:'hidden',textOverflow:'ellipsis',whiteSpace:'nowrap'}}
                 onMouseEnter={e=>e.currentTarget.style.borderBottomColor=isRetro?'#e8520a':dark?'#a29bfe55':'#5b4fd455'}
                 onMouseLeave={e=>e.currentTarget.style.borderBottomColor='transparent'}>
                 {activeInc.name}
               </span>
             )}
-            <span style={{fontSize:9,color:textDim}}>
-              created {fmtTs(activeInc.createdAt)}
-            </span>
           </>}
+
+          <div style={{marginLeft:'auto',display:'flex',alignItems:'center',gap:6,flexShrink:0}}>
+            <button onClick={exportTimeline} style={btn(true)}>Export Timeline ↓</button>
+            <button onClick={exportIncident} style={btn(true)}>Export JSON ↓</button>
+            <button onClick={resetAll} style={{
+              ...btn(false),
+              borderColor: isRetro?'#e8520a':dark?'#7a2020':'#fda4af',
+              color: isRetro?'#e8520a':dark?'#fc8181':'#c53030',
+            }}
+              onMouseEnter={e=>{e.currentTarget.style.background='rgba(239,68,68,0.12)';e.currentTarget.style.borderColor='#ef4444';e.currentTarget.style.color='#ef4444';}}
+              onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.borderColor=isRetro?'#e8520a':dark?'#7a2020':'#fda4af';e.currentTarget.style.color=isRetro?'#e8520a':dark?'#fc8181':'#c53030';}}
+              title="Wipe all incidents and start fresh">
+              ↺ Reset All
+            </button>
+          </div>
         </div>
 
-        {/* Summary pills */}
-        {activeInc&&(
-          <div style={{display:'flex',gap:6}}>
-            {[
-              {l:'TODO',    n:todoCards.length,    c:isRetro?'#00aaff':dark?'#63b3ed':'#2b6cb0'},
-              {l:'IN PROG', n:ipCards.length,      c:isRetro?'#e8520a':dark?'#f6ad55':'#c2410c'},
-              {l:'HOLD',    n:blockedCards.length,  c:isRetro?'#e8520a':dark?'#fc8181':'#c53030'},
-              {l:'DONE',    n:doneCards.length,    c:isRetro?'#80d0a0':dark?'#68d391':'#15803d'},
-            ].map(s=>(
-              <span key={s.l} style={{
-                fontSize:9, color:s.c, fontWeight:700,
-                background:isRetro?'#131318':dark?'#1a1a38':'#f0f0fc',
-                border:isRetro?`1px solid ${s.c}`:`1px solid ${dark?'#2a2a4a':'#d0d0e8'}`,
-                borderRadius:isRetro?10:10, padding:'2px 8px',
-              }}>{s.l}:{s.n}</span>
-            ))}
-          </div>
-        )}
+        {/* Row 2: clock + summary pills + created + playbook */}
+        <div style={{display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
+          <ClockBar timerStart={timerStart} onTimerStart={onTimerStart} onTimerStop={onTimerStop} compact={true} />
 
-        {/* Playbook loader */}
-        {activeInc&&(
-          <div style={{display:'flex',alignItems:'center',gap:6}}>
-            <span style={{fontSize:9,color:textDim}}>
-              {activeInc.playbookId
-                ? (matrix.playbooks||[]).find(p=>p.id===activeInc.playbookId)?.name
-                : 'No playbook loaded'}
-            </span>
-            <select value="" onChange={e=>{if(e.target.value)loadPlaybook(e.target.value);}}
-              style={{
-                background:isRetro?'#0a0a0e':dark?'#1a1a3a':'#f0f0f8',
-                border:isRetro?'2px solid #c84b9e':`1px solid ${border}`,
-                borderRadius:isRetro?0:5, color:isRetro?'#f0eeea':textMain,
-                padding:'4px 8px', fontFamily:font, fontSize:10, cursor:'pointer', outline:'none',
-              }}>
-              <option value="">Load Playbook…</option>
-              {(matrix.playbooks||[]).map(pb=>(
-                <option key={pb.id} value={pb.id}>{pb.name}</option>
+          {activeInc&&<>
+            <span style={{fontSize:9,color:textDim}}>created {fmtTs(activeInc.createdAt)}</span>
+
+            <div style={{display:'flex',gap:6}}>
+              {[
+                {l:'TODO',    n:todoCards.length,    c:isRetro?'#00aaff':dark?'#63b3ed':'#2b6cb0'},
+                {l:'IN PROG', n:ipCards.length,      c:isRetro?'#e8520a':dark?'#f6ad55':'#c2410c'},
+                {l:'HOLD',    n:blockedCards.length,  c:isRetro?'#e8520a':dark?'#fc8181':'#c53030'},
+                {l:'DONE',    n:doneCards.length,    c:isRetro?'#80d0a0':dark?'#68d391':'#15803d'},
+              ].map(s=>(
+                <span key={s.l} style={{
+                  fontSize:9, color:s.c, fontWeight:700,
+                  background:isRetro?'#131318':dark?'#1a1a38':'#f0f0fc',
+                  border:isRetro?`1px solid ${s.c}`:`1px solid ${dark?'#2a2a4a':'#d0d0e8'}`,
+                  borderRadius:10, padding:'2px 8px',
+                }}>{s.l}:{s.n}</span>
               ))}
-            </select>
-          </div>
-        )}
+            </div>
 
-        <button onClick={resetAll} style={{
-          ...btn(false),
-          borderColor: isRetro?'#e8520a':dark?'#7a2020':'#fda4af',
-          color: isRetro?'#e8520a':dark?'#fc8181':'#c53030',
-        }}
-          onMouseEnter={e=>{e.currentTarget.style.background='rgba(239,68,68,0.12)';e.currentTarget.style.borderColor='#ef4444';e.currentTarget.style.color='#ef4444';}}
-          onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.borderColor=isRetro?'#e8520a':dark?'#7a2020':'#fda4af';e.currentTarget.style.color=isRetro?'#e8520a':dark?'#fc8181':'#c53030';}}
-          title="Wipe all incidents and start fresh">
-          ↺ Reset All
-        </button>
-        <button onClick={exportIncident} style={btn(true)}>Export JSON ↓</button>
+            <div style={{display:'flex',alignItems:'center',gap:6,marginLeft:'auto'}}>
+              <span style={{fontSize:9,color:textDim}}>
+                {activeInc.playbookId
+                  ? (matrix.playbooks||[]).find(p=>p.id===activeInc.playbookId)?.name
+                  : 'No playbook loaded'}
+              </span>
+              <select value="" onChange={e=>{if(e.target.value)loadPlaybook(e.target.value);}}
+                style={{
+                  background:isRetro?'#0a0a0e':dark?'#1a1a3a':'#f0f0f8',
+                  border:isRetro?'2px solid #c84b9e':`1px solid ${border}`,
+                  borderRadius:isRetro?0:5, color:isRetro?'#f0eeea':textMain,
+                  padding:'4px 8px', fontFamily:font, fontSize:10, cursor:'pointer', outline:'none',
+                }}>
+                <option value="">Load Playbook…</option>
+                {(matrix.playbooks||[]).map(pb=>(
+                  <option key={pb.id} value={pb.id}>{pb.name}</option>
+                ))}
+              </select>
+            </div>
+          </>}
+        </div>
       </div>
-
       {/* ── BODY ── */}
       <div style={{flex:1,display:'flex',overflow:'hidden'}}>
 
