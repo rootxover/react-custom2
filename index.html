@@ -8,7 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Space+Grotesk:wght@600;700&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&family=Press+Start+2P&display=swap" rel="stylesheet" />
   <style>
     /* ── THEME TOKENS ── */
     :root[data-theme="dark"] {
@@ -120,132 +120,98 @@
       --shadow-md:   0 4px 20px rgba(0,0,0,.5);
     }
 
-    :root[data-theme="retro"] {
-      --bg:          #1a1a2e;
-      --bg2:         #16213e;
-      --bg3:         #0f3460;
-      --surface:     #1a1a40;
-      --surface2:    #222255;
-      --border:      #00ff41;
-      --border2:     #33ff66;
-      --text:        #00ff41;
-      --text2:       #33ff88;
-      --text3:       #00aa2a;
-      --text4:       #006618;
-      --accent:      #ff003c;
-      --accent2:     #ffcc00;
-      --danger:      #ff003c;
-      --header-bg:   #0a0a1e;
-      --modal-bg:    #0e0e28;
-      --modal-border:#00ff41;
-      --input-bg:    #0a0a20;
-      --input-border:#00ff41;
-      --scrollbar:   #00ff41;
-      --cell-bg:     #0e0e2a;
-      --cell-border: #00aa2a;
-      --dim-opacity: 0.12;
-      --shadow-sm:   0 2px 0 #00ff41, 0 -2px 0 #00ff41, 2px 0 0 #00ff41, -2px 0 0 #00ff41;
-      --shadow-md:   0 0 12px rgba(0,255,65,.3);
+    :root[data-theme="goose"] {
+      --bg:          #0f0f13;
+      --bg2:         #171720;
+      --bg3:         #1e1e2a;
+      --surface:     #1c1c26;
+      --surface2:    #242432;
+      --border:      #c84b9e;
+      --border2:     #e0559e;
+      --text:        #f0eeea;
+      --text2:       #d4cfc8;
+      --text3:       #a09890;
+      --text4:       #5a5450;
+      --accent:      #e8520a;
+      --accent2:     #ff7a30;
+      --danger:      #e8520a;
+      --header-bg:   #0a0a0e;
+      --modal-bg:    #13131a;
+      --modal-border:#c84b9e;
+      --input-bg:    #0a0a0e;
+      --input-border:#c84b9e;
+      --scrollbar:   #c84b9e;
+      --cell-bg:     #141418;
+      --cell-border: #2a2a38;
+      --dim-opacity: 0.15;
+      --shadow-sm:   0 2px 8px rgba(200,75,158,.2);
+      --shadow-md:   0 4px 20px rgba(200,75,158,.25);
     }
 
-    /* ── RETRO 8-BIT OVERRIDES ── */
-    :root[data-theme="retro"] body,
-    :root[data-theme="retro"] input,
-    :root[data-theme="retro"] textarea,
-    :root[data-theme="retro"] button,
-    :root[data-theme="retro"] select {
-      font-family: 'Press Start 2P', monospace !important;
-    }
-    :root[data-theme="retro"] * {
-      border-radius: 0 !important;
-      image-rendering: pixelated;
-    }
-    :root[data-theme="retro"] .tech-cell {
-      border: 2px solid #00aa2a !important;
-      box-shadow: 4px 4px 0 #000 !important;
-      transition: none !important;
-    }
-    :root[data-theme="retro"] .tech-cell:hover {
-      transform: none !important;
-      border-color: #00ff41 !important;
-      box-shadow: 4px 4px 0 #00ff41 !important;
-    }
-    :root[data-theme="retro"] .tech-cell.in-playbook {
-      outline: 3px solid var(--pb-color,#ffcc00) !important;
-      outline-offset: 0 !important;
-      box-shadow: 0 0 8px var(--pb-color,#ffcc00), 4px 4px 0 #000 !important;
-    }
-    :root[data-theme="retro"] .tactic-header {
-      border: 2px solid #00ff41 !important;
-      box-shadow: 4px 4px 0 #000 !important;
-      transition: none !important;
-    }
-    :root[data-theme="retro"] .tactic-header:hover {
-      filter: none !important;
-      border-color: #ffcc00 !important;
-    }
-    :root[data-theme="retro"] .tool-btn {
-      border: 2px solid #00ff41 !important;
-      box-shadow: 3px 3px 0 #000 !important;
-      transition: none !important;
-      text-transform: uppercase;
-    }
-    :root[data-theme="retro"] .tool-btn:hover {
-      background: #00ff41 !important;
-      color: #0a0a1e !important;
-      border-color: #00ff41 !important;
-    }
-    :root[data-theme="retro"] .tool-btn:active {
-      box-shadow: 1px 1px 0 #000 !important;
-      transform: translate(2px,2px);
-    }
-    :root[data-theme="retro"] .theme-toggle {
-      border: 2px solid #00ff41 !important;
-      box-shadow: 3px 3px 0 #000 !important;
-      transition: none !important;
-    }
-    :root[data-theme="retro"] .theme-toggle:hover {
-      transform: none !important;
-      background: #00ff41 !important;
-      color: #0a0a1e !important;
-    }
-    :root[data-theme="retro"] .pb-card {
-      border: 2px solid #00aa2a !important;
-      box-shadow: 4px 4px 0 #000 !important;
-      transition: none !important;
-    }
-    :root[data-theme="retro"] .pb-tech-row {
-      border: 1px solid #006618 !important;
-      transition: none !important;
-    }
-    :root[data-theme="retro"] .pb-tech-row:hover {
-      border-color: #00ff41 !important;
-      background: #1a1a40 !important;
-    }
-    :root[data-theme="retro"] .modal-overlay {
-      backdrop-filter: none !important;
-      background: rgba(0,0,0,.85) !important;
-    }
-    :root[data-theme="retro"] .mode-btn {
-      transition: none !important;
-    }
-    :root[data-theme="retro"] ::-webkit-scrollbar-thumb {
-      background: #00ff41 !important;
-      border-radius: 0 !important;
-    }
-    :root[data-theme="retro"] ::-webkit-scrollbar-track {
-      background: #0a0a1e !important;
+    :root[data-theme="corporate"] {
+      --bg:          #1c2333;
+      --bg2:         #212b3b;
+      --bg3:         #273042;
+      --surface:     #263044;
+      --surface2:    #2c3850;
+      --border:      #354560;
+      --border2:     #3f5070;
+      --text:        #cdd6e8;
+      --text2:       #96a8c0;
+      --text3:       #627590;
+      --text4:       #415068;
+      --accent:      #4a8ef5;
+      --accent2:     #7aaeff;
+      --danger:      #e05a5a;
+      --header-bg:   #18202e;
+      --modal-bg:    #1e2a3c;
+      --modal-border:#354560;
+      --input-bg:    #18202e;
+      --input-border:#354560;
+      --scrollbar:   #354560;
+      --cell-bg:     #212b3b;
+      --cell-border: #2e3f58;
+      --dim-opacity: 0.20;
+      --shadow-sm:   0 2px 8px rgba(0,0,0,.35);
+      --shadow-md:   0 4px 20px rgba(0,0,0,.45);
     }
 
-    @keyframes retro-blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    @keyframes retro-scanlines {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 4px; }
+    /* ── GOOSE THEME OVERRIDES ── */
+    :root[data-theme="goose"] .tech-cell {
+      border: 1px solid #2a2a38 !important;
+    }
+    :root[data-theme="goose"] .tech-cell:hover {
+      border-color: #c84b9e88 !important;
+      box-shadow: 0 0 12px rgba(200,75,158,.25) !important;
+    }
+    :root[data-theme="goose"] .tech-cell.in-playbook {
+      outline: 2px solid var(--pb-color,#e8520a) !important;
+      outline-offset: 2px;
+      box-shadow: 0 0 10px rgba(232,82,10,.3) !important;
+    }
+    :root[data-theme="goose"] .tactic-header {
+      border-color: rgba(200,75,158,.4) !important;
+    }
+    :root[data-theme="goose"] .tactic-header:hover {
+      filter: brightness(1.12) !important;
+      border-color: #c84b9e !important;
+    }
+    :root[data-theme="goose"] .tool-btn:hover {
+      border-color: #c84b9e !important;
+      color: #e870c0 !important;
+      background: rgba(200,75,158,.1) !important;
+    }
+    :root[data-theme="goose"] .theme-toggle:hover {
+      border-color: #c84b9e !important;
+      box-shadow: 0 0 12px rgba(200,75,158,.3) !important;
+    }
+    :root[data-theme="goose"] ::-webkit-scrollbar-thumb {
+      background: #c84b9e88 !important;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body, #root { height: 100%; }
-    body { background: var(--bg); font-family: 'DM Mono', monospace; color: var(--text); overflow: hidden; transition: background .25s, color .25s; }
+    body { background: var(--bg); font-family: 'Inter', system-ui, sans-serif; color: var(--text); overflow: hidden; transition: background .25s, color .25s; }
 
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: var(--bg2); }
@@ -342,17 +308,97 @@ const TACTIC_ACCENTS_LIGHT = {
   t5:{ from:"#e0f2fe", to:"#f0f9ff", border:"#7dd3fc", text:"#0369a1" },
   t6:{ from:"#ffe4e6", to:"#fff1f2", border:"#fda4af", text:"#be123c" },
 };
-const TACTIC_ACCENTS_RETRO = {
-  t1:{ from:"#0a1040", to:"#060828", border:"#00aaff", text:"#00ccff" },
-  t2:{ from:"#200840", to:"#140428", border:"#cc00ff", text:"#dd44ff" },
-  t3:{ from:"#2a1800", to:"#1a0e00", border:"#ff8800", text:"#ffaa00" },
-  t4:{ from:"#002a10", to:"#001a08", border:"#00ff41", text:"#33ff66" },
-  t5:{ from:"#002040", to:"#001428", border:"#0088ff", text:"#44aaff" },
-  t6:{ from:"#2a0010", to:"#1a0008", border:"#ff003c", text:"#ff3366" },
+const TACTIC_ACCENTS_GOOSE = {
+  t1:{ from:"#1a1030", to:"#120a20", border:"#9b3aaa", text:"#cc88ee" },
+  t2:{ from:"#2a0e28", to:"#1c0818", border:"#c84b9e", text:"#e870c8" },
+  t3:{ from:"#2a1400", to:"#1c0e00", border:"#c86010", text:"#e8900a" },
+  t4:{ from:"#1a1030", to:"#120a20", border:"#7a3aaa", text:"#b888ee" },
+  t5:{ from:"#0e1428", to:"#080e1c", border:"#3a5ab0", text:"#7aa0e8" },
+  t6:{ from:"#280a18", to:"#1c0610", border:"#c84b6e", text:"#e87098" },
 };
-const DEF_ACCENT_RETRO = { from:"#0e0e30", to:"#08081a", border:"#00ff41", text:"#00ff41" };
+const DEF_ACCENT_GOOSE = { from:"#1e0e2a", to:"#140818", border:"#c84b9e", text:"#e060be" };
 const DEF_ACCENT_DARK  = { from:"#1e1e4f", to:"#12122a", border:"#3e2e7e", text:"#c4b5fd" };
 const DEF_ACCENT_LIGHT = { from:"#ede9fe", to:"#f5f3ff", border:"#a78bfa", text:"#5b21b6" };
+const TACTIC_ACCENTS_CORPORATE = {
+  t1:{ from:"#1e304e", to:"#182840", border:"#2e5080", text:"#7aaeff" },
+  t2:{ from:"#251e40", to:"#1c1632", border:"#42307a", text:"#a88cff" },
+  t3:{ from:"#352808", to:"#261c04", border:"#6a4c10", text:"#e0a040" },
+  t4:{ from:"#0e2e20", to:"#081e14", border:"#1a5038", text:"#4ec490" },
+  t5:{ from:"#102840", to:"#082030", border:"#1e4868", text:"#5ab0e8" },
+  t6:{ from:"#2e1020", to:"#1e0814", border:"#5a1e30", text:"#e07090" },
+};
+const DEF_ACCENT_CORPORATE = { from:"#1e304e", to:"#182840", border:"#2e5080", text:"#7aaeff" };
+
+// ── Live UTC clock + incident elapsed timer ──
+// timerStart = ms timestamp when timer began (null = not running)
+// onTimerStart / onTimerStop = callbacks to lift state to App
+function ClockBar({ timerStart, onTimerStart, onTimerStop, compact }) {
+  const [utcTime, setUtcTime] = React.useState('');
+  const [elapsed, setElapsed] = React.useState('––:––:––');
+
+  React.useEffect(() => {
+    function tick() {
+      const now = new Date();
+      const p = n => String(n).padStart(2,'0');
+      setUtcTime(p(now.getUTCHours())+':'+p(now.getUTCMinutes())+':'+p(now.getUTCSeconds())+' UTC');
+      if (timerStart) {
+        const diff = Math.max(0, Math.floor((Date.now() - timerStart) / 1000));
+        setElapsed(p(Math.floor(diff/3600))+':'+p(Math.floor((diff%3600)/60))+':'+p(diff%60));
+      } else {
+        setElapsed('––:––:––');
+      }
+    }
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [timerStart]);
+
+  const isRunning = !!timerStart;
+
+  return (
+    <div style={{
+      display:'flex', alignItems:'center', gap: compact?10:20,
+      background:'rgba(0,0,0,0.18)',
+      border:'1px solid rgba(255,255,255,0.12)',
+      borderRadius: compact?6:8,
+      padding: compact?'3px 12px':'5px 18px',
+      fontFamily:"'DM Mono',monospace",
+      flexShrink:0,
+    }}>
+      <div style={{display:'flex',alignItems:'center',gap:6}}>
+        <span style={{fontSize:compact?8:9,color:'rgba(255,255,255,0.45)',letterSpacing:1.5,textTransform:'uppercase'}}>ELAPSED</span>
+        <span style={{fontSize:compact?12:15,color:'#f0c040',fontWeight:600,letterSpacing:2,fontVariantNumeric:'tabular-nums',textShadow:'0 0 8px rgba(240,192,64,0.4)'}}>{elapsed}</span>
+        {isRunning && <span style={{width:6,height:6,borderRadius:'50%',background:'#ef4444',flexShrink:0,display:'inline-block'}} className="rec-dot"/>}
+        <button
+          onClick={isRunning ? onTimerStop : onTimerStart}
+          title={isRunning ? 'Stop & reset timer' : 'Start elapsed timer'}
+          style={{
+            background: isRunning ? 'rgba(239,68,68,0.15)' : 'rgba(255,255,255,0.08)',
+            border: isRunning ? '1px solid rgba(239,68,68,0.5)' : '1px solid rgba(255,255,255,0.18)',
+            borderRadius: 4,
+            color: isRunning ? '#ef4444' : 'rgba(255,255,255,0.5)',
+            cursor: 'pointer',
+            fontSize: compact?9:10,
+            fontFamily: "'DM Mono',monospace",
+            padding: '1px 7px',
+            letterSpacing: 0.5,
+            lineHeight: 1.6,
+            transition: 'all .15s',
+          }}
+          onMouseEnter={e=>{e.currentTarget.style.borderColor=isRunning?'#ef4444':'rgba(255,255,255,0.4)';e.currentTarget.style.color=isRunning?'#ef4444':'rgba(255,255,255,0.8)';}}
+          onMouseLeave={e=>{e.currentTarget.style.borderColor=isRunning?'rgba(239,68,68,0.5)':'rgba(255,255,255,0.18)';e.currentTarget.style.color=isRunning?'#ef4444':'rgba(255,255,255,0.5)';}}
+        >
+          {isRunning ? '■ STOP' : '▶ START'}
+        </button>
+      </div>
+      <div style={{width:1,height:compact?16:22,background:'rgba(255,255,255,0.15)',flexShrink:0}}/>
+      <div style={{display:'flex',alignItems:'center',gap:5}}>
+        <span style={{fontSize:compact?8:9,color:'rgba(255,255,255,0.45)',letterSpacing:1.5,textTransform:'uppercase'}}>UTC</span>
+        <span style={{fontSize:compact?12:15,color:'rgba(255,255,255,0.9)',fontWeight:600,letterSpacing:2,fontVariantNumeric:'tabular-nums'}}>{utcTime}</span>
+      </div>
+    </div>
+  );
+}
 
 function uid() { return Math.random().toString(36).slice(2,8); }
 function openLink(url) { if(url) window.open(url,"_blank","noopener,noreferrer"); }
@@ -372,10 +418,10 @@ function exportHTML(matrix, name) {
 // ── Theme-aware shared styles (functions so they re-derive on theme change) ──
 function getS(dark) {
   return {
-    primary: { background:"linear-gradient(135deg,#6c5ce7,#a29bfe)",color:"#fff",border:"none",borderRadius:7,padding:"8px 20px",cursor:"pointer",fontSize:12,fontFamily:"'DM Mono',monospace",letterSpacing:.5 },
-    ghost:   { background:"transparent",color:dark?"#888":"#555",border:`1px solid ${dark?"#3a3a60":"#c0c0da"}`,borderRadius:7,padding:"8px 20px",cursor:"pointer",fontSize:12,fontFamily:"'DM Mono',monospace" },
-    input:   { width:"100%",background:dark?"#0c0c1e":"#f5f5fc",border:`1px solid ${dark?"#252545":"#c0c0da"}`,borderRadius:6,color:dark?"#e8e8f0":"#1a1a2e",padding:"8px 10px",fontSize:13,fontFamily:"'DM Mono',monospace",boxSizing:"border-box",outline:"none",display:"block" },
-    mbox:    { background:dark?"#141428":"#ffffff",border:`1px solid ${dark?"#2e2e5e":"#c8c8e0"}`,borderRadius:14,padding:32,width:460,maxWidth:"92vw",fontFamily:"'DM Mono',monospace",boxShadow:dark?"0 24px 60px rgba(0,0,0,.6)":"0 24px 60px rgba(0,0,0,.15)" },
+    primary: { background:"linear-gradient(135deg,#6c5ce7,#a29bfe)",color:"#fff",border:"none",borderRadius:7,padding:"8px 20px",cursor:"pointer",fontSize:12,fontFamily:"'Inter',sans-serif",letterSpacing:.3 },
+    ghost:   { background:"transparent",color:dark?"#888":"#555",border:`1px solid ${dark?"#3a3a60":"#c0c0da"}`,borderRadius:7,padding:"8px 20px",cursor:"pointer",fontSize:12,fontFamily:"'Inter',sans-serif" },
+    input:   { width:"100%",background:dark?"#0c0c1e":"#f5f5fc",border:`1px solid ${dark?"#252545":"#c0c0da"}`,borderRadius:6,color:dark?"#e8e8f0":"#1a1a2e",padding:"8px 10px",fontSize:13,fontFamily:"'Inter',sans-serif",boxSizing:"border-box",outline:"none",display:"block" },
+    mbox:    { background:dark?"#141428":"#ffffff",border:`1px solid ${dark?"#2e2e5e":"#c8c8e0"}`,borderRadius:14,padding:32,width:460,maxWidth:"92vw",fontFamily:"'Inter',sans-serif",boxShadow:dark?"0 24px 60px rgba(0,0,0,.6)":"0 24px 60px rgba(0,0,0,.15)" },
     ml:      { fontSize:10,color:dark?"#555":"#a0a0c0",letterSpacing:3,textTransform:"uppercase",marginBottom:10 },
     ml2:     { fontSize:10,color:dark?"#666":"#9090b0",letterSpacing:2,marginBottom:6 },
     note:    { fontSize:10,color:dark?"#444":"#b0b0cc",marginBottom:16 },
@@ -409,7 +455,7 @@ function SectionBlock({sec, dark}) {
 
   return (
     <details style={{marginBottom:3}}>
-      <summary style={{fontSize:9,color:dark?"#7c6ff7":"#5b4fd4",cursor:"pointer",letterSpacing:.5,listStyle:"none",display:"flex",alignItems:"center",gap:4,userSelect:"none",padding:"2px 0"}}>
+      <summary style={{fontSize:11,color:dark?"#7c6ff7":"#5b4fd4",cursor:"pointer",letterSpacing:.3,listStyle:"none",display:"flex",alignItems:"center",gap:4,userSelect:"none",padding:"2px 0"}}>
         <svg width="7" height="7" viewBox="0 0 10 10" fill={dark?"#7c6ff7":"#5b4fd4"} style={{flexShrink:0,transition:"transform .15s"}}><polygon points="0,0 10,5 0,10"/></svg>
         {sec.title||"Notes"}
         {sec.url&&(
@@ -443,7 +489,7 @@ function SectionBlock({sec, dark}) {
             }
           </button>
         )}
-        <div style={{padding:"6px 8px",paddingRight:sec.body?"52px":"8px",background:dark?"#0c0c1e88":"#f0f0f888",fontSize:10,color:dark?"#a0a0c0":"#5050a0",lineHeight:1.6,whiteSpace:"pre-wrap",wordBreak:"break-word",minHeight:28}}>
+        <div style={{padding:"6px 8px",paddingRight:sec.body?"52px":"8px",background:dark?"#0c0c1e88":"#f0f0f888",fontSize:12,color:dark?"#a0a0c0":"#5050a0",lineHeight:1.6,whiteSpace:"pre-wrap",wordBreak:"break-word",minHeight:28}}>
           {sec.body?sec.body:<span style={{opacity:.4,fontStyle:"italic"}}>empty</span>}
         </div>
       </div>
@@ -881,13 +927,13 @@ function PlaybookPanel({dark, theme, playbooks, activePlaybookId, pbMode, onSele
   const [dropPos,    setDropPos]    = useState(null);
   const dragPbRef = useRef(null);
 
-  const isRetro     = theme==="retro";
+  const isRetro     = theme==="goose";
   const panelBg     = isRetro ? "#0a0a1e" : dark ? "#0e0e1e" : "#f8f8ff";
-  const panelBorder = isRetro ? "#00aa2a" : dark ? "#1e1e38" : "#e0e0f0";
+  const panelBorder = isRetro ? "#3a1a30" : dark ? "#1e1e38" : "#e0e0f0";
   const headerBg    = isRetro ? "#0a0a1e" : dark ? "#111120" : "#ffffff";
   const cardBg      = isRetro ? "#0e0e2a" : dark ? "#0e0e1e" : "#f8f8ff";
-  const textMain    = isRetro ? "#00ff41" : dark ? "#ccccee" : "#2a2a4a";
-  const textSub     = isRetro ? "#00aa2a" : dark ? "#666688" : "#9090b0";
+  const textMain    = isRetro ? "#f0eeea" : dark ? "#ccccee" : "#2a2a4a";
+  const textSub     = isRetro ? "#c84b9e" : dark ? "#666688" : "#9090b0";
 
   function getOrderedTechs(pb) {
     const lookup = {};
@@ -932,12 +978,12 @@ function PlaybookPanel({dark, theme, playbooks, activePlaybookId, pbMode, onSele
   function onDragEnd() { setDragId(null); setDragOverId(null); setDropPos(null); dragPbRef.current=null; }
 
   return (
-    <div style={{width:268,flexShrink:0,background:panelBg,borderLeft:isRetro?`2px solid #00ff41`:`1px solid ${panelBorder}`,display:"flex",flexDirection:"column",height:"100%",overflow:"hidden"}}>
+    <div style={{width:268,flexShrink:0,background:panelBg,borderLeft:isRetro?`1px solid #c84b9e`:`1px solid ${panelBorder}`,display:"flex",flexDirection:"column",height:"100%",overflow:"hidden"}}>
       {/* Header */}
       <div style={{padding:"12px 14px 10px",borderBottom:`1px solid ${panelBorder}`,background:headerBg,display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0}}>
         <div style={{display:"flex",alignItems:"center",gap:7}}>
-          <BookIcon color={isRetro?"#00ff41":"#7c6ff7"} size={14}/>
-          <span style={{fontSize:isRetro?7:12,color:isRetro?"#00ff41":"#7c6ff7",letterSpacing:1,fontWeight:600,textShadow:isRetro?"0 0 8px #00ff41":"none"}}>{isRetro?"★ ":""}USE CASES</span>
+          <BookIcon color={isRetro?"#e870c0":"#7c6ff7"} size={14}/>
+          <span style={{fontSize:12,color:isRetro?"#e870c0":"#7c6ff7",letterSpacing:1,fontWeight:600,textShadow:isRetro?"0 0 8px rgba(200,75,158,.6)":"none"}}>{isRetro?"★ ":""}USE CASES</span>
         </div>
         <div style={{display:"flex",gap:5}}>
           <button onClick={onAdd} title="New use case" style={{background:dark?"#1a1a3a":"#ede9fe",border:`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:5,width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer"}}>
@@ -983,7 +1029,7 @@ function PlaybookPanel({dark, theme, playbooks, activePlaybookId, pbMode, onSele
                       style={{width:"100%",background:"transparent",border:"none",borderBottom:`1px solid ${pb.color}`,color:textMain,fontSize:12,outline:"none",fontFamily:"inherit",padding:"1px 0"}}/>
                   ) : (
                     <span onDoubleClick={e=>{e.stopPropagation();setEditingId(pb.id);setEditName(pb.name);}} title="Double-click to rename"
-                      style={{fontSize:12,color:isActive?textMain:textSub,fontWeight:isActive?600:400,lineHeight:1.2,display:"block"}}>
+                      style={{fontSize:13,color:isActive?textMain:textSub,fontWeight:isActive?600:400,lineHeight:1.2,display:"block"}}>
                       {pb.name}
                     </span>
                   )}
@@ -1106,7 +1152,7 @@ function PlaybookPanel({dark, theme, playbooks, activePlaybookId, pbMode, onSele
                             <div key={te.id} className={`pb-tech-row${clickable?" clickable":""}`} onClick={()=>clickable&&openLink(techUrl)}
                               style={{display:"flex",alignItems:"center",gap:6,padding:"4px 10px",margin:"0 4px"}}>
                               <div style={{width:4,height:4,borderRadius:"50%",background:pb.color,flexShrink:0,opacity:.7}}/>
-                              <span style={{fontSize:11,color:clickable?textMain:textSub,flex:1,lineHeight:1.3}}>{te.name}</span>
+                              <span style={{fontSize:12,color:clickable?textMain:textSub,flex:1,lineHeight:1.3}}>{te.name}</span>
                               {clickable?<LinkIcon color={pb.color} size={9}/>:<span style={{fontSize:9,color:textSub,opacity:.6}}>{te.id}</span>}
                             </div>
                           );
@@ -1159,8 +1205,8 @@ function ResponseGuideOverlay({dark, theme, playbook, matrix, onClose}) {
 
   const totalActions = playbook.techIds.filter(id=>lookup[id]).length;
 
-  const isRetro  = theme==="retro";
-  const retroFont= "'Press Start 2P', monospace";
+  const isRetro  = theme==="goose";
+  const retroFont= "'Inter',system-ui,sans-serif"; // goose uses normal font
 
   // Phase badge colors
   const phaseBadge = isRetro ? {
@@ -1178,25 +1224,25 @@ function ResponseGuideOverlay({dark, theme, playbook, matrix, onClose}) {
     R:{ bg:dark?"#143325":"#dcfce7", text:dark?"#68d391":"#15803d" },
     L:{ bg:dark?"#3b1a3b":"#fce7f3", text:dark?"#d6bcfa":"#a21caf" },
   };
-  const bgMain   = isRetro?"#0a0a1e":dark?"#0e0e18":"#f0f0f8";
+  const bgMain   = isRetro?"#0a0a0e":dark?"#0e0e18":"#f0f0f8";
   const bgCard   = isRetro?"#0e0e2a":dark?"#161628":"#ffffff";
-  const borderC  = isRetro?"#00ff41":dark?"#2e2e50":"#d8d8f0";
-  const textMain = isRetro?"#00ff41":dark?"#e8e8f0":"#1a1a2e";
-  const textSub  = isRetro?"#00aa2a":dark?"#8888aa":"#6060a0";
-  const textDim  = isRetro?"#006618":dark?"#555577":"#a0a0c0";
-  const surfaceBg= isRetro?"#0e0e28":dark?"#1a1a2e":"#f5f5fc";
+  const borderC  = isRetro?"#f0eeea":dark?"#2e2e50":"#d8d8f0";
+  const textMain = isRetro?"#f0eeea":dark?"#e8e8f0":"#1a1a2e";
+  const textSub  = isRetro?"#c84b9e":dark?"#8888aa":"#6060a0";
+  const textDim  = isRetro?"#7a2a5a":dark?"#555577":"#a0a0c0";
+  const surfaceBg= isRetro?"#131318":dark?"#1a1a2e":"#f5f5fc";
 
   return (
-    <div style={{position:"fixed",inset:0,background:bgMain,zIndex:2000,display:"flex",flexDirection:"column",fontFamily:isRetro?retroFont:"'DM Mono',monospace",overflow:"hidden"}}>
-      {isRetro && <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:9999,background:"repeating-linear-gradient(0deg, rgba(0,255,65,0.03) 0px, rgba(0,255,65,0.03) 1px, transparent 1px, transparent 3px)",mixBlendMode:"overlay"}}/>}
+    <div style={{position:"fixed",inset:0,background:bgMain,zIndex:2000,display:"flex",flexDirection:"column",fontFamily:"'Inter',system-ui,sans-serif",overflow:"hidden"}}>
+      {isRetro && <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:9999,background:"radial-gradient(ellipse at top, rgba(200,75,158,0.06) 0%, transparent 70%)"}}/>}
       {/* Header bar */}
-      <div style={{padding:isRetro?"12px 28px":"16px 28px",borderBottom:isRetro?`2px solid #00ff41`:`1px solid ${borderC}`,display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0,background:isRetro?"#0a0a1e":dark?"#111120":"#ffffff",boxShadow:isRetro?"0 4px 0 #000":"none"}}>
+      <div style={{padding:"16px 28px",borderBottom:isRetro?`1px solid #c84b9e`:`1px solid ${borderC}`,display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0,background:isRetro?"#0a0a0e":dark?"#111120":"#ffffff",boxShadow:isRetro?"none":"none"}}>
         <div style={{display:"flex",alignItems:"center",gap:12}}>
           <div style={{width:10,height:10,borderRadius:isRetro?0:"50%",background:playbook.color,boxShadow:isRetro?"none":`0 0 8px ${playbook.color}`}}/>
-          <span style={{fontSize:isRetro?9:16,fontFamily:isRetro?retroFont:"'Space Grotesk',sans-serif",fontWeight:700,color:textMain,textShadow:isRetro?"0 0 8px #00ff41":"none"}}>{isRetro?"► ":""}Response Guide</span>
-          <span style={{fontSize:isRetro?8:12,color:textSub}}>—</span>
-          <span style={{fontSize:isRetro?8:14,fontFamily:isRetro?retroFont:"'Space Grotesk',sans-serif",fontWeight:600,color:playbook.color}}>{playbook.name}</span>
-          <span style={{fontSize:isRetro?6:11,color:textDim,background:isRetro?"#0e0e28":dark?"#1e1e38":"#eeeefc",border:isRetro?"1px solid #006618":"none",borderRadius:isRetro?0:10,padding:"2px 10px"}}>{totalActions} actions across {phases.length} phases</span>
+          <span style={{fontSize:16,fontFamily:"'Space Grotesk',sans-serif",fontWeight:700,color:textMain,textShadow:isRetro?"0 0 8px rgba(200,75,158,.6)":"none"}}>Response Guide</span>
+          <span style={{fontSize:12,color:textSub}}>—</span>
+          <span style={{fontSize:14,fontFamily:"'Space Grotesk',sans-serif",fontWeight:600,color:playbook.color}}>{playbook.name}</span>
+          <span style={{fontSize:11,color:textDim,background:isRetro?"#131318":dark?"#1e1e38":"#eeeefc",border:isRetro?"1px solid #7a2a5a":"none",borderRadius:isRetro?10:10,padding:"2px 10px"}}>{totalActions} actions across {phases.length} phases</span>
         </div>
         <div style={{display:"flex",alignItems:"center",gap:8}}>
           {(() => {
@@ -1439,9 +1485,10 @@ function fmtTs(ms) {
 function KanbanCard({ card, colStatus, colColor, colLabel, phaseColor, now, dark, isRetro, font,
                       getCat, textMain, textSub, textDim, border, border2, cardBg,
                       onMove, onOwner, onNotes, onImages, onRemove }) {
-  const [ownerVal,  setOwnerVal]  = React.useState(card.owner  || '');
-  const [notesVal,  setNotesVal]  = React.useState(card.notes  || '');
-  const [imagesVal, setImagesVal] = React.useState(card.images || []);
+  const [ownerVal,   setOwnerVal]   = React.useState(card.owner  || '');
+  const [notesVal,   setNotesVal]   = React.useState(card.notes  || '');
+  const [imagesVal,  setImagesVal]  = React.useState(card.images || []);
+  const [cardCollapsed, setCardCollapsed] = React.useState(false);
   React.useEffect(() => { setOwnerVal(card.owner   || ''); }, [card.owner]);
   React.useEffect(() => { setNotesVal(card.notes   || ''); }, [card.notes]);
   React.useEffect(() => { setImagesVal(card.images || []); }, [card.images]);
@@ -1466,10 +1513,10 @@ function KanbanCard({ card, colStatus, colColor, colLabel, phaseColor, now, dark
     onImages(card.id, next);
   }
 
-  const cat       = getCat(card.category);
-  const stageTs   = colStatus==='todo' ? card.todoAt : colStatus==='inprogress' ? card.startedAt : colStatus==='blocked' ? card.blockedAt : card.completedAt;
-  const elapsed   = fmtElapsed(stageTs, now);
-  const ph        = phaseColor;
+  const cat     = getCat(card.category);
+  const stageTs = colStatus==='todo' ? card.todoAt : colStatus==='inprogress' ? card.startedAt : colStatus==='blocked' ? card.blockedAt : card.completedAt;
+  const elapsed = fmtElapsed(stageTs, now);
+  const ph      = phaseColor;
 
   return (
     <div style={{
@@ -1479,181 +1526,256 @@ function KanbanCard({ card, colStatus, colColor, colLabel, phaseColor, now, dark
       padding: '9px 10px', marginBottom: 7,
       boxShadow: isRetro ? '3px 3px 0 #000' : dark ? '0 1px 6px rgba(0,0,0,.35)' : '0 1px 4px rgba(0,0,0,.07)',
       position: 'relative',
+      transition: 'box-shadow .15s',
     }}>
-      {/* Top row — ID + remove */}
-      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:4}}>
-        <span style={{fontSize:isRetro?5:8,color:isRetro?'#00aa2a':textDim,letterSpacing:.5}}>
-          {isRetro?'▸ ':''}{card.techId||'CUSTOM'}
-        </span>
+
+      {/* ── HEADER ROW — always visible ── */}
+      <div style={{display:'flex',alignItems:'center',gap:6,marginBottom: cardCollapsed ? 0 : 6}}>
+
+        {/* Collapse toggle */}
+        <button
+          onClick={()=>setCardCollapsed(c=>!c)}
+          title={cardCollapsed ? 'Expand card' : 'Collapse card'}
+          style={{
+            background:'none', border:'none', cursor:'pointer', padding:'0 2px',
+            color: textDim, flexShrink:0, display:'flex', alignItems:'center',
+            transition:'transform .15s, color .15s',
+            transform: cardCollapsed ? 'rotate(-90deg)' : 'rotate(0deg)',
+          }}
+          onMouseEnter={e=>e.currentTarget.style.color=colColor}
+          onMouseLeave={e=>e.currentTarget.style.color=textDim}
+        >
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+
+        {/* Title + timer in one line */}
+        <div style={{flex:1,minWidth:0}}>
+          <div style={{fontSize:13,fontWeight:600,color:textMain,lineHeight:1.3,overflow:'hidden',textOverflow:'ellipsis',whiteSpace: cardCollapsed ? 'nowrap' : 'normal'}}>
+            {card.techName}
+          </div>
+          {/* Timer always visible under title */}
+          <div style={{display:'flex',alignItems:'center',gap:4,marginTop:2}}>
+            <span style={{fontSize:10,color:textDim}}>⏱</span>
+            <span style={{
+              fontSize:12, fontVariantNumeric:'tabular-nums',
+              color:colColor, fontWeight:700, letterSpacing:.5,
+              textShadow:'none',
+              fontFamily:"'DM Mono',monospace",
+            }}>{elapsed}</span>
+            <span style={{fontSize:9,color:textDim}}>in {colLabel.toLowerCase()}</span>
+            {/* Owner pill when collapsed */}
+            {cardCollapsed && ownerVal && (
+              <span style={{
+                marginLeft:4, fontSize:9,
+                color:textSub, opacity:.7,
+              }}>· 👤 {ownerVal}</span>
+            )}
+          </div>
+        </div>
+
+        {/* Remove button */}
         <button onClick={()=>onRemove(card.id)}
           onMouseEnter={e=>e.currentTarget.style.color='#e94560'}
           onMouseLeave={e=>e.currentTarget.style.color='#e9456044'}
-          style={{background:'none',border:'none',color:'#e9456044',cursor:'pointer',fontSize:13,lineHeight:1,padding:0}}
+          style={{background:'none',border:'none',color:'#e9456044',cursor:'pointer',fontSize:13,lineHeight:1,padding:0,flexShrink:0}}
           title="Remove">×</button>
       </div>
 
-      {/* Action name */}
-      <div style={{fontSize:isRetro?7:11,fontWeight:600,color:textMain,lineHeight:isRetro?1.7:1.4,marginBottom:5}}>
-        {card.techName}
-      </div>
+      {/* ── EXPANDED CONTENT ── */}
+      {!cardCollapsed && (
+        <div className="fade-in">
+          {/* ID + category row */}
+          <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:6}}>
+            <span style={{fontSize:10,color:isRetro?'#c84b9e':textDim,letterSpacing:.3,fontFamily:"'DM Mono',monospace"}}>
+              {isRetro?'':''}{card.techId||'CUSTOM'}
+            </span>
+            {card.category && (
+              <span style={{
+                fontSize:9, background:`${cat.color}20`,
+                border:isRetro?`1px solid ${cat.color}`:`1px solid ${cat.color}44`,
+                borderRadius:isRetro?8:8, padding:'1px 6px', color:cat.text,
+              }}>{cat.label}</span>
+            )}
+          </div>
 
-      {/* Category badge */}
-      {card.category && (
-        <div style={{marginBottom:6}}>
-          <span style={{
-            fontSize:isRetro?5:8, background:`${cat.color}20`,
-            border:isRetro?`1px solid ${cat.color}`:`1px solid ${cat.color}44`,
-            borderRadius:isRetro?0:8, padding:'1px 5px', color:cat.text,
-          }}>{cat.label}</span>
+          {/* Owner */}
+          <div style={{display:'flex',alignItems:'center',gap:5,marginBottom:6}}>
+            <span style={{fontSize:10,flexShrink:0}}>👤</span>
+            <input
+              value={ownerVal}
+              onChange={e=>setOwnerVal(e.target.value)}
+              onBlur={()=>onOwner(card.id, ownerVal)}
+              placeholder="Assign owner…"
+              style={{
+                flex:1, background:'transparent', border:'none',
+                borderBottom:isRetro?'1px solid #5a2a4a':`1px solid ${dark?'#2a2a48':'#d0d0e8'}`,
+                color:ownerVal?(isRetro?'#f0eeea':textMain):textDim,
+                fontFamily:font, fontSize:12, outline:'none', padding:'1px 2px',
+              }}/>
+          </div>
+
+          {/* Timestamps */}
+          <div style={{
+            fontSize:10, color:textDim, fontFamily:"'DM Mono',monospace",
+            borderTop:`1px solid ${border2}`, paddingTop:4, marginTop:2,
+            display:'flex', flexDirection:'column', gap:2, marginBottom:8,
+          }}>
+            {stageTs          && <span>Entered:  {fmtTs(stageTs)}</span>}
+            {card.assignedAt  && <span>Assigned: {fmtTs(card.assignedAt)}</span>}
+            {card.startedAt   && colStatus!=='todo' && <span>Started:  {fmtTs(card.startedAt)}</span>}
+            {card.blockedAt   && <span style={{color:isRetro?'#e8520a':dark?'#fc8181':'#c53030'}}>Blocked:  {fmtTs(card.blockedAt)}</span>}
+            {card.completedAt && <span>Closed:   {fmtTs(card.completedAt)}</span>}
+          </div>
+
+          {/* Notes */}
+          <div style={{marginBottom:8}}>
+            <div style={{fontSize:9,color:isRetro?'#c84b9e':textDim,letterSpacing:1,marginBottom:4,textTransform:'uppercase'}}>
+              {isRetro?'':''}Notes
+            </div>
+            <textarea
+              value={notesVal}
+              onChange={e=>setNotesVal(e.target.value)}
+              onBlur={()=>onNotes(card.id, notesVal)}
+              onPaste={handlePaste}
+              placeholder="Add context, findings, observations…"
+              rows={2}
+              style={{
+                width:'100%', boxSizing:'border-box',
+                background:isRetro?'#0a0a0e':dark?'#0c0c20':'#f8f8ff',
+                border:isRetro?'1px solid #5a2a4a':`1px solid ${dark?'#2a2a48':'#d8d8f0'}`,
+                borderRadius:isRetro?4:4,
+                color:notesVal?(isRetro?'#f0eeea':textMain):textDim,
+                fontFamily:font, fontSize:12,
+                padding:'5px 7px', outline:'none', resize:'vertical',
+                lineHeight:1.5,
+              }}/>
+            <div style={{fontSize:8,color:textDim,marginTop:3,marginBottom:imagesVal.length?6:0}}>
+              Ctrl+V / ⌘V to paste a screenshot
+            </div>
+            {imagesVal.length>0&&(
+              <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
+                {imagesVal.map((src,idx)=>(
+                  <div key={idx} style={{position:'relative',flexShrink:0}}>
+                    <img src={src} alt={`screenshot ${idx+1}`}
+                      style={{
+                        width:80, height:60, objectFit:'cover',
+                        border:isRetro?'1px solid #8a3a6e':`1px solid ${dark?'#2a2a48':'#d8d8f0'}`,
+                        borderRadius:isRetro?4:4, display:'block', cursor:'pointer',
+                      }}
+                      onClick={()=>window.open(src,'_blank')}
+                      title="Click to open full size"
+                    />
+                    <button
+                      onClick={()=>removeImage(idx)}
+                      title="Remove screenshot"
+                      style={{
+                        position:'absolute', top:-5, right:-5,
+                        width:16, height:16,
+                        background:isRetro?'#1a0404':dark?'#2a1010':'#fff',
+                        border:isRetro?'1px solid #ff4444':`1px solid ${dark?'#7a2020':'#fda4af'}`,
+                        borderRadius:'50%',
+                        color:isRetro?'#e8520a':dark?'#fc8181':'#c53030',
+                        cursor:'pointer', fontSize:10, lineHeight:1,
+                        display:'flex', alignItems:'center', justifyContent:'center',
+                        padding:0,
+                      }}>×</button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Move buttons */}
+          <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
+            {colStatus !== 'todo' && (
+              <button onClick={()=>onMove(card.id, colStatus==='inprogress'?'todo':'inprogress')}
+                style={{
+                  flex:1, background:'transparent',
+                  border:isRetro?'1px solid #444':`1px solid ${dark?'#3a3a6a':'#d0d0e8'}`,
+                  borderRadius:isRetro?4:4, color:isRetro?'#666':textSub,
+                  padding:'3px 6px', cursor:'pointer', fontFamily:font, fontSize:9,
+                }}>
+                ← {colStatus==='inprogress'?'To Do':'In Progress'}
+              </button>
+            )}
+            {colStatus === 'inprogress' && (
+              <button onClick={()=>onMove(card.id, 'blocked')}
+                style={{
+                  flex:1, background:'transparent',
+                  border:isRetro?'1px solid #ff4444':`1px solid ${dark?'#7a2020':'#fda4af'}`,
+                  borderRadius:isRetro?4:4,
+                  color:isRetro?'#e8520a':dark?'#fc8181':'#c53030',
+                  padding:'3px 6px', cursor:'pointer', fontFamily:font,
+                  fontSize:9, fontWeight:600,
+                }}>
+                ⚠ Hold
+              </button>
+            )}
+            {colStatus !== 'completed' && (
+              <button onClick={()=>onMove(card.id, colStatus==='todo'?'inprogress':'completed')}
+                style={{
+                  flex:1,
+                  background:isRetro?'transparent':dark?'#1a1a38':'#f0f0fc',
+                  border:isRetro?`1px solid ${colColor}`:`1px solid ${dark?'#3a3a6a':'#c4b5fd'}`,
+                  borderRadius:isRetro?4:4,
+                  color:isRetro?colColor:dark?'#a29bfe':'#5b4fd4',
+                  padding:'3px 6px', cursor:'pointer', fontFamily:font,
+                  fontSize:9, fontWeight:600,
+                  boxShadow:isRetro?'none':'none',
+                }}>
+                {colStatus==='todo'?'Start →':'Complete ✓'}
+              </button>
+            )}
+          </div>
         </div>
       )}
 
-      {/* Owner */}
-      <div style={{display:'flex',alignItems:'center',gap:5,marginBottom:6}}>
-        <span style={{fontSize:isRetro?5:10,flexShrink:0}}>👤</span>
-        <input
-          value={ownerVal}
-          onChange={e=>setOwnerVal(e.target.value)}
-          onBlur={()=>onOwner(card.id, ownerVal)}
-          placeholder="Assign owner…"
-          style={{
-            flex:1, background:'transparent', border:'none',
-            borderBottom:isRetro?'1px solid #006618':`1px solid ${dark?'#2a2a48':'#d0d0e8'}`,
-            color:ownerVal?(isRetro?'#00ff41':textMain):textDim,
-            fontFamily:font, fontSize:isRetro?6:10, outline:'none', padding:'1px 2px',
-          }}/>
-      </div>
-
-      {/* Live stage timer */}
-      <div style={{display:'flex',alignItems:'center',gap:5,marginBottom:4}}>
-        <span style={{fontSize:isRetro?6:10}}>⏱</span>
-        <span style={{
-          fontSize:isRetro?7:11, fontVariantNumeric:'tabular-nums',
-          color:colColor, fontWeight:700, letterSpacing:1,
-          textShadow:isRetro?`0 0 5px ${colColor}`:'none',
-        }}>{elapsed}</span>
-        <span style={{fontSize:isRetro?5:8,color:textDim}}>in {colLabel.toLowerCase()}</span>
-      </div>
-
-      {/* Stage entry + captured timestamps */}
-      <div style={{
-        fontSize:isRetro?5:8, color:textDim,
-        borderTop:`1px solid ${border2}`, paddingTop:4, marginTop:4,
-        display:'flex', flexDirection:'column', gap:2,
-      }}>
-        {stageTs          && <span>Entered:  {fmtTs(stageTs)}</span>}
-        {card.assignedAt  && <span>Assigned: {fmtTs(card.assignedAt)}</span>}
-        {card.startedAt   && colStatus!=='todo' && <span>Started:  {fmtTs(card.startedAt)}</span>}
-        {card.blockedAt   && <span style={{color:isRetro?'#ff4444':dark?'#fc8181':'#c53030'}}>Blocked:  {fmtTs(card.blockedAt)}</span>}
-        {card.completedAt && <span>Closed:   {fmtTs(card.completedAt)}</span>}
-      </div>
-
-      {/* Notes */}
-      <div style={{marginTop:8}}>
-        <div style={{fontSize:isRetro?5:9,color:isRetro?'#00aa2a':textDim,letterSpacing:1,marginBottom:4}}>
-          {isRetro?'▸ ':''}NOTES
+      {/* Move buttons always visible when collapsed */}
+      {cardCollapsed && (
+        <div style={{display:'flex',gap:4,marginTop:6,flexWrap:'wrap'}}>
+          {colStatus !== 'todo' && (
+            <button onClick={()=>onMove(card.id, colStatus==='inprogress'?'todo':'inprogress')}
+              style={{
+                flex:1, background:'transparent',
+                border:isRetro?'1px solid #444':`1px solid ${dark?'#3a3a6a':'#d0d0e8'}`,
+                borderRadius:isRetro?4:4, color:isRetro?'#666':textSub,
+                padding:'2px 6px', cursor:'pointer', fontFamily:font, fontSize:9,
+              }}>
+              ← {colStatus==='inprogress'?'To Do':'In Progress'}
+            </button>
+          )}
+          {colStatus === 'inprogress' && (
+            <button onClick={()=>onMove(card.id, 'blocked')}
+              style={{
+                flex:1, background:'transparent',
+                border:isRetro?'1px solid #ff4444':`1px solid ${dark?'#7a2020':'#fda4af'}`,
+                borderRadius:isRetro?4:4,
+                color:isRetro?'#e8520a':dark?'#fc8181':'#c53030',
+                padding:'2px 6px', cursor:'pointer', fontFamily:font,
+                fontSize:9, fontWeight:600,
+              }}>
+              ⚠ Hold
+            </button>
+          )}
+          {colStatus !== 'completed' && (
+            <button onClick={()=>onMove(card.id, colStatus==='todo'?'inprogress':'completed')}
+              style={{
+                flex:1,
+                background:isRetro?'transparent':dark?'#1a1a38':'#f0f0fc',
+                border:isRetro?`1px solid ${colColor}`:`1px solid ${dark?'#3a3a6a':'#c4b5fd'}`,
+                borderRadius:isRetro?4:4,
+                color:isRetro?colColor:dark?'#a29bfe':'#5b4fd4',
+                padding:'2px 6px', cursor:'pointer', fontFamily:font,
+                fontSize:9, fontWeight:600,
+                boxShadow:isRetro?'none':'none',
+              }}>
+              {colStatus==='todo'?'Start →':'Complete ✓'}
+            </button>
+          )}
         </div>
-        <textarea
-          value={notesVal}
-          onChange={e=>setNotesVal(e.target.value)}
-          onBlur={()=>onNotes(card.id, notesVal)}
-          onPaste={handlePaste}
-          placeholder="Add context, findings, observations…"
-          rows={2}
-          style={{
-            width:'100%', boxSizing:'border-box',
-            background:isRetro?'#06061a':dark?'#0c0c20':'#f8f8ff',
-            border:isRetro?'1px solid #006618':`1px solid ${dark?'#2a2a48':'#d8d8f0'}`,
-            borderRadius:isRetro?0:4,
-            color:notesVal?(isRetro?'#00ff41':textMain):textDim,
-            fontFamily:font, fontSize:isRetro?6:10,
-            padding:'5px 7px', outline:'none', resize:'vertical',
-            lineHeight:1.5,
-          }}/>
-        <div style={{fontSize:isRetro?5:8,color:textDim,marginTop:3,marginBottom:imagesVal.length?6:0}}>
-          Ctrl+V / ⌘V to paste a screenshot
-        </div>
-        {/* Screenshot thumbnails */}
-        {imagesVal.length>0&&(
-          <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-            {imagesVal.map((src,idx)=>(
-              <div key={idx} style={{position:'relative',flexShrink:0}}>
-                <img src={src} alt={`screenshot ${idx+1}`}
-                  style={{
-                    width:80, height:60, objectFit:'cover',
-                    border:isRetro?'1px solid #00aa2a':`1px solid ${dark?'#2a2a48':'#d8d8f0'}`,
-                    borderRadius:isRetro?0:4, display:'block', cursor:'pointer',
-                  }}
-                  onClick={()=>window.open(src,'_blank')}
-                  title="Click to open full size"
-                />
-                <button
-                  onClick={()=>removeImage(idx)}
-                  title="Remove screenshot"
-                  style={{
-                    position:'absolute', top:-5, right:-5,
-                    width:16, height:16,
-                    background:isRetro?'#1a0404':dark?'#2a1010':'#fff',
-                    border:isRetro?'1px solid #ff4444':`1px solid ${dark?'#7a2020':'#fda4af'}`,
-                    borderRadius:'50%',
-                    color:isRetro?'#ff4444':dark?'#fc8181':'#c53030',
-                    cursor:'pointer', fontSize:10, lineHeight:1,
-                    display:'flex', alignItems:'center', justifyContent:'center',
-                    padding:0,
-                  }}>×</button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Move buttons */}
-      <div style={{display:'flex',gap:4,marginTop:8,flexWrap:'wrap'}}>
-        {/* ← Back */}
-        {colStatus !== 'todo' && (
-          <button onClick={()=>onMove(card.id, colStatus==='inprogress'?'todo':'inprogress')}
-            style={{
-              flex:1, background:'transparent',
-              border:isRetro?'1px solid #444':`1px solid ${dark?'#3a3a6a':'#d0d0e8'}`,
-              borderRadius:isRetro?0:4,
-              color:isRetro?'#666':textSub,
-              padding:'3px 6px', cursor:'pointer', fontFamily:font,
-              fontSize:isRetro?5:9,
-            }}>
-            ← {colStatus==='inprogress'?'To Do':'In Progress'}
-          </button>
-        )}
-        {/* ⚠ Block — only available from In Progress */}
-        {colStatus === 'inprogress' && (
-          <button onClick={()=>onMove(card.id, 'blocked')}
-            style={{
-              flex:1, background:'transparent',
-              border:isRetro?'1px solid #ff4444':`1px solid ${dark?'#7a2020':'#fda4af'}`,
-              borderRadius:isRetro?0:4,
-              color:isRetro?'#ff4444':dark?'#fc8181':'#c53030',
-              padding:'3px 6px', cursor:'pointer', fontFamily:font,
-              fontSize:isRetro?5:9, fontWeight:600,
-            }}>
-            ⚠ Hold
-          </button>
-        )}
-        {/* Forward → */}
-        {colStatus !== 'completed' && (
-          <button onClick={()=>onMove(card.id, colStatus==='todo'?'inprogress':'completed')}
-            style={{
-              flex:1,
-              background:isRetro?'transparent':dark?'#1a1a38':'#f0f0fc',
-              border:isRetro?`1px solid ${colColor}`:`1px solid ${dark?'#3a3a6a':'#c4b5fd'}`,
-              borderRadius:isRetro?0:4,
-              color:isRetro?colColor:dark?'#a29bfe':'#5b4fd4',
-              padding:'3px 6px', cursor:'pointer', fontFamily:font,
-              fontSize:isRetro?5:9, fontWeight:600,
-              boxShadow:isRetro?'2px 2px 0 #000':'none',
-            }}>
-            {colStatus==='todo'?'Start →':'Complete ✓'}
-          </button>
-        )}
-      </div>
+      )}
     </div>
   );
 }
@@ -1691,43 +1813,43 @@ function IncidentAddModal({ allIcerTechs, activeInc, dark, isRetro, font, textMa
     onClose();
   }
 
-  const bg       = isRetro?'#0a0a1e':dark?'#141428':'#ffffff';
-  const surfBg   = isRetro?'#0e0e28':dark?'#1a1a38':'#f5f5fc';
-  const inBorder = isRetro?'1px solid #00aa2a':`1px solid ${dark?'#2a2a48':'#c0c0da'}`;
+  const bg       = isRetro?'#0a0a0e':dark?'#141428':'#ffffff';
+  const surfBg   = isRetro?'#131318':dark?'#1a1a38':'#f5f5fc';
+  const inBorder = isRetro?'1px solid #8a3a6e':`1px solid ${dark?'#2a2a48':'#c0c0da'}`;
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div onClick={e=>e.stopPropagation()} style={{
         background:bg,
-        border:isRetro?'2px solid #00ff41':`1px solid ${dark?'#2e2e5e':'#c8c8e0'}`,
-        borderRadius:isRetro?0:12,
+        border:isRetro?'2px solid #c84b9e':`1px solid ${dark?'#2e2e5e':'#c8c8e0'}`,
+        borderRadius:isRetro?12:12,
         width:520, maxWidth:'92vw', maxHeight:'78vh',
         display:'flex', flexDirection:'column',
         fontFamily:font,
-        boxShadow:isRetro?'6px 6px 0 #000':dark?'0 24px 60px rgba(0,0,0,.6)':'0 24px 60px rgba(0,0,0,.15)',
+        boxShadow:isRetro?'0 0 16px rgba(200,75,158,.3)':dark?'0 24px 60px rgba(0,0,0,.6)':'0 24px 60px rgba(0,0,0,.15)',
       }}>
         {/* Header */}
         <div style={{
           padding:'12px 16px',
-          borderBottom:isRetro?'2px solid #00ff41':`1px solid ${dark?'#2e2e5e':'#d0d0e8'}`,
+          borderBottom:isRetro?'2px solid #c84b9e':`1px solid ${dark?'#2e2e5e':'#d0d0e8'}`,
           display:'flex', alignItems:'center', justifyContent:'space-between', flexShrink:0,
         }}>
-          <span style={{fontSize:isRetro?8:13,fontWeight:700,color:isRetro?'#00ff41':textMain,textShadow:isRetro?'0 0 6px #00ff41':'none'}}>
-            {isRetro?'► ':''}Add Action
+          <span style={{fontSize:13,fontWeight:700,color:isRetro?'#f0eeea':textMain,textShadow:'none'}}>
+            Add Action
           </span>
           <button onClick={onClose} style={{background:'none',border:'none',color:textDim,cursor:'pointer',fontSize:16}}>×</button>
         </div>
 
         {/* Tabs */}
-        <div style={{display:'flex',borderBottom:isRetro?'1px solid #006618':`1px solid ${dark?'#2e2e5e':'#d0d0e8'}`,flexShrink:0}}>
+        <div style={{display:'flex',borderBottom:isRetro?'1px solid #5a2a4a':`1px solid ${dark?'#2e2e5e':'#d0d0e8'}`,flexShrink:0}}>
           {[{id:'library',label:'From Library'},{id:'custom',label:'Custom Action'}].map(t=>(
             <button key={t.id} onClick={()=>setTab(t.id)} style={{
               flex:1, padding:'8px',
-              background:tab===t.id?(isRetro?'#0e0e28':dark?'#1a1a38':'#ede9fe'):'transparent',
+              background:tab===t.id?(isRetro?'#131318':dark?'#1a1a38':'#ede9fe'):'transparent',
               border:'none',
-              borderBottom:tab===t.id?`2px solid ${isRetro?'#00ff41':dark?'#7c6ff7':'#5b4fd4'}`:'2px solid transparent',
-              color:tab===t.id?(isRetro?'#00ff41':dark?'#a29bfe':'#5b4fd4'):textDim,
-              cursor:'pointer', fontFamily:font, fontSize:isRetro?7:11,
+              borderBottom:tab===t.id?`2px solid ${isRetro?'#f0eeea':dark?'#7c6ff7':'#5b4fd4'}`:'2px solid transparent',
+              color:tab===t.id?(isRetro?'#f0eeea':dark?'#a29bfe':'#5b4fd4'):textDim,
+              cursor:'pointer', fontFamily:font, fontSize:11,
             }}>{t.label}</button>
           ))}
         </div>
@@ -1738,27 +1860,27 @@ function IncidentAddModal({ allIcerTechs, activeInc, dark, isRetro, font, textMa
             <div style={{display:'flex',gap:8,marginBottom:9,flexShrink:0,flexWrap:'wrap'}}>
               <input autoFocus value={search} onChange={e=>setSearch(e.target.value)}
                 placeholder="Search actions…"
-                style={{flex:1,minWidth:120,background:surfBg,border:inBorder,borderRadius:isRetro?0:6,
-                  color:textMain,padding:'6px 10px',fontFamily:font,fontSize:isRetro?7:11,outline:'none'}}/>
+                style={{flex:1,minWidth:120,background:surfBg,border:inBorder,borderRadius:isRetro?6:6,
+                  color:textMain,padding:'6px 10px',fontFamily:font,fontSize:11,outline:'none'}}/>
               <select value={phaseFilter} onChange={e=>setPhaseFilter(e.target.value)}
-                style={{background:surfBg,border:inBorder,borderRadius:isRetro?0:6,
-                  color:textMain,padding:'4px 8px',fontFamily:font,fontSize:isRetro?7:10,outline:'none',cursor:'pointer'}}>
+                style={{background:surfBg,border:inBorder,borderRadius:isRetro?6:6,
+                  color:textMain,padding:'4px 8px',fontFamily:font,fontSize:10,outline:'none',cursor:'pointer'}}>
                 <option value="">All Phases</option>
                 {ICER_CODES.map(c=><option key={c} value={c}>{c} — {ICER_LABELS[c]}</option>)}
               </select>
               <select value={catFilter} onChange={e=>setCatFilter(e.target.value)}
-                style={{background:surfBg,border:inBorder,borderRadius:isRetro?0:6,
-                  color:textMain,padding:'4px 8px',fontFamily:font,fontSize:isRetro?7:10,outline:'none',cursor:'pointer'}}>
+                style={{background:surfBg,border:inBorder,borderRadius:isRetro?6:6,
+                  color:textMain,padding:'4px 8px',fontFamily:font,fontSize:10,outline:'none',cursor:'pointer'}}>
                 <option value="">All Categories</option>
                 {categories.map(c=><option key={c.id} value={c.id}>{c.label}</option>)}
               </select>
             </div>
             {/* Count */}
-            <div style={{fontSize:isRetro?5:9,color:textDim,marginBottom:6,flexShrink:0}}>{filtered.length} action{filtered.length!==1?'s':''} available</div>
+            <div style={{fontSize:9,color:textDim,marginBottom:6,flexShrink:0}}>{filtered.length} action{filtered.length!==1?'s':''} available</div>
             {/* List */}
             <div style={{flex:1,overflowY:'auto'}}>
               {filtered.length===0 && (
-                <div style={{textAlign:'center',padding:'24px',color:textDim,fontSize:isRetro?7:11}}>No actions found</div>
+                <div style={{textAlign:'center',padding:'24px',color:textDim,fontSize:11}}>No actions found</div>
               )}
               {ICER_CODES.map(code=>{
                 const group = filtered.filter(t=>t.tacticShortcode===code);
@@ -1767,7 +1889,7 @@ function IncidentAddModal({ allIcerTechs, activeInc, dark, isRetro, font, textMa
                 return (
                   <div key={code} style={{marginBottom:10}}>
                     <div style={{
-                      fontSize:isRetro?5:9,fontWeight:700,letterSpacing:2,textTransform:'uppercase',
+                      fontSize:9,fontWeight:700,letterSpacing:2,textTransform:'uppercase',
                       color:ph.text,background:ph.bg,
                       border:isRetro?`1px solid ${ph.border}`:'none',
                       borderRadius:isRetro?0:3,
@@ -1780,20 +1902,20 @@ function IncidentAddModal({ allIcerTechs, activeInc, dark, isRetro, font, textMa
                           className="pb-tech-row clickable"
                           style={{
                             padding:'6px 8px',marginBottom:2,cursor:'pointer',
-                            border:isRetro?'1px solid #006618':'1px solid transparent',
-                            borderRadius:isRetro?0:4,
+                            border:isRetro?'1px solid #5a2a4a':'1px solid transparent',
+                            borderRadius:isRetro?4:4,
                             display:'flex',alignItems:'flex-start',gap:8,
                           }}>
                           <div style={{flex:1}}>
-                            <div style={{fontSize:isRetro?5:8,color:textDim,marginBottom:1}}>{te.id}</div>
-                            <div style={{fontSize:isRetro?7:11,color:textMain,lineHeight:1.4}}>{te.name}</div>
+                            <div style={{fontSize:8,color:textDim,marginBottom:1}}>{te.id}</div>
+                            <div style={{fontSize:12,color:textMain,lineHeight:1.4}}>{te.name}</div>
                           </div>
                           {te.category&&(
                             <span style={{
-                              fontSize:isRetro?5:8, flexShrink:0, marginTop:2,
+                              fontSize:8, flexShrink:0, marginTop:2,
                               color:cat.text, background:`${cat.color}22`,
                               border:`1px solid ${cat.color}55`,
-                              borderRadius:isRetro?0:8, padding:'1px 6px',
+                              borderRadius:isRetro?8:8, padding:'1px 6px',
                             }}>{cat.label}</span>
                           )}
                         </div>
@@ -1807,7 +1929,7 @@ function IncidentAddModal({ allIcerTechs, activeInc, dark, isRetro, font, textMa
         ) : (
           <div style={{padding:'18px',flex:1}}>
             <div style={{marginBottom:14}}>
-              <div style={{fontSize:isRetro?6:10,color:textDim,letterSpacing:1,marginBottom:7}}>PHASE</div>
+              <div style={{fontSize:10,color:textDim,letterSpacing:1,marginBottom:7}}>PHASE</div>
               <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
                 {ICER_CODES.map(code=>{
                   const ph=PHASE_COLORS[code]; const on=customPhase===code;
@@ -1815,35 +1937,35 @@ function IncidentAddModal({ allIcerTechs, activeInc, dark, isRetro, font, textMa
                     <button key={code} onClick={()=>setCustomPhase(code)} style={{
                       background:on?ph.bg:'transparent',
                       border:isRetro?`1px solid ${on?ph.border:'#444'}`:`1px solid ${on?ph.border:dark?'#3a3a6a':'#d0d0e8'}`,
-                      borderRadius:isRetro?0:4, color:on?ph.text:textDim,
+                      borderRadius:isRetro?4:4, color:on?ph.text:textDim,
                       padding:'5px 14px', cursor:'pointer', fontFamily:font,
-                      fontSize:isRetro?6:10, fontWeight:on?700:400,
+                      fontSize:10, fontWeight:on?700:400,
                     }}>{code}</button>
                   );
                 })}
               </div>
             </div>
             <div style={{marginBottom:14}}>
-              <div style={{fontSize:isRetro?6:10,color:textDim,letterSpacing:1,marginBottom:7}}>ACTION DESCRIPTION</div>
+              <div style={{fontSize:10,color:textDim,letterSpacing:1,marginBottom:7}}>ACTION DESCRIPTION</div>
               <input autoFocus value={customName} onChange={e=>setCustomName(e.target.value)}
                 onKeyDown={e=>e.key==='Enter'&&addCustom()}
                 placeholder="Describe the action…"
                 style={{
                   width:'100%',background:surfBg,border:inBorder,
-                  borderRadius:isRetro?0:6,color:textMain,
-                  padding:'8px 10px',fontFamily:font,fontSize:isRetro?7:11,
+                  borderRadius:isRetro?6:6,color:textMain,
+                  padding:'8px 10px',fontFamily:font,fontSize:11,
                   outline:'none',boxSizing:'border-box',
                 }}/>
             </div>
             <button onClick={addCustom} style={{
               width:'100%',
               background:isRetro?'transparent':'linear-gradient(135deg,#6c5ce7,#a29bfe)',
-              border:isRetro?'2px solid #00ff41':'none',
+              border:isRetro?'2px solid #c84b9e':'none',
               borderRadius:isRetro?0:7,
-              color:isRetro?'#00ff41':'#fff',
+              color:isRetro?'#e870c0':'#fff',
               padding:'10px', cursor:'pointer', fontFamily:font,
-              fontSize:isRetro?7:12, fontWeight:600,
-              boxShadow:isRetro?'3px 3px 0 #000':'none',
+              fontSize:12, fontWeight:600,
+              boxShadow:isRetro?'0 0 12px rgba(200,75,158,.3)':'none',
             }}>+ Add to To Do</button>
           </div>
         )}
@@ -1855,19 +1977,44 @@ function IncidentAddModal({ allIcerTechs, activeInc, dark, isRetro, font, textMa
 // ─────────────────────────────────────────────────────────────────
 // IncidentView
 // ─────────────────────────────────────────────────────────────────
-function IncidentView({ matrix, theme, dark, onClose }) {
-  const isRetro  = theme==='retro';
-  const font     = isRetro?"'Press Start 2P',monospace":"'DM Mono',monospace";
+function IncidentView({ matrix, theme, dark, onClose, timerStart, onTimerStart, onTimerStop }) {
+  const isRetro  = theme==='goose';
+  const font     = "'Inter',system-ui,sans-serif";
 
   // Stable initial incident ID
+  // ── Persist incidents + activeId to localStorage ──
+  const LS_INC = 'ir_navigator_incidents';
+  const LS_AID = 'ir_navigator_activeId';
+
   const initRef = React.useRef(null);
   if (!initRef.current) { initRef.current = { id: uid() }; }
 
-  const [incidents,    setIncidents]   = React.useState(()=>[{
-    id: initRef.current.id, name:'INC-001 New Incident',
-    createdAt: Date.now(), playbookId: null, cards: [],
-  }]);
-  const [activeId,     setActiveId]    = React.useState(initRef.current.id);
+  const [incidents, setIncidents] = React.useState(() => {
+    try {
+      const saved = localStorage.getItem(LS_INC);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch(e) {}
+    return [{ id: initRef.current.id, name:'INC-001 New Incident', createdAt: Date.now(), playbookId: null, cards: [] }];
+  });
+
+  const [activeId, setActiveId] = React.useState(() => {
+    try {
+      const saved = localStorage.getItem(LS_AID);
+      if (saved) return saved;
+    } catch(e) {}
+    return initRef.current.id;
+  });
+
+  // Save to localStorage whenever incidents or activeId change
+  React.useEffect(() => {
+    try { localStorage.setItem(LS_INC, JSON.stringify(incidents)); } catch(e) {}
+  }, [incidents]);
+  React.useEffect(() => {
+    try { localStorage.setItem(LS_AID, activeId); } catch(e) {}
+  }, [activeId]);
   const [sidebarOpen,  setSidebarOpen] = React.useState(true);
   const [now,          setNow]         = React.useState(Date.now());
   const [showAdd,      setShowAdd]     = React.useState(false);
@@ -1899,22 +2046,24 @@ function IncidentView({ matrix, theme, dark, onClose }) {
   const activeInc    = incidents.find(i=>i.id===activeId) || incidents[0];
 
   // ── Theme colours ──
-  const bg        = isRetro?'#0a0a1e':dark?'#0e0e18':'#f0f0f8';
-  const headerBg  = isRetro?'#06061a':dark?'#0a0a20':'#ffffff';
-  const sidebarBg = isRetro?'#06061a':dark?'#0a0a1e':'#f8f8ff';
-  const border    = isRetro?'#00aa2a':dark?'#2e2e50':'#d8d8f0';
-  const border2   = isRetro?'#006618':dark?'#1e1e38':'#ebebf5';
-  const textMain  = isRetro?'#00ff41':dark?'#e8e8f0':'#1a1a2e';
-  const textSub   = isRetro?'#00aa2a':dark?'#8888aa':'#6060a0';
-  const textDim   = isRetro?'#006618':dark?'#555577':'#a0a0c0';
-  const cardBg    = isRetro?'#0e0e2a':dark?'#141630':'#ffffff';
+  // Read CSS vars so IncidentView respects the active theme (including Corporate)
+  const getV = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const bg        = isRetro?'#0a0a0e':getV('--bg')        || (dark?'#0e0e18':'#f0f0f8');
+  const headerBg  = isRetro?'#0a0a0e':getV('--header-bg')  || (dark?'#0a0a20':'#ffffff');
+  const sidebarBg = isRetro?'#0a0a0e':getV('--bg2')        || (dark?'#0a0a1e':'#f8f8ff');
+  const border    = isRetro?'#c84b9e':getV('--border')     || (dark?'#2e2e50':'#d8d8f0');
+  const border2   = isRetro?'#7a2a5a':getV('--border2')    || (dark?'#1e1e38':'#ebebf5');
+  const textMain  = isRetro?'#f0eeea':getV('--text')       || (dark?'#e8e8f0':'#1a1a2e');
+  const textSub   = isRetro?'#c84b9e':getV('--text3')      || (dark?'#8888aa':'#6060a0');
+  const textDim   = isRetro?'#7a2a5a':getV('--text4')      || (dark?'#555577':'#a0a0c0');
+  const cardBg    = isRetro?'#141418':getV('--cell-bg')    || (dark?'#141630':'#ffffff');
 
   const PHASE_COLORS = isRetro ? {
     I: { bg:'#001a40', text:'#00ccff', border:'#00aaff' },
     C: { bg:'#2a1800', text:'#ffaa00', border:'#ff8800' },
     E: { bg:'#2a0010', text:'#ff3366', border:'#ff003c' },
-    R: { bg:'#002a10', text:'#33ff66', border:'#00ff41' },
-    AD:{ bg:'#1a1a00', text:'#ffcc00', border:'#ffcc00' },
+    R: { bg:'#0a1e18', text:'#50c880', border:'#2a8050' },
+    AD:{ bg:'#1e100a', text:'#e8900a', border:'#a85010' },
   } : {
     I: { bg:dark?'#1a365d':'#dbeafe', text:dark?'#63b3ed':'#1d4ed8', border:dark?'#3a6a9a':'#93c5fd' },
     C: { bg:dark?'#4a2e08':'#ffedd5', text:dark?'#f6ad55':'#c2410c', border:dark?'#7a5020':'#fdba74' },
@@ -1925,9 +2074,9 @@ function IncidentView({ matrix, theme, dark, onClose }) {
 
   const COLS = [
     { status:'todo',        label:'TO DO',         color:isRetro?'#00aaff':dark?'#63b3ed':'#2b6cb0', colBg:isRetro?'#07071a':dark?'#0d0d22':'#f5f5fc' },
-    { status:'inprogress',  label:'IN PROGRESS',   color:isRetro?'#ffcc00':dark?'#f6ad55':'#c2410c', colBg:isRetro?'#120e00':dark?'#12100a':'#fffbf5' },
-    { status:'blocked',     label:'BLOCKER / HOLD', color:isRetro?'#ff4444':dark?'#fc8181':'#c53030', colBg:isRetro?'#1a0404':dark?'#160808':'#fff5f5' },
-    { status:'completed',   label:'COMPLETED',     color:isRetro?'#33ff66':dark?'#68d391':'#15803d', colBg:isRetro?'#061206':dark?'#0a140a':'#f0fdf4' },
+    { status:'inprogress',  label:'IN PROGRESS',   color:isRetro?'#e8520a':dark?'#f6ad55':'#c2410c', colBg:isRetro?'#120e00':dark?'#12100a':'#fffbf5' },
+    { status:'blocked',     label:'BLOCKER / HOLD', color:isRetro?'#e8520a':dark?'#fc8181':'#c53030', colBg:isRetro?'#1a0404':dark?'#160808':'#fff5f5' },
+    { status:'completed',   label:'COMPLETED',     color:isRetro?'#80d0a0':dark?'#68d391':'#15803d', colBg:isRetro?'#061206':dark?'#0a140a':'#f0fdf4' },
   ];
 
   // ── Incident management ──
@@ -1937,6 +2086,20 @@ function IncidentView({ matrix, theme, dark, onClose }) {
     const inc = { id, name:`INC-00${n} New Incident`, createdAt:Date.now(), playbookId:null, cards:[] };
     setIncidents(p=>[...p, inc]);
     setActiveId(id);
+  }
+
+  function resetAll() {
+    if (!window.confirm('Reset all incidents? This will permanently wipe all cards, notes, owners, and timestamps. This cannot be undone.')) return;
+    const freshId = uid();
+    const fresh = [{ id: freshId, name:'INC-001 New Incident', createdAt: Date.now(), playbookId: null, cards: [] }];
+    setIncidents(fresh);
+    setActiveId(freshId);
+    stopTimer();
+    try {
+      localStorage.removeItem(LS_INC);
+      localStorage.removeItem(LS_AID);
+      localStorage.removeItem(LS_TIMER);
+    } catch(e) {}
   }
   function deleteIncident(id) {
     setIncidents(p=>{
@@ -2096,12 +2259,12 @@ function IncidentView({ matrix, theme, dark, onClose }) {
 
   // ── Btn shared style ──
   const btn = (hi) => ({
-    background:isRetro?'#0a0a1e':dark?'#1a1a3a':'#f0f0f8',
-    border:isRetro?`2px solid ${hi?'#ffcc00':'#00ff41'}`:`1px solid ${hi?(dark?'#6c5ce7':'#a78bfa'):border}`,
-    borderRadius:isRetro?0:6, color:isRetro?(hi?'#ffcc00':'#00ff41'):(hi?(dark?'#a29bfe':'#5b4fd4'):textMain),
+    background:isRetro?'#0a0a0e':dark?'#1a1a3a':'#f0f0f8',
+    border:isRetro?`1px solid ${hi?'#e8520a':'#c84b9e'}`:`1px solid ${hi?(dark?'#6c5ce7':'#a78bfa'):border}`,
+    borderRadius:isRetro?6:6, color:isRetro?(hi?'#e8520a':'#e870c0'):(hi?(dark?'#a29bfe':'#5b4fd4'):textMain),
     padding:'5px 12px', cursor:'pointer', fontFamily:font,
-    fontSize:isRetro?7:11, display:'flex', alignItems:'center', gap:5,
-    boxShadow:isRetro?'3px 3px 0 #000':'none',
+    fontSize:11, display:'flex', alignItems:'center', gap:5,
+    boxShadow:isRetro?'0 0 12px rgba(200,75,158,.3)':'none',
   });
 
   return (
@@ -2109,15 +2272,14 @@ function IncidentView({ matrix, theme, dark, onClose }) {
       position:'fixed', inset:0, zIndex:3000,
       background:bg, fontFamily:font, display:'flex', flexDirection:'column', color:textMain,
     }}>
-      {/* Retro scanlines */}
+      {/* Goose ambient glow */}
       {isRetro&&<div style={{position:'fixed',inset:0,pointerEvents:'none',zIndex:9999,
-        background:'repeating-linear-gradient(0deg,rgba(0,255,65,.03) 0px,rgba(0,255,65,.03) 1px,transparent 1px,transparent 3px)',
-        mixBlendMode:'overlay'}}/>}
+        background:'radial-gradient(ellipse at top, rgba(200,75,158,0.06) 0%, transparent 70%)'}}/>}
 
       {/* ── TOP BAR ── */}
       <div style={{
         background:headerBg, flexShrink:0,
-        borderBottom:isRetro?'2px solid #00ff41':`1px solid ${border}`,
+        borderBottom:isRetro?'2px solid #c84b9e':`1px solid ${border}`,
         padding:'10px 18px', display:'flex', alignItems:'center', gap:12, flexWrap:'wrap',
         boxShadow:isRetro?'0 4px 0 #000':'none',
       }}>
@@ -2127,18 +2289,49 @@ function IncidentView({ matrix, theme, dark, onClose }) {
 
         <div style={{display:'flex',alignItems:'center',gap:8,flex:1,minWidth:0}}>
           <span style={{
-            fontSize:isRetro?9:15, fontWeight:700,
+            fontSize:15, fontWeight:700,
             fontFamily:isRetro?font:"'Space Grotesk',sans-serif",
-            color:isRetro?'#00ff41':textMain,
-            textShadow:isRetro?'0 0 10px #00ff41':'none', letterSpacing:isRetro?1:0,
-          }}>{isRetro?'⚡ ':''}INCIDENT VIEW</span>
+            color:isRetro?'#f0eeea':textMain,
+            textShadow:isRetro?'0 0 10px rgba(200,75,158,.6)':'none', letterSpacing:0,
+          }}>INCIDENT VIEW</span>
+
+          <ClockBar timerStart={timerStart} onTimerStart={onTimerStart} onTimerStop={onTimerStop} compact={false} />
 
           {activeInc&&<>
-            <span style={{color:textDim,fontSize:isRetro?7:12}}>—</span>
-            <span style={{fontSize:isRetro?8:13,color:isRetro?'#ffcc00':dark?'#a29bfe':'#5b4fd4',fontWeight:600}}>
-              {activeInc.name}
-            </span>
-            <span style={{fontSize:isRetro?5:9,color:textDim}}>
+            <span style={{color:textDim,fontSize:12}}>—</span>
+            {editingIncId==='topbar' ? (
+              <input
+                autoFocus
+                value={editIncName}
+                onChange={e=>setEditIncName(e.target.value)}
+                onBlur={()=>{
+                  if(editIncName.trim()) setIncidents(p=>p.map(i=>i.id===activeId?{...i,name:editIncName.trim()}:i));
+                  setEditingIncId(null);
+                }}
+                onKeyDown={e=>{
+                  if(e.key==='Enter') e.target.blur();
+                  if(e.key==='Escape') setEditingIncId(null);
+                }}
+                style={{
+                  background:'transparent',
+                  border:'none',
+                  borderBottom:`1px solid ${isRetro?'#e8520a':dark?'#a29bfe':'#5b4fd4'}`,
+                  color:isRetro?'#e8520a':dark?'#a29bfe':'#5b4fd4',
+                  fontFamily:font, fontSize:13, fontWeight:600,
+                  outline:'none', padding:'1px 2px', minWidth:160,
+                }}
+              />
+            ) : (
+              <span
+                onClick={()=>{setEditingIncId('topbar');setEditIncName(activeInc.name);}}
+                title="Click to rename"
+                style={{fontSize:13,color:isRetro?'#e8520a':dark?'#a29bfe':'#5b4fd4',fontWeight:600,cursor:'text',borderBottom:'1px dashed transparent',transition:'border-color .15s'}}
+                onMouseEnter={e=>e.currentTarget.style.borderBottomColor=isRetro?'#e8520a':dark?'#a29bfe55':'#5b4fd455'}
+                onMouseLeave={e=>e.currentTarget.style.borderBottomColor='transparent'}>
+                {activeInc.name}
+              </span>
+            )}
+            <span style={{fontSize:9,color:textDim}}>
               created {fmtTs(activeInc.createdAt)}
             </span>
           </>}
@@ -2149,15 +2342,15 @@ function IncidentView({ matrix, theme, dark, onClose }) {
           <div style={{display:'flex',gap:6}}>
             {[
               {l:'TODO',    n:todoCards.length,    c:isRetro?'#00aaff':dark?'#63b3ed':'#2b6cb0'},
-              {l:'IN PROG', n:ipCards.length,      c:isRetro?'#ffcc00':dark?'#f6ad55':'#c2410c'},
-              {l:'HOLD',    n:blockedCards.length,  c:isRetro?'#ff4444':dark?'#fc8181':'#c53030'},
-              {l:'DONE',    n:doneCards.length,    c:isRetro?'#33ff66':dark?'#68d391':'#15803d'},
+              {l:'IN PROG', n:ipCards.length,      c:isRetro?'#e8520a':dark?'#f6ad55':'#c2410c'},
+              {l:'HOLD',    n:blockedCards.length,  c:isRetro?'#e8520a':dark?'#fc8181':'#c53030'},
+              {l:'DONE',    n:doneCards.length,    c:isRetro?'#80d0a0':dark?'#68d391':'#15803d'},
             ].map(s=>(
               <span key={s.l} style={{
-                fontSize:isRetro?5:9, color:s.c, fontWeight:700,
-                background:isRetro?'#0e0e28':dark?'#1a1a38':'#f0f0fc',
+                fontSize:9, color:s.c, fontWeight:700,
+                background:isRetro?'#131318':dark?'#1a1a38':'#f0f0fc',
                 border:isRetro?`1px solid ${s.c}`:`1px solid ${dark?'#2a2a4a':'#d0d0e8'}`,
-                borderRadius:isRetro?0:10, padding:'2px 8px',
+                borderRadius:isRetro?10:10, padding:'2px 8px',
               }}>{s.l}:{s.n}</span>
             ))}
           </div>
@@ -2166,17 +2359,17 @@ function IncidentView({ matrix, theme, dark, onClose }) {
         {/* Playbook loader */}
         {activeInc&&(
           <div style={{display:'flex',alignItems:'center',gap:6}}>
-            <span style={{fontSize:isRetro?5:9,color:textDim}}>
+            <span style={{fontSize:9,color:textDim}}>
               {activeInc.playbookId
                 ? (matrix.playbooks||[]).find(p=>p.id===activeInc.playbookId)?.name
                 : 'No playbook loaded'}
             </span>
             <select value="" onChange={e=>{if(e.target.value)loadPlaybook(e.target.value);}}
               style={{
-                background:isRetro?'#0a0a1e':dark?'#1a1a3a':'#f0f0f8',
-                border:isRetro?'2px solid #00ff41':`1px solid ${border}`,
-                borderRadius:isRetro?0:5, color:isRetro?'#00ff41':textMain,
-                padding:'4px 8px', fontFamily:font, fontSize:isRetro?6:10, cursor:'pointer', outline:'none',
+                background:isRetro?'#0a0a0e':dark?'#1a1a3a':'#f0f0f8',
+                border:isRetro?'2px solid #c84b9e':`1px solid ${border}`,
+                borderRadius:isRetro?0:5, color:isRetro?'#f0eeea':textMain,
+                padding:'4px 8px', fontFamily:font, fontSize:10, cursor:'pointer', outline:'none',
               }}>
               <option value="">Load Playbook…</option>
               {(matrix.playbooks||[]).map(pb=>(
@@ -2186,6 +2379,16 @@ function IncidentView({ matrix, theme, dark, onClose }) {
           </div>
         )}
 
+        <button onClick={resetAll} style={{
+          ...btn(false),
+          borderColor: isRetro?'#e8520a':dark?'#7a2020':'#fda4af',
+          color: isRetro?'#e8520a':dark?'#fc8181':'#c53030',
+        }}
+          onMouseEnter={e=>{e.currentTarget.style.background='rgba(239,68,68,0.12)';e.currentTarget.style.borderColor='#ef4444';e.currentTarget.style.color='#ef4444';}}
+          onMouseLeave={e=>{e.currentTarget.style.background='transparent';e.currentTarget.style.borderColor=isRetro?'#e8520a':dark?'#7a2020':'#fda4af';e.currentTarget.style.color=isRetro?'#e8520a':dark?'#fc8181':'#c53030';}}
+          title="Wipe all incidents and start fresh">
+          ↺ Reset All
+        </button>
         <button onClick={exportIncident} style={btn(true)}>Export JSON ↓</button>
       </div>
 
@@ -2197,31 +2400,31 @@ function IncidentView({ matrix, theme, dark, onClose }) {
           <div style={{
             width:230, flexShrink:0,
             background:sidebarBg,
-            borderRight:isRetro?'2px solid #00ff41':`1px solid ${border}`,
+            borderRight:isRetro?'2px solid #c84b9e':`1px solid ${border}`,
             display:'flex', flexDirection:'column', overflow:'hidden',
           }}>
             {/* Sidebar header */}
             <div style={{
               padding:'9px 11px', flexShrink:0,
-              borderBottom:isRetro?'1px solid #00aa2a':`1px solid ${border}`,
+              borderBottom:isRetro?'1px solid #8a3a6e':`1px solid ${border}`,
               display:'flex', alignItems:'center', justifyContent:'space-between',
             }}>
-              <span style={{fontSize:isRetro?7:11,fontWeight:600,color:isRetro?'#00ff41':textMain,
-                textShadow:isRetro?'0 0 6px #00ff41':'none'}}>
-                {isRetro?'⚡ ':''}INCIDENTS
+              <span style={{fontSize:11,fontWeight:600,color:isRetro?'#f0eeea':textMain,
+                textShadow:isRetro?'0 0 6px rgba(200,75,158,.5)':'none'}}>
+                INCIDENTS
               </span>
               <div style={{display:'flex',gap:4}}>
                 <button onClick={createIncident} title="New incident" style={{
-                  background:isRetro?'#0a0a1e':dark?'#1a1a3a':'#ede9fe',
-                  border:isRetro?'2px solid #00ff41':`1px solid ${dark?'#3a3a6a':'#c4b5fd'}`,
-                  borderRadius:isRetro?0:4, color:isRetro?'#00ff41':'#7c6ff7',
+                  background:isRetro?'#0a0a0e':dark?'#1a1a3a':'#ede9fe',
+                  border:isRetro?'2px solid #c84b9e':`1px solid ${dark?'#3a3a6a':'#c4b5fd'}`,
+                  borderRadius:4, color:isRetro?'#e870c0':'#7c6ff7',
                   width:22,height:22,cursor:'pointer',fontFamily:font,
                   display:'flex',alignItems:'center',justifyContent:'center',fontSize:14,
                 }}>+</button>
                 <button onClick={()=>setSidebarOpen(false)} style={{
-                  background:isRetro?'#0a0a1e':dark?'#1a1a3a':'#ede9fe',
-                  border:isRetro?'1px solid #00aa2a':`1px solid ${dark?'#3a3a6a':'#c4b5fd'}`,
-                  borderRadius:isRetro?0:4, color:isRetro?'#00aa2a':'#7c6ff7',
+                  background:isRetro?'#0a0a0e':dark?'#1a1a3a':'#ede9fe',
+                  border:isRetro?'1px solid #8a3a6e':`1px solid ${dark?'#3a3a6a':'#c4b5fd'}`,
+                  borderRadius:isRetro?4:4, color:isRetro?'#c84b9e':'#7c6ff7',
                   width:22,height:22,cursor:'pointer',fontSize:12,
                   display:'flex',alignItems:'center',justifyContent:'center',
                 }}>‹</button>
@@ -2241,11 +2444,11 @@ function IncidentView({ matrix, theme, dark, onClose }) {
                     style={{
                       background:isAct?(isRetro?'#111130':dark?'#1a1a38':'#ede9fe'):'transparent',
                       border:isAct
-                        ?(isRetro?'2px solid #00ff41':`1px solid ${dark?'#4a4a8a':'#a78bfa'}`)
+                        ?(isRetro?'2px solid #c84b9e':`1px solid ${dark?'#4a4a8a':'#a78bfa'}`)
                         :(isRetro?'1px solid #003308':`1px solid ${dark?'#1e1e38':'#e0e0f0'}`),
-                      borderRadius:isRetro?0:6, padding:'10px', marginBottom:6,
+                      borderRadius:isRetro?6:6, padding:'10px', marginBottom:6,
                       cursor:'pointer', position:'relative',
-                      boxShadow:isAct&&isRetro?'3px 3px 0 #00ff41':'none',
+                      boxShadow:isAct&&isRetro?`0 0 12px rgba(200,75,158,.4)`:'none',
                     }}>
                     {/* Name row */}
                     <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:4,marginBottom:4}}>
@@ -2264,16 +2467,16 @@ function IncidentView({ matrix, theme, dark, onClose }) {
                           onClick={e=>e.stopPropagation()}
                           style={{
                             flex:1,background:'transparent',border:'none',
-                            borderBottom:isRetro?'1px solid #00ff41':`1px solid ${dark?'#4a4a8a':'#a78bfa'}`,
-                            color:textMain,fontFamily:font,fontSize:isRetro?7:11,outline:'none',padding:'1px 0',
+                            borderBottom:isRetro?'1px solid #c84b9e':`1px solid ${dark?'#4a4a8a':'#a78bfa'}`,
+                            color:textMain,fontFamily:font,fontSize:11,outline:'none',padding:'1px 0',
                           }}/>
                       ) : (
                         <span
                           onDoubleClick={e=>{e.stopPropagation();setEditingIncId(inc.id);setEditIncName(inc.name);}}
                           title="Double-click to rename"
-                          style={{fontSize:isRetro?7:11,fontWeight:600,lineHeight:1.5,wordBreak:'break-word',flex:1,
-                            color:isAct?(isRetro?'#00ff41':dark?'#c4b5fd':'#5b4fd4'):textMain}}>
-                          {isAct&&isRetro?'► ':''}{inc.name}
+                          style={{fontSize:12,fontWeight:600,lineHeight:1.5,wordBreak:'break-word',flex:1,
+                            color:isAct?(isRetro?'#f0eeea':dark?'#c4b5fd':'#5b4fd4'):textMain}}>
+                          {isAct&&''}{inc.name}
                         </span>
                       )}
                       <button onClick={e=>{e.stopPropagation();deleteIncident(inc.id);}}
@@ -2285,7 +2488,7 @@ function IncidentView({ matrix, theme, dark, onClose }) {
                     {/* Progress stats */}
                     <div style={{display:'flex',gap:8,marginBottom:4,flexWrap:'wrap'}}>
                       {[{l:'TODO',n:todo,c:'#63b3ed'},{l:'PROG',n:ip,c:'#f6ad55'},{l:'HOLD',n:blocked,c:'#fc8181'},{l:'DONE',n:done,c:'#68d391'}].map(s=>(
-                        <span key={s.l} style={{fontSize:isRetro?5:9,color:s.c}}>{s.l}:{s.n}</span>
+                        <span key={s.l} style={{fontSize:9,color:s.c}}>{s.l}:{s.n}</span>
                       ))}
                     </div>
 
@@ -2293,10 +2496,10 @@ function IncidentView({ matrix, theme, dark, onClose }) {
                     {inc.playbookId&&(
                       <div style={{marginBottom:4}}>
                         <span style={{
-                          fontSize:isRetro?5:8,
-                          background:isRetro?'#0e0e28':dark?'#1a1a38':'#ede9fe',
+                          fontSize:8,
+                          background:isRetro?'#131318':dark?'#1a1a38':'#ede9fe',
                           border:isRetro?'1px solid #4444aa':`1px solid ${dark?'#3a3a6a':'#c4b5fd'}`,
-                          borderRadius:isRetro?0:8, padding:'1px 6px',
+                          borderRadius:isRetro?8:8, padding:'1px 6px',
                           color:isRetro?'#8888ff':dark?'#a29bfe':'#5b4fd4',
                         }}>
                           {(matrix.playbooks||[]).find(p=>p.id===inc.playbookId)?.name||'Playbook'}
@@ -2305,7 +2508,7 @@ function IncidentView({ matrix, theme, dark, onClose }) {
                     )}
 
                     {/* Elapsed since created */}
-                    <div style={{fontSize:isRetro?5:9,color:textDim}}>
+                    <div style={{fontSize:9,color:textDim}}>
                       ⏱ {fmtElapsed(inc.createdAt,now)} elapsed
                     </div>
                   </div>
@@ -2318,12 +2521,12 @@ function IncidentView({ matrix, theme, dark, onClose }) {
           <div onClick={()=>setSidebarOpen(true)} style={{
             width:28, flexShrink:0, cursor:'pointer',
             background:sidebarBg,
-            borderRight:isRetro?'2px solid #00ff41':`1px solid ${border}`,
+            borderRight:isRetro?'2px solid #c84b9e':`1px solid ${border}`,
             display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:8,
           }}>
-            <span style={{fontSize:isRetro?5:9,color:isRetro?'#00ff41':'#7c6ff7',
+            <span style={{fontSize:9,color:isRetro?'#e870c0':'#7c6ff7',
               writingMode:'vertical-rl',transform:'rotate(180deg)',letterSpacing:2,opacity:.8}}>INCIDENTS</span>
-            <span style={{fontSize:12,color:isRetro?'#00ff41':'#7c6ff7'}}>›</span>
+            <span style={{fontSize:12,color:isRetro?'#e870c0':'#7c6ff7'}}>›</span>
           </div>
         )}
 
@@ -2338,14 +2541,14 @@ function IncidentView({ matrix, theme, dark, onClose }) {
                 flex:'0 0 calc(33.333% - 8px)', minWidth:290,
                 background:col.colBg,
                 border:isRetro?`2px solid ${col.color}55`:`1px solid ${border}`,
-                borderRadius:isRetro?0:10,
+                borderRadius:isRetro?10:10,
                 display:'flex', flexDirection:'column', overflow:'hidden',
-                boxShadow:isRetro?'4px 4px 0 #000':dark?'0 2px 12px rgba(0,0,0,.3)':'0 2px 8px rgba(0,0,0,.06)',
+                boxShadow:isRetro?'0 0 12px rgba(200,75,158,.25)':dark?'0 2px 12px rgba(0,0,0,.3)':'0 2px 8px rgba(0,0,0,.06)',
               }}>
                 {/* Column header */}
                 <div style={{
                   padding:'10px 14px', flexShrink:0,
-                  background:isRetro?'#0a0a1e':dark?'#0e0e20':'#f0f0fc',
+                  background:isRetro?'#0a0a0e':dark?'#0e0e20':'#f0f0fc',
                   borderBottom:isRetro?`2px solid ${col.color}`:`1px solid ${border}`,
                   display:'flex', alignItems:'center', justifyContent:'space-between',
                   boxShadow:isRetro?'0 3px 0 #000':'none',
@@ -2353,23 +2556,23 @@ function IncidentView({ matrix, theme, dark, onClose }) {
                   <div style={{display:'flex',alignItems:'center',gap:7}}>
                     {isRetro&&<span style={{color:col.color,fontSize:10}}>▐</span>}
                     <span style={{
-                      fontSize:isRetro?8:11, fontWeight:700, letterSpacing:isRetro?1:2,
+                      fontSize:12, fontWeight:700, letterSpacing:1,
                       color:col.color, textShadow:isRetro?`0 0 8px ${col.color}`:'none',
                     }}>{col.label}</span>
                     {isRetro&&<span style={{color:col.color,fontSize:10}}>▌</span>}
                   </div>
                   <span style={{
-                    fontSize:isRetro?7:10, fontWeight:700, color:col.color,
-                    background:isRetro?'#0e0e28':dark?'#1a1a38':'#eeeefc',
+                    fontSize:10, fontWeight:700, color:col.color,
+                    background:isRetro?'#131318':dark?'#1a1a38':'#eeeefc',
                     border:isRetro?`1px solid ${col.color}`:`1px solid ${dark?'#2a2a4a':'#d0d0e8'}`,
-                    borderRadius:isRetro?0:10, padding:'2px 8px',
+                    borderRadius:isRetro?10:10, padding:'2px 8px',
                   }}>{colCards.length}</span>
                 </div>
 
                 {/* Column body */}
                 <div style={{flex:1,overflowY:'auto',padding:'10px 10px 6px'}}>
                   {groups.length===0&&(
-                    <div style={{textAlign:'center',padding:'28px 10px',color:textDim,fontSize:isRetro?6:10,lineHeight:2}}>
+                    <div style={{textAlign:'center',padding:'28px 10px',color:textDim,fontSize:10,lineHeight:2}}>
                       {col.status==='todo'?'Load a playbook\nor add actions below':'No actions yet'}
                     </div>
                   )}
@@ -2390,20 +2593,20 @@ function IncidentView({ matrix, theme, dark, onClose }) {
                           }}>
                           {/* Chevron */}
                           <span style={{
-                            fontSize:isRetro?7:10, color:ph.text, opacity:.7,
+                            fontSize:10, color:ph.text, opacity:.7,
                             transform:isCollapsed?'rotate(-90deg)':'rotate(0deg)',
                             display:'inline-block', transition:isRetro?'none':'transform .15s',
                             flexShrink:0, lineHeight:1,
                           }}>▾</span>
                           <span style={{
-                            fontSize:isRetro?6:9, fontWeight:700, letterSpacing:isRetro?1:2,
+                            fontSize:9, fontWeight:700, letterSpacing:2,
                             textTransform:'uppercase', background:ph.bg, color:ph.text,
                             border:isRetro?`1px solid ${ph.border}`:'none',
                             borderRadius:isRetro?0:3, padding:'2px 7px', flexShrink:0,
                           }}>{tactic.shortcode}</span>
-                          <span style={{fontSize:isRetro?6:10,color:ph.text,opacity:.8}}>{tactic.name}</span>
+                          <span style={{fontSize:10,color:ph.text,opacity:.8}}>{tactic.name}</span>
                           <span style={{
-                            fontSize:isRetro?5:9, color:isCollapsed?ph.text:textDim,
+                            fontSize:9, color:isCollapsed?ph.text:textDim,
                             marginLeft:'auto', fontWeight:isCollapsed?700:400,
                           }}>{cards.length}</span>
                         </div>
@@ -2425,14 +2628,14 @@ function IncidentView({ matrix, theme, dark, onClose }) {
 
                 {/* Add action button — To Do only */}
                 {col.status==='todo'&&(
-                  <div style={{padding:'8px 10px',borderTop:isRetro?'1px solid #006618':`1px solid ${border}`,flexShrink:0}}>
+                  <div style={{padding:'8px 10px',borderTop:isRetro?'1px solid #5a2a4a':`1px solid ${border}`,flexShrink:0}}>
                     <button onClick={()=>setShowAdd(true)} style={{
                       width:'100%', background:'transparent',
-                      border:isRetro?'1px dashed #00ff41':`1px dashed ${dark?'#3a3a6a':'#c4b5fd'}`,
-                      borderRadius:isRetro?0:6,
-                      color:isRetro?'#00ff41':dark?'#7c6ff7':'#5b4fd4',
+                      border:isRetro?'1px dashed #c84b9e':`1px dashed ${dark?'#3a3a6a':'#c4b5fd'}`,
+                      borderRadius:isRetro?6:6,
+                      color:isRetro?'#f0eeea':dark?'#7c6ff7':'#5b4fd4',
                       padding:'8px', cursor:'pointer', fontFamily:font,
-                      fontSize:isRetro?7:11, letterSpacing:.5,
+                      fontSize:11, letterSpacing:.5,
                     }}>+ Add Action</button>
                   </div>
                 )}
@@ -2478,7 +2681,25 @@ function App({initialMatrix, initialName}) {
   const [panelOpen,     setPanelOpen]     = useState(true);
   const [showGuide,     setShowGuide]     = useState(null); // playbook id for guide view
   const [showIncident,  setShowIncident]  = useState(false);
+  const LS_TIMER = 'ir_navigator_timer';
+  const [timerStart, setTimerStart] = useState(() => {
+    try {
+      const saved = localStorage.getItem(LS_TIMER);
+      if (saved) return parseInt(saved, 10);
+    } catch(e) {}
+    return null;
+  });
   const fileRef = useRef();
+
+  function startTimer() {
+    const t = Date.now();
+    setTimerStart(t);
+    try { localStorage.setItem(LS_TIMER, String(t)); } catch(e) {}
+  }
+  function stopTimer() {
+    setTimerStart(null);
+    try { localStorage.removeItem(LS_TIMER); } catch(e) {}
+  }
 
   const dark = theme !== "light";
 
@@ -2497,8 +2718,8 @@ function App({initialMatrix, initialName}) {
   const activePb     = (matrix.playbooks||[]).find(p=>p.id===activePlaybook)||null;
   const selectedTech = selected ? matrix.tactics.find(t=>t.id===selected.tacticId)?.techniques.find(te=>te.id===selected.techId) : null;
 
-  const TACTIC_ACCENTS = theme==="retro" ? TACTIC_ACCENTS_RETRO : dark ? TACTIC_ACCENTS_DARK : TACTIC_ACCENTS_LIGHT;
-  const DEF_ACCENT     = theme==="retro" ? DEF_ACCENT_RETRO : dark ? DEF_ACCENT_DARK      : DEF_ACCENT_LIGHT;
+  const TACTIC_ACCENTS = theme==="goose" ? TACTIC_ACCENTS_GOOSE : theme==="corporate" ? TACTIC_ACCENTS_CORPORATE : dark ? TACTIC_ACCENTS_DARK : TACTIC_ACCENTS_LIGHT;
+  const DEF_ACCENT     = theme==="goose" ? DEF_ACCENT_GOOSE : theme==="corporate" ? DEF_ACCENT_CORPORATE : dark ? DEF_ACCENT_DARK : DEF_ACCENT_LIGHT;
 
   // ── Playbook fns ──
   function selectPlaybook(pbId) { setActivePlaybook(pbId); setPbMode("view"); setSelected(null); }
@@ -2624,12 +2845,12 @@ function App({initialMatrix, initialName}) {
       });
     });
   }, [theme]);
-  const isRetro = theme==="retro";
-  const retroFont = "'Press Start 2P', monospace";
+  const isRetro = theme==="goose";
+  const retroFont = "'Inter',system-ui,sans-serif"; // goose uses normal font
   const bg        = themeColors.bg       || (dark?"#0e0e18":"#f0f0f8");
   const headerBg  = themeColors.headerBg || (dark?"#111120":"#ffffff");
   const barBg     = themeColors.bg2      || (dark?"#0c0c1a":"#e8e8f4");
-  const hintBg    = isRetro?"#0a0a1e":dark?"#0a0a12":"#f0f0fa";
+  const hintBg    = isRetro?"#0a0a0e":dark?"#0a0a12":"#f0f0fa";
   const border    = themeColors.border   || (dark?"#1e1e38":"#d8d8f0");
   const border2   = themeColors.border2  || (dark?"#252545":"#c8c8e8");
   const textMain  = themeColors.text     || (dark?"#e8e8f0":"#1a1a2e");
@@ -2641,22 +2862,22 @@ function App({initialMatrix, initialName}) {
   const S = getS(dark);
 
   return (
-    <div style={{height:"100vh",display:"flex",flexDirection:"column",background:bg,fontFamily:isRetro?retroFont:"'DM Mono',monospace",color:textMain,position:"relative"}}>
-      {isRetro && <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:9999,background:"repeating-linear-gradient(0deg, rgba(0,255,65,0.03) 0px, rgba(0,255,65,0.03) 1px, transparent 1px, transparent 3px)",mixBlendMode:"overlay"}}/>}
+    <div style={{height:"100vh",display:"flex",flexDirection:"column",background:bg,fontFamily:"'Inter',system-ui,sans-serif",color:textMain,position:"relative"}}>
+      {isRetro && <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:9999,background:"radial-gradient(ellipse at top, rgba(200,75,158,0.06) 0%, transparent 70%)"}}/>}
 
       {/* ── HEADER ── */}
-      <header style={{background:headerBg,borderBottom:isRetro?`2px solid #00ff41`:`1px solid ${border}`,padding:isRetro?"10px 22px":"13px 22px",display:"flex",alignItems:"center",gap:14,flexWrap:"wrap",flexShrink:0,boxShadow:isRetro?"0 4px 0 #000":dark?"none":"0 1px 8px rgba(0,0,0,.06)"}}>
+      <header style={{background:headerBg,borderBottom:isRetro?`1px solid #c84b9e`:`1px solid ${border}`,padding:"13px 22px",display:"flex",alignItems:"center",gap:14,flexWrap:"wrap",flexShrink:0,boxShadow:isRetro?"none":dark?"none":"0 1px 8px rgba(0,0,0,.06)"}}>
         <div style={{flex:1,minWidth:220}}>
           {editingName ? (
             <input value={matrixName} onChange={e=>setMatrixName(e.target.value)} onBlur={()=>setEditingName(false)} onKeyDown={e=>e.key==="Enter"&&setEditingName(false)} autoFocus
               style={{fontSize:18,fontFamily:"'Space Grotesk',sans-serif",fontWeight:700,background:"transparent",border:"none",borderBottom:"2px solid #7c6ff7",color:textMain,outline:"none",padding:"2px 0",minWidth:280}}/>
           ) : (
             <h1 onClick={()=>setEditingName(true)} title="Click to rename"
-              style={{margin:0,fontSize:isRetro?12:18,fontFamily:isRetro?retroFont:"'Space Grotesk',sans-serif",fontWeight:700,color:isRetro?"#00ff41":textMain,cursor:"text",letterSpacing:isRetro?1:.3,textShadow:isRetro?"0 0 10px #00ff41":"none"}}>
-              {isRetro?"► ":""}{matrixName}{isRetro?" ◄":""}
+              style={{margin:0,fontSize:18,fontFamily:"'Space Grotesk',sans-serif",fontWeight:700,color:isRetro?"#f0eeea":textMain,cursor:"text",letterSpacing:.3,textShadow:isRetro?"0 0 10px rgba(200,75,158,.5)":"none"}}>
+              {matrixName}{isRetro?" ◄":""}
             </h1>
           )}
-          <div style={{fontSize:isRetro?7:11,color:textDim,marginTop:4,display:"flex",gap:10,flexWrap:"wrap",alignItems:"center"}}>
+          <div style={{fontSize:12,color:textDim,marginTop:4,display:"flex",gap:10,flexWrap:"wrap",alignItems:"center"}}>
             <span>{categorizedTechs}/{totalTechs} categorized</span>
             <span style={{opacity:.4}}>·</span>
             <span>{matrix.tactics.length} phases</span>
@@ -2682,17 +2903,26 @@ function App({initialMatrix, initialName}) {
         </div>
 
         <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center"}}>
+          <ClockBar timerStart={timerStart} onTimerStart={startTimer} onTimerStop={stopTimer} compact={true} />
           {/* Theme toggle */}
           {(()=>{
-            const themes = ["dark","light","tactical","midnight","retro"];
-            const labels = {dark:"Dark",light:"Light",tactical:"Tactical",midnight:"Midnight",retro:"8-Bit"};
+            const themes = ["dark","light","tactical","midnight","corporate","goose"];
+            const labels = {dark:"Dark",light:"Light",tactical:"Tactical",midnight:"Midnight",corporate:"Corporate",goose:"Goose"};
             const nextTheme = themes[(themes.indexOf(theme)+1)%themes.length];
             return (
               <button className="theme-toggle" onClick={()=>setTheme(nextTheme)}
                 title={`Theme: ${labels[theme]} → ${labels[nextTheme]}`}
-                style={{background:theme==="retro"?"#0a0a1e":dark?"#1a1a3a":"#ede9fe",border:theme==="retro"?"2px solid #00ff41":`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:7,height:30,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",gap:5,padding:"0 10px"}}>
-                {theme==="retro" ? <span style={{fontSize:10,lineHeight:1}}>&#x1F47E;</span> : dark ? <SunIcon color={theme==="tactical"?"#FCCC44":"#f6ad55"} size={15}/> : <MoonIcon color="#5b4fd4" size={15}/>}
-                <span style={{fontSize:theme==="retro"?7:10,color:theme==="retro"?"#00ff41":dark?"#888":"#666",letterSpacing:theme==="retro"?1:.5}}>{labels[theme]}</span>
+                style={{background:theme==="goose"?"#0a0a0e":dark?"#1a1a3a":"#ede9fe",border:theme==="goose"?"1px solid #c84b9e":`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:7,height:30,display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer",gap:5,padding:"0 10px"}}>
+                {theme==="dark"      ? <MoonIcon color="#a29bfe" size={15}/>
+                 : theme==="light"     ? <SunIcon  color="#f6ad55" size={15}/>
+                 : theme==="tactical"  ? <span style={{fontSize:14,lineHeight:1}}>🛡️</span>
+                 : theme==="midnight"  ? <span style={{fontSize:14,lineHeight:1}}>🌌</span>
+                 : theme==="corporate" ? <span style={{fontSize:14,lineHeight:1}}>💼</span>
+                 : theme==="goose"     ? <img src="data:image/png;base64,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" style={{width:20,height:20,borderRadius:'50%',objectFit:'cover'}} alt="Goose"/>
+                 : <MoonIcon color="#a29bfe" size={15}/>}
+                <span style={{fontSize:theme==="goose"?10:10,color:theme==="goose"?"#e870c0":dark?"#888":"#666",letterSpacing:theme==="goose"?1:.5}}>{labels[theme]}</span>
               </button>
             );
           })()}
@@ -2704,18 +2934,18 @@ function App({initialMatrix, initialName}) {
             {label:"Export JSON ↓",  fn:exportSnapshot, hi:true},
           ].map(btn=>(
             <button key={btn.label} className="tool-btn" onClick={btn.fn} style={{
-              background:isRetro?"#0a0a1e":btn.hi?(dark?"#1a1040":"#ede9fe"):(dark?"#0e0e20":"#f5f5fc"),
-              color:isRetro?(btn.hi?"#ffcc00":"#00ff41"):btn.hi?(dark?"#a29bfe":"#5b4fd4"):(dark?"#888":"#6060a0"),
-              border:isRetro?`2px solid ${btn.hi?"#ffcc00":"#00ff41"}`:`1px solid ${btn.hi?(dark?"#6c5ce7":"#a78bfa"):(dark?"#252545":"#d0d0e8")}`,
-              borderRadius:6,padding:isRetro?"5px 10px":"6px 12px",cursor:"pointer",fontSize:isRetro?7:11,letterSpacing:isRetro?0:.5,fontFamily:"inherit",
+              background:isRetro?"#0a0a0e":btn.hi?(dark?"#1a1040":"#ede9fe"):(dark?"#0e0e20":"#f5f5fc"),
+              color:isRetro?(btn.hi?"#e8520a":"#e870c0"):btn.hi?(dark?"#a29bfe":"#5b4fd4"):(dark?"#888":"#6060a0"),
+              border:isRetro?`1px solid ${btn.hi?"#e8520a":"#c84b9e"}`:`1px solid ${btn.hi?(dark?"#6c5ce7":"#a78bfa"):(dark?"#252545":"#d0d0e8")}`,
+              borderRadius:6,padding:"6px 12px",cursor:"pointer",fontSize:11,letterSpacing:.5,fontFamily:"inherit",
             }}>{btn.label}</button>
           ))}
         </div>
       </header>
 
       {/* ── CATEGORY FILTER BAR ── */}
-      <div style={{background:barBg,borderBottom:isRetro?`2px solid #00aa2a`:`1px solid ${border}`,padding:"7px 22px",display:"flex",gap:5,flexWrap:"wrap",alignItems:"center",flexShrink:0}}>
-        <span style={{fontSize:isRetro?7:10,color:isRetro?"#00ff41":textDim,letterSpacing:2,marginRight:4}}>CATEGORY:</span>
+      <div style={{background:barBg,borderBottom:isRetro?`1px solid #8a3a6e`:`1px solid ${border}`,padding:"7px 22px",display:"flex",gap:5,flexWrap:"wrap",alignItems:"center",flexShrink:0}}>
+        <span style={{fontSize:10,color:isRetro?"#f0eeea":textDim,letterSpacing:1,marginRight:4}}>CATEGORY:</span>
         <button onClick={()=>setFilterCat(null)}
           disabled={filterCat===null}
           title="Clear category filter"
@@ -2732,7 +2962,7 @@ function App({initialMatrix, initialName}) {
               <button onClick={()=>setFilterCat(on?null:cat.id)}
                 style={{display:"flex",alignItems:"center",gap:5,background:on?cat.bg:"transparent",border:`1px solid ${on?cat.color:dark?"#2a2a48":"#d0d0e8"}`,borderRadius:20,padding:isCustom?"3px 22px 3px 10px":"3px 10px",cursor:"pointer",fontFamily:"inherit",transition:"all .15s"}}>
                 <div style={{width:6,height:6,borderRadius:"50%",background:on?cat.text:dark?"#4a4a70":"#b0b0cc",flexShrink:0}}/>
-                <span style={{fontSize:11,color:on?cat.text:textSub}}>{cat.label}</span>
+                <span style={{fontSize:12,color:on?cat.text:textSub}}>{cat.label}</span>
               </button>
               {isCustom&&(
                 <button onClick={e=>{e.stopPropagation();deleteCategory(cat.id);}}
@@ -2756,24 +2986,24 @@ function App({initialMatrix, initialName}) {
           style={{
             marginLeft:"auto",
             display:"flex",alignItems:"center",gap:5,
-            background:isRetro?"#0a0a1e":dark?"#1a1040":"#ede9fe",
-            border:isRetro?"2px solid #00ff41":`1px solid ${dark?"#6c5ce7":"#a78bfa"}`,
+            background:isRetro?"#0a0a0e":dark?"#1a1040":"#ede9fe",
+            border:isRetro?"2px solid #c84b9e":`1px solid ${dark?"#6c5ce7":"#a78bfa"}`,
             borderRadius:isRetro?0:20,
-            padding:isRetro?"4px 10px":"3px 12px",
+            padding:"3px 12px",
             cursor:"pointer",fontFamily:"inherit",
-            color:isRetro?"#00ff41":dark?"#a29bfe":"#5b4fd4",
-            fontSize:isRetro?7:11,fontWeight:600,
-            letterSpacing:isRetro?1:.5,
+            color:isRetro?"#f0eeea":dark?"#a29bfe":"#5b4fd4",
+            fontSize:11,fontWeight:600,
+            letterSpacing:.5,
             boxShadow:isRetro?"3px 3px 0 #000":"none",
             flexShrink:0,
           }}>
-          {isRetro?"⚡ ":""}Incident View
+          Incident View
         </button>
       </div>
 
       {/* ── HINT BAR ── */}
-      <div style={{background:isRetro?"#0a0a1e":hintBg,borderBottom:isRetro?`1px solid #006618`:`1px solid ${border}`,padding:"5px 22px",display:"flex",gap:20,alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",flexShrink:0}}>
-        <span style={{fontSize:isRetro?6:10,color:isRetro?"#00aa2a":textDim,display:"flex",alignItems:"center",gap:5}}>
+      <div style={{background:isRetro?"#0a0a0e":hintBg,borderBottom:isRetro?`1px solid #5a2a4a`:`1px solid ${border}`,padding:"5px 22px",display:"flex",gap:20,alignItems:"center",justifyContent:"space-between",flexWrap:"wrap",flexShrink:0}}>
+        <span style={{fontSize:11,color:isRetro?"#c84b9e":textDim,display:"flex",alignItems:"center",gap:5}}>
           {activePb&&pbMode==="view"&&<><EyeIcon color={activePb.color+"aa"} size={9}/><span style={{color:activePb.color+"bb"}}>View — highlighted actions open their link on click</span></>}
           {activePb&&pbMode==="edit"&&<><div className="rec-dot" style={{width:5,height:5,borderRadius:"50%",background:activePb.color,flexShrink:0}}/><span style={{color:activePb.color+"bb"}}>Edit — click any action to add/remove from <strong style={{color:activePb.color}}>{activePb.name}</strong></span></>}
           {!activePb&&<><LinkIcon color={textDim} size={9}/> Phase/action with link → opens URL · No link → click to edit</>}
@@ -2807,9 +3037,9 @@ function App({initialMatrix, initialName}) {
                     onMouseEnter={()=>setHoveredTactic(tactic.id)}
                     onMouseLeave={()=>setHoveredTactic(null)}
                     style={{background:isRetro?accent.from:`linear-gradient(150deg,${accent.from},${accent.to})`,borderRadius:10,padding:"12px 14px",marginBottom:8,border:isRetro?`2px solid ${accent.border}`:`1px solid ${tactic.url?accent.text+"66":accent.border}`,position:"relative",boxShadow:isRetro?`4px 4px 0 #000`:dark?(tactic.url?`0 4px 24px ${accent.text}22`:`0 4px 18px ${accent.border}22`):(tactic.url?`0 4px 16px ${accent.text}33`:`0 2px 8px ${accent.border}22`)}}>
-                    <div style={{fontSize:isRetro?6:9,color:accent.text,opacity:.6,letterSpacing:isRetro?1:3,marginBottom:4,textTransform:"uppercase"}}>{isRetro?"★ ":""}Phase {idx+1}</div>
-                    <div style={{fontSize:isRetro?8:13,fontWeight:700,color:accent.text,fontFamily:isRetro?retroFont:"'Space Grotesk',sans-serif",lineHeight:isRetro?1.5:1.25,paddingRight:18,textShadow:isRetro?`0 0 6px ${accent.text}`:"none"}}>{tactic.name}</div>
-                    <div style={{fontSize:isRetro?6:10,color:dark?"#44446088":"#88889088",marginTop:4,display:"flex",alignItems:"center",gap:5}}>
+                    <div style={{fontSize:9,color:accent.text,opacity:.6,letterSpacing:3,marginBottom:4,textTransform:"uppercase"}}>{isRetro?"★ ":""}Phase {idx+1}</div>
+                    <div style={{fontSize:13,fontWeight:700,color:accent.text,fontFamily:"'Space Grotesk',sans-serif",lineHeight:1.25,paddingRight:18,textShadow:isRetro?`0 0 6px ${accent.text}`:"none"}}>{tactic.name}</div>
+                    <div style={{fontSize:11,color:dark?"#44446088":"#88889088",marginTop:4,display:"flex",alignItems:"center",gap:5}}>
                       <span>{filterCat!==null?`${techs.length}/${tactic.techniques.length}`:tactic.techniques.length} actions</span>
                       {tactic.url&&<span style={{display:"flex",alignItems:"center",gap:3,color:accent.text,opacity:.6}}>· <LinkIcon color={accent.text} size={9}/></span>}
                     </div>
@@ -2869,7 +3099,7 @@ function App({initialMatrix, initialName}) {
                           onMouseLeave={()=>setHoveredCell(null)}
                         >
                           {/* ID row */}
-                          <div style={{fontSize:isRetro?6:9,color:isRetro?"#00aa2a":dark?"#3a3a58":"#c0c0d8",marginBottom:3,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                          <div style={{fontSize:10,color:isRetro?"#c84b9e":dark?"#3a3a58":"#c0c0d8",marginBottom:3,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                             <span>{isRetro?"▸ ":""}{tech.id}</span>
                             <div style={{display:"flex",alignItems:"center",gap:3}}>
                               {memberPbs.map(p=><div key={p.id} style={{width:5,height:5,borderRadius:"50%",background:p.color}} title={p.name}/>)}
@@ -2878,14 +3108,14 @@ function App({initialMatrix, initialName}) {
                             </div>
                           </div>
                           {/* Name */}
-                          <div style={{fontSize:isRetro?7:12,fontWeight:500,color:inPb?(isRetro?"#ffcc00":textMain):(tech.category?cat.text:(hasLink?(dark?"#b0b0d8":"#4040a0"):(dark?"#9090b8":"#5050a0"))),lineHeight:isRetro?1.6:1.35}}>
+                          <div style={{fontSize:13,fontWeight:500,color:inPb?(isRetro?"#ffcc00":textMain):(tech.category?cat.text:(hasLink?(dark?"#b0b0d8":"#4040a0"):(dark?"#9090b8":"#5050a0"))),lineHeight:1.35}}>
                             {tech.name}
                           </div>
                           {/* Category badge */}
                           {tech.category&&(
-                            <div style={{display:"inline-flex",alignItems:"center",gap:4,marginTop:6,background:`${cat.color}20`,border:isRetro?`1px solid ${cat.color}`:`1px solid ${cat.color}55`,borderRadius:isRetro?0:10,padding:isRetro?"2px 5px":"2px 7px"}}>
+                            <div style={{display:"inline-flex",alignItems:"center",gap:4,marginTop:6,background:`${cat.color}20`,border:isRetro?`1px solid ${cat.color}`:`1px solid ${cat.color}55`,borderRadius:isRetro?10:10,padding:"2px 7px"}}>
                               <div style={{width:isRetro?4:5,height:isRetro?4:5,borderRadius:isRetro?0:"50%",background:cat.text}}/>
-                              <span style={{fontSize:isRetro?6:9,color:cat.text,letterSpacing:.5}}>{cat.label}</span>
+                              <span style={{fontSize:10,color:cat.text,letterSpacing:.3}}>{cat.label}</span>
                             </div>
                           )}
                           {/* Expandable sections — shown when card is clicked */}
@@ -2978,11 +3208,11 @@ function App({initialMatrix, initialName}) {
           />
         ) : (
           <div onClick={()=>setPanelOpen(true)} title="Open use cases panel"
-            style={{width:32,flexShrink:0,background:isRetro?"#0a0a1e":dark?"#0e0e1e":"#f8f8ff",borderLeft:isRetro?`2px solid #00ff41`:`1px solid ${dark?"#1e1e38":"#d8d8f0"}`,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",cursor:"pointer",gap:10,transition:isRetro?"none":"background .15s"}}
-            onMouseEnter={e=>e.currentTarget.style.background=isRetro?"#0e0e28":dark?"#141430":"#eeeefc"}
-            onMouseLeave={e=>e.currentTarget.style.background=isRetro?"#0a0a1e":dark?"#0e0e1e":"#f8f8ff"}>
-            <BookIcon color={isRetro?"#00ff41":"#7c6ff7"} size={14}/>
-            <span style={{fontSize:isRetro?6:10,color:isRetro?"#00ff41":"#7c6ff7",letterSpacing:2,textTransform:"uppercase",writingMode:"vertical-rl",transform:"rotate(180deg)",opacity:.8,whiteSpace:"nowrap"}}>Use Cases</span>
+            style={{width:32,flexShrink:0,background:isRetro?"#0a0a0e":dark?"#0e0e1e":"#f8f8ff",borderLeft:isRetro?`1px solid #c84b9e`:`1px solid ${dark?"#1e1e38":"#d8d8f0"}`,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",cursor:"pointer",gap:10,transition:isRetro?"none":"background .15s"}}
+            onMouseEnter={e=>e.currentTarget.style.background=isRetro?"#131318":dark?"#141430":"#eeeefc"}
+            onMouseLeave={e=>e.currentTarget.style.background=isRetro?"#0a0a0e":dark?"#0e0e1e":"#f8f8ff"}>
+            <BookIcon color={isRetro?"#e870c0":"#7c6ff7"} size={14}/>
+            <span style={{fontSize:10,color:isRetro?"#e870c0":"#7c6ff7",letterSpacing:2,textTransform:"uppercase",writingMode:"vertical-rl",transform:"rotate(180deg)",opacity:.8,whiteSpace:"nowrap"}}>Use Cases</span>
             {(matrix.playbooks||[]).length>0&&(
               <span style={{fontSize:9,color:"#a29bfe",background:dark?"#1a1a3a":"#ede9fe",border:`1px solid ${dark?"#3a3a6a":"#c4b5fd"}`,borderRadius:8,padding:"2px 5px",textAlign:"center"}}>
                 {(matrix.playbooks||[]).length}
@@ -2997,7 +3227,7 @@ function App({initialMatrix, initialName}) {
 
       {/* ── INCIDENT VIEW ── */}
       {showIncident&&(
-        <IncidentView matrix={matrix} theme={theme} dark={dark} onClose={()=>setShowIncident(false)}/>
+        <IncidentView matrix={matrix} theme={theme} dark={dark} onClose={()=>setShowIncident(false)} timerStart={timerStart} onTimerStart={startTimer} onTimerStop={stopTimer}/>
       )}
 
       {/* ── MODALS ── */}
@@ -3028,7 +3258,7 @@ async function loadData() {
   const root = document.getElementById("root");
 
   // Show a loading state
-  root.innerHTML = '<div style="height:100vh;display:flex;align-items:center;justify-content:center;background:#0e0e18;font-family:DM Mono,monospace;color:#444460;font-size:13px;letter-spacing:1px;">Loading IR Navigator…</div>';
+  root.innerHTML = '<div style="height:100vh;display:flex;align-items:center;justify-content:center;background:#0e0e18;font-family:Inter,system-ui,sans-serif;color:#444460;font-size:14px;letter-spacing:0;">Loading IR Navigator…</div>';
 
   try {
     // Derive base URL robustly — works whether the page is at /repo/ or /repo/index.html
@@ -3090,7 +3320,7 @@ async function loadData() {
 
   } catch(err) {
     const msg = err.message || String(err);
-    root.innerHTML = `<div style="height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0e0e18;font-family:DM Mono,monospace;gap:10px;padding:40px;text-align:center;">
+    root.innerHTML = `<div style="height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#0e0e18;font-family:Inter,system-ui,sans-serif;gap:10px;padding:40px;text-align:center;">
       <div style="color:#e94560;font-size:15px;font-weight:600;">Failed to load IR Navigator</div>
       <div style="color:#888;font-size:12px;max-width:560px;">${msg}</div>
       <div style="color:#555;font-size:10px;margin-top:6px;">Page URL: ${window.location.href}</div>
