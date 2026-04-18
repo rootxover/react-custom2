@@ -332,7 +332,7 @@ const DEF_ACCENT_CORPORATE = { from:"#1e304e", to:"#182840", border:"#2e5080", t
 // ── Live UTC clock + incident elapsed timer ──
 // timerStart = ms timestamp when timer began (null = not running)
 // onTimerStart / onTimerStop = callbacks to lift state to App
-function ClockBar({ timerStart, onTimerStart, onTimerStop, compact }) {
+function ClockBar({ timerStart, onTimerStart, onTimerStop, compact, hideTimer }) {
   const [utcTime, setUtcTime] = React.useState('');
   const [elapsed, setElapsed] = React.useState('––:––:––');
 
@@ -365,6 +365,7 @@ function ClockBar({ timerStart, onTimerStart, onTimerStop, compact }) {
       fontFamily:"'DM Mono',monospace",
       flexShrink:0,
     }}>
+      {!hideTimer && <>
       <div style={{display:'flex',alignItems:'center',gap:6}}>
         <span style={{fontSize:compact?8:9,color:'rgba(255,255,255,0.45)',letterSpacing:1.5,textTransform:'uppercase'}}>ELAPSED</span>
         <span style={{fontSize:compact?12:15,color:'#f0c040',fontWeight:600,letterSpacing:2,fontVariantNumeric:'tabular-nums',textShadow:'0 0 8px rgba(240,192,64,0.4)'}}>{elapsed}</span>
@@ -392,6 +393,7 @@ function ClockBar({ timerStart, onTimerStart, onTimerStop, compact }) {
         </button>
       </div>
       <div style={{width:1,height:compact?16:22,background:'rgba(255,255,255,0.15)',flexShrink:0}}/>
+      </>}
       <div style={{display:'flex',alignItems:'center',gap:5}}>
         <span style={{fontSize:compact?8:9,color:'rgba(255,255,255,0.45)',letterSpacing:1.5,textTransform:'uppercase'}}>UTC</span>
         <span style={{fontSize:compact?12:15,color:'rgba(255,255,255,0.9)',fontWeight:600,letterSpacing:2,fontVariantNumeric:'tabular-nums'}}>{utcTime}</span>
@@ -2903,7 +2905,7 @@ function App({initialMatrix, initialName}) {
         </div>
 
         <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center"}}>
-          <ClockBar timerStart={timerStart} onTimerStart={startTimer} onTimerStop={stopTimer} compact={true} />
+          <ClockBar timerStart={timerStart} onTimerStart={startTimer} onTimerStop={stopTimer} compact={true} hideTimer={true} />
           {/* Theme toggle */}
           {(()=>{
             const themes = ["dark","light","tactical","midnight","corporate","goose"];
