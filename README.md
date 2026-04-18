@@ -7,7 +7,7 @@ A living incident response reference tool built on the PICERL framework. Browse 
 ## Live URL
 
 ```
-https://YOUR-USERNAME.github.io/react-custom2
+https://rootxover.github.io/IR-REACT/
 ```
 
 Replace `YOUR-USERNAME` with your actual GitHub username after setup.
