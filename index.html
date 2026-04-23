@@ -3107,7 +3107,7 @@ pBKgysXFjVJkZw5CMP3Kl+XVZfQxeop1UiDNcV1t/PTjnWSe7NsreNYvRaFy+fPn06dMxDBs0aFAfn7y
                     style={{background:isRetro?accent.from:`linear-gradient(150deg,${accent.from},${accent.to})`,borderRadius:10,padding:"12px 14px",marginBottom:8,border:isRetro?`2px solid ${accent.border}`:`1px solid ${tactic.url?accent.text+"66":accent.border}`,position:"relative",boxShadow:isRetro?`4px 4px 0 #000`:dark?(tactic.url?`0 4px 24px ${accent.text}22`:`0 4px 18px ${accent.border}22`):(tactic.url?`0 4px 16px ${accent.text}33`:`0 2px 8px ${accent.border}22`)}}>
                     <div style={{fontSize:9,color:accent.text,opacity:.6,letterSpacing:3,marginBottom:4,textTransform:"uppercase"}}>{isRetro?"★ ":""}Phase {idx+1}</div>
                     <div style={{fontSize:13,fontWeight:700,color:accent.text,fontFamily:"'Space Grotesk',sans-serif",lineHeight:1.25,paddingRight:18,textShadow:isRetro?`0 0 6px ${accent.text}`:"none"}}>{tactic.name}</div>
-                    <div style={{fontSize:11,color:dark?"#44446088":"#88889088",marginTop:4,display:"flex",alignItems:"center",gap:5}}>
+                    <div style={{fontSize:11,color:dark?accent.text+"99":"#88889088",marginTop:4,display:"flex",alignItems:"center",gap:5}}>
                       <span>{filterCat!==null?`${techs.length}/${tactic.techniques.length}`:tactic.techniques.length} actions</span>
                       {tactic.url&&<span style={{display:"flex",alignItems:"center",gap:3,color:accent.text,opacity:.6}}>· <LinkIcon color={accent.text} size={9}/></span>}
                     </div>
@@ -3167,7 +3167,7 @@ pBKgysXFjVJkZw5CMP3Kl+XVZfQxeop1UiDNcV1t/PTjnWSe7NsreNYvRaFy+fPn06dMxDBs0aFAfn7y
                           onMouseLeave={()=>setHoveredCell(null)}
                         >
                           {/* ID row */}
-                          <div style={{fontSize:10,color:isRetro?"#c84b9e":dark?"#3a3a58":"#c0c0d8",marginBottom:3,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                          <div style={{fontSize:10,color:isRetro?"#c84b9e":dark?"#7878a8":"#c0c0d8",marginBottom:3,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                             <span>{isRetro?"▸ ":""}{tech.id}</span>
                             <div style={{display:"flex",alignItems:"center",gap:3}}>
                               {memberPbs.map(p=><div key={p.id} style={{width:5,height:5,borderRadius:"50%",background:p.color}} title={p.name}/>)}
