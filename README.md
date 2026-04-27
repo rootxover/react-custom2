@@ -67,7 +67,7 @@ Everything an analyst would want to change — action names, procedures, URLs, c
 The main view displays a column-based matrix. Each column is a PICERL phase. Each cell is an action. Click an action to expand its detail sections (description, procedure, tools, etc.) inline. Hover over an action to see **edit** and **del** buttons.
 
 ### Themes
-Cycle through 5 themes using the toggle button in the header: **Dark** (default), **Light**, **Tactical** (red/amber), **Midnight** (blue), **8-Bit** (retro CRT green).
+Cycle through 5 themes using the toggle button in the header: Dark (default), Light, Tactical (red/amber), Midnight (blue), Corporate (as boring as possible), Goose (Grumpy Goose).
 
 ### Category filter bar
 Filter the matrix by category (Network, Email, File, Process, Configuration, Identity, General). Click a category pill to show only actions in that category. Click again to clear the filter.
